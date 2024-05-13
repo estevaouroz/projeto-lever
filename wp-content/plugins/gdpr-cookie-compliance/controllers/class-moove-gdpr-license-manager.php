@@ -25,6 +25,63 @@ class Moove_GDPR_License_Manager {
 	public function __construct() {
 
 	}
+	/**
+	 * Bulk activate licence on MultiSites
+	 */
+	public static function gdpr_msba_bulk_activate_ajx() {
+    $licence_key  = isset( $_POST['licence_key'] ) ? sanitize_text_field( wp_unslash( $_POST['licence_key'] ) ) : '';
+    $blog_id      = isset( $_POST['blog_id'] ) ? intval( wp_unslash( $_POST['blog_id'] ) ) : false;
+    $nonce      	= isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : false;
+    $action 			= 'activate';
+    $validate_license     = array(
+      'valid'   => false,
+      'key'     => $licence_key,
+      'message' => $nonce
+    );
+
+    if ( $blog_id && $licence_key && class_exists('Moove_GDPR_License_Manager') && wp_verify_nonce( $nonce, 'gdpr_tab_licence_bulk' ) && current_user_can('manage_options') ) :
+      switch_to_blog( $blog_id );
+      $licence_manager = new Moove_GDPR_License_Manager();
+
+      $validate_license = $licence_manager->validate_license( $licence_key, 'gdpr', 'activate' );
+      if ( $validate_license && isset( $validate_license['valid'] ) && true === $validate_license['valid'] ) :
+        $plugin_token     = isset( $validate_license['data'] ) && isset( $validate_license['data']['download_token'] ) && $validate_license['data']['download_token'] ? $validate_license['data']['download_token'] : false;
+
+        $gdpr_default_content = new Moove_GDPR_Content();
+        $option_key           = $gdpr_default_content->moove_gdpr_get_key_name(); 
+
+        update_option(
+          $option_key,
+          array(
+            'key'        => $validate_license['key'],
+            'activation' => $validate_license['data']['today'],
+          )
+        );
+        // VALID.
+        $messages = isset( $validate_license['message'] ) && is_array( $validate_license['message'] ) ? implode( '<br>', $validate_license['message'] ) : '';
+
+        if ( $plugin_token && 'activate' === $action ) :
+          $plugin_slug = $licence_manager->get_add_on_plugin_slug();       
+          
+          if ( $plugin_slug ) :
+            if ( $licence_manager->is_plugin_installed( $plugin_slug ) ) {
+              $installed = true;
+            } else {
+              $installed = $licence_manager->install_plugin( $plugin_token );
+            }
+            if ( ! is_wp_error( $installed ) && $installed ) {
+            	$plugin_path 	=  
+              $activate 		= activate_plugin( $plugin_slug );              
+            }
+          endif;
+        endif;
+      endif;
+
+      restore_current_blog();
+    endif;
+    echo json_encode( $validate_license );
+    die();
+  }
 
 	/**
 	 * Licence validation

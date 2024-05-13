@@ -157,8 +157,8 @@ class GDPR_Modules {
 
 		$content            = isset( $modal_options[ 'moove_gdpr_info_bar_content' . $wpml_lang ] ) && $modal_options[ 'moove_gdpr_info_bar_content' . $wpml_lang ] ? $modal_options[ 'moove_gdpr_info_bar_content' . $wpml_lang ] : $_content;
 		$tabindex 					= apply_filters('gdpr_tabindex_attribute', '', '0' );
-		$content            = str_replace( '[setting]', '<span role="button" ' . $tabindex . ' data-href="#moove_gdpr_cookie_modal" class="change-settings-button">', $content );
-		$content            = str_replace( '[/setting]', '</span>', $content );
+		$content            = str_replace( '[setting]', '<button ' . $tabindex . ' data-href="#moove_gdpr_cookie_modal" class="change-settings-button">', $content );
+		$content            = str_replace( '[/setting]', '</button>', $content );
 		$content            = apply_filters( 'gdpr_info_bar_notice_content', $content );
 		$data               = new stdClass();
 		$data->text_content = $content;

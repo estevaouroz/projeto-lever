@@ -4,7 +4,7 @@
  *  Plugin Name: GDPR Cookie Compliance
  *  Plugin URI: https://wordpress.org/plugins/gdpr-cookie-compliance/
  *  Description: Our plugin is useful in preparing your site for the following data protection and privacy regulations: GDPR, CCPA, PIPEDA, AAP, LGPD and others.
- *  Version: 4.12.5
+ *  Version: 4.14.0
  *  Author: Moove Agency
  *  Domain Path: /languages
  *  Author URI: https://www.mooveagency.com
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
 
-define( 'MOOVE_GDPR_VERSION', '4.12.5' );
+define( 'MOOVE_GDPR_VERSION', '4.14.0' );
 if ( ! defined( 'MOOVE_SHOP_URL' ) ) :
 	define( 'MOOVE_SHOP_URL', 'https://shop.mooveagency.com' );
 endif;
@@ -109,48 +109,56 @@ add_filter( 'plugin_row_meta', 'gdpr_cookie_add_plugin_meta_links', 10, 2 );
  * Loading assets
  */
 function gdpr_cookie_compliance_load_libs() {
-	/**
-	 * Database Controller
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'class-moove-gdpr-db-controller.php';
 
-	/**
-	 * View
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-gdpr-view.php';
+	if ( current_user_can('edit_posts') && isset( $_GET['elementor-preview'] ) && intval( $_GET['elementor-preview'] ) ) :
+		/**
+		 * Prevent loading the GDPR plugin in Elementor previews
+		 */
+	else :
+		/**
+		 * Database Controller
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'class-moove-gdpr-db-controller.php';
 
-	/**
-	 * Modules View
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-gdpr-modules-view.php';
-	/**
-	 * Modules
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-gdpr-modules.php';
+		/**
+		 * View
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-gdpr-view.php';
 
-	/**
-	 * Content
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-moove-gdpr-content.php';
+		/**
+		 * Modules View
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-gdpr-modules-view.php';
+		/**
+		 * Modules
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-gdpr-modules.php';
 
-	/**
-	 * Options page
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-moove-gdpr-options.php';
+		/**
+		 * Content
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-moove-gdpr-content.php';
 
-	/**
-	 * Controllers
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'class-moove-gdpr-controller.php';
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'class-moove-gdpr-license-manager.php';
+		/**
+		 * Options page
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-moove-gdpr-options.php';
 
-	/**
-	 * Custom Functions
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gdpr-functions.php';
-	
-	/**
-	 * Actions
-	 */
-	include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-moove-gdpr-actions.php';
+		/**
+		 * Controllers
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'class-moove-gdpr-controller.php';
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'class-moove-gdpr-license-manager.php';
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . 'class-moove-gdpr-review.php';
+		
+		/**
+		 * Custom Functions
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'gdpr-functions.php';
+		
+		/**
+		 * Actions
+		 */
+		include_once dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'class-moove-gdpr-actions.php';
+	endif;
 }

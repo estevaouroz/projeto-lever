@@ -1,14 +1,14 @@
-=== GDPR Cookie Compliance (CCPA, DSGVO, Cookie Consent) ===
+=== GDPR Cookie Compliance - Cookie Banner, Cookie Consent, Cookie Notice - CCPA, DSGVO, RGPD ===
 Contributors: MooveAgency
 Donate link: https://www.mooveagency.com/wordpress-plugins/gdpr-cookie-compliance/
-Tags: GDPR, CCPA, DSGVO, cookie banner, cookie notice
-Stable tag: 4.12.5
+Tags: GDPR, CCPA, DSGVO, CPRA, RGPD
+Stable tag: 4.14.0
 Requires at least: 4.5
-Tested up to: 6.3
+Tested up to: 6.5
 Requires PHP: 5.6
 License: GPLv3
 
-Cookie notice banner for GDPR, CCPA, CPRA, LGPD, PECR, AAP, PIPEDA, VCDPA, CPRA, ICO, GPDP, DSGVO, BfDl, CNIL, AEPD, PDPB, DPA, PDPA, TTDSG, POPIA, APA, ePrivacy, COPPA, CASL, European cookie law, data protection and privacy regulations and other cookie law and consent notice requirements on your website.
+Cookie notice banner for GDPR, CCPA, CPRA, LGPD, RGPD, PECR, AAP, PIPEDA, VCDPA, CPRA, ICO, GPDP, DSGVO, BfDl, CNIL, AEPD, PDPB, DPA, PDPA, TTDSG, POPIA, APA, ePrivacy, COPPA, CASL, European cookie law, data protection and privacy regulations and other cookie law and consent notice requirements on your website.
 
 == Description ==
 
@@ -22,7 +22,8 @@ Cookie notice banner for GDPR, CCPA, CPRA, LGPD, PECR, AAP, PIPEDA, VCDPA, CPRA,
 * Give your users **full control** over cookies stored on their computer, including the ability for users to **revoke their consent**.
 * **Fully customisable** - upload your own logo, colours, fonts
 * **Fully editable** - change all text
-* Direct integration of **GTM, GA, Meta Pixel**, GTM4WP and more
+* Direct integration of **GTM, GA, Meta Pixel, GTM4WP** and more
+* **Google Consent Mode v2** fully supported
 * **Set the position** of the Cookie Consent Banner: at the top or bottom of your pages
 * **Flexible** - decide which scripts will be loaded by default or only when the user gives consent
 * **'Accept'**, **'Reject'**, 'Close' and 'Settings' buttons & you can also change their order
@@ -37,24 +38,24 @@ Cookie notice banner for GDPR, CCPA, CPRA, LGPD, PECR, AAP, PIPEDA, VCDPA, CPRA,
 * WPML, QTranslate, WP Multilang, TranslatePress and Polylang compatible, .pot file for translations included
 * **CDN** base URL supported
 * Supports all major **caching** servers and plugins
-* Available in **18 languages**
+* Available in **19 languages**
 * Optimised for PHP 7 and PHP 8
 
 ### Premium Features Available
 
-* **[NEW] Google Site Kit integration** - our plugin supports the Google Site Kit natively
+* **Consent Log** - gives you the ability to store user consent information in the event that you need to prove that consent was given
+* **Geo-location** - the Cookie Consent Banner can be shown to visitors from the European Union or selected countries only (ie. Canada, California etc.)
+* **Google Site Kit integration** - our plugin supports the Google Site Kit natively
 * **Cookie wall / Full-screen layout** - if enabled, the Cookie Consent Banner will be display in a full screen mode, and force users to either accept or reject cookies before they can see your content
 * **Export & import settings** - transfer your custom settings between sites with ease
 * **WordPress Multisite features** - you can manage the plugin settings globally, and clone them from one site to another within your multi-site setup. You can also sync users consent between individual subsites on your multisite network
 * **Accept on Scroll / Hide timer** - allow users to accept cookies by scrolling down the page OR by setting a timer (ie. Hide banner after 5 seconds)
 * **Renew Consent** - ask users to renew their consent if there is a change in privacy or cookie policy on your site
-* **Geo-location** - the Cookie Consent Banner can be shown to visitors from the European Union or selected countries only (ie. Canada, California etc.)
 * **iFrame Blocker** - blocks users from viewing 3rd party resources (such as Youtube) until they accept cookies
 * **Language Specific Scripts** - insert different Tag Manager Scripts for different languages, supports WPML and other language plugins
 * **Premium Shortcodes** that can be added to your ‘Privacy & Cookie Policy’ and allow your users to manage their consent with ease.
 * **Hide Cookie Banner** allows you to hide the Cookie Notice Banner on selected pages
 * **Cookie Declaration** allows you to declare the exact type of cookies that your site uses, including the cookie name, provider, purpose and expiration
-* **Consent Log** - gives you the ability to store user consent information in the event that you need to prove that consent was given
 * **Analytics** - stats and charts showing you how many users accepted your cookies (all anonymous)
 * **Fast Premium Support** from our friendly team
 * **12 months** of premium updates included
@@ -98,14 +99,6 @@ No cookies are stored on users' computers until the user accepts cookies.
 The 'Full-Screen / Cookie Wall' option is used (a premium feature).
 [Example 2](https://www.teneo.net/)
 
-**OPTION C**  
-Cookie Consent Banner is displayed at the top of the page. Cookies are accepted automatically when user starts scrolling down the page.
-[Example 4](https://www.mrisoftware.com/uk/)
-
-**OPTION D**  
-Cookie Notice Banner is displayed at the bottom of the page and uses the 'light' colour scheme with squared buttons. Cookies are accepted by default but user can change their cookie settings preferences at anytime.
-[Example 5](https://www.ukibc.com/)
-
 **OTHER OPTIONS**  
 There are many other settings available that you can use to create your own unique Cookie Consent Banner and satisfy the Cookie Compliance Law - our plugin is very flexible. 
 
@@ -120,7 +113,7 @@ There are many other settings available that you can use to create your own uniq
 
 ### Flexible 
 
-OUr cookie plugin is very flexible and especially useful in preparing your site for the following cookie law, data protection and privacy regulations:
+Our cookie plugin is very flexible and especially useful in preparing your site for the following cookie law, data protection and privacy regulations:
 
 * **GDPR**: The General Data Protection Regulation, ePrivacy Directive, ePrivacy Regulation (European Union)
 * **CCPA**: The California Consumer Privacy Act (California, United States)
@@ -128,7 +121,7 @@ OUr cookie plugin is very flexible and especially useful in preparing your site 
 * **AAP**: Australia's Privacy Principles (Australia)
 * **PIPEDA**: The Personal Information Protection and Electronic Documents Act (Canada) 
 * **LGPD**: The Brazilian General Data Protection Law (Brazil)
-* **VCDPA, CPRA, ICO, GPDP, DSGVO, BfDl, CNIL, AEPD, PDPB, DPA, PDPA, DPA, PDPA, TTDSG, POPIA , APA, ePrivacy, COPPA, CASL, Australian Privacy Principles, The “Marco Civil” Privacy Act 1988 ** and other cookie law, data protection and privacy regulations
+* **VCDPA, CPRA, ICO, GPDP, DSGVO, BfDl, CNIL, AEPD, PDPB, DPA, PDPA, DPA, PDPA, TTDSG, POPIA , APA, ePrivacy, COPPA, CASL, Australian Privacy Principles, The Marco Civil Privacy Act 1988** and other cookie law, data protection and privacy regulations
 
 
 
@@ -167,7 +160,7 @@ https://www.example.com/your-internal-page/#gdpr_cookie_modal
 * To view the scripts, you can use the Developer Console in Chrome browser (Inspect Element feature).
 
 = Compatibility with GTM containers =
-* Our plugin fully supports GTM consent settings and containers. [More details here](https://support.mooveagency.com/topic/gtm-consent-settings/)
+* Our plugin fully supports GTM consent settings and containers. [More details here](https://support.mooveagency.com/topic/ga-gtm-consent-settings/)
 
 = What are "Strictly Necessary Cookies"? =
 * The "Strictly Necessary Cookies", sometimes called Essential Cookies, are cookies that are necessary for your site to function properly.
@@ -276,8 +269,36 @@ The Brazilian General Data Protection Law (“Lei Geral de Proteção de Dados�
 39. GDPR Cookie Compliance - Front-end - Cookie Shortcode [Premium]
 
 == Changelog ==
+= 4.14.0: 24 April 2024 =
+* WP Consent API support
+
+= 4.13.4: 26 March 2024 =
+* JS/CSS Assets added to plugin
+
+= 4.13.3: 11 March 2024 =
+* Integration title update if translation detected
+
+= 4.13.2: 4 March 2024 =
+* Added GTM Consent v2 custom event: cookie_consent_update
+* Removed deprecated Google Universal Analytics integration
+
+= 4.13.1: 26 January 2024 =
+* Tracking ID fixed in Google Consent v2 integration module
+
+= 4.13.0: 22 January 2024 =
+* Google Consent V2 added to integrations
+
+= 4.12.8: 16 October 2023 =
+* Restricted loading plugin to Elementor previews
+
+= 4.12.7: 1 September 2023 =
+* Minor CSS fixes
+
+= 4.12.6: 22 August 2023 =
+* Accessibility fixes
+* Minor CSS fixes
+
 = 4.12.5: 03 August 2023 =
-* Licence functions improved
 * New banner position options added
 * Minor fixes
 
