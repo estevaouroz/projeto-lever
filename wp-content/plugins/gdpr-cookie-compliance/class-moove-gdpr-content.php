@@ -72,7 +72,7 @@ class Moove_GDPR_Content {
 			if ( $cookie_cat_n ) :
 				ob_start();
 				?>
-				<!-- Google tag (gtag.js) - Google Analaytics 4 -->
+				<!-- Google tag (gtag.js) - Google Analytics 4 -->
 				<script src="https://www.googletagmanager.com/gtag/js?id=<?php echo $_gdin_module['tacking_id']; ?>" data-type="gdpr-integration"></script>
 				<script data-type="gdpr-integration">
 				  window.dataLayer = window.dataLayer || [];
@@ -111,6 +111,73 @@ class Moove_GDPR_Content {
 				<!-- End Google Tag Manager (noscript) -->
 				<?php
 				$cache_array[$cookie_cat_n]['body'] .= ob_get_clean();
+			endif;
+		endif;
+		return $cache_array;
+	}
+
+	public static function gdpr_google_consent_mode2_snippet(){
+		$gdpr_default_content = new Moove_GDPR_Content();
+  	$option_name          = $gdpr_default_content->moove_gdpr_get_option_name();
+		$gdpr_options         = get_option( $option_name );
+		$gdin_values       	 	= isset( $gdpr_options['gdin_values'] ) ? json_decode( $gdpr_options['gdin_values'], true ) : array();
+   	$gdin_modules       	= gdpr_get_integration_modules( $gdpr_options, $gdin_values );
+   	if ( isset( $gdin_modules['gtmc2'] ) && isset( $gdin_modules['gtmc2']['tacking_id'] ) && $gdin_modules['gtmc2']['status'] ) :
+			?>
+				<script>
+				  // Define dataLayer and the gtag function.
+				  window.dataLayer = window.dataLayer || [];
+				  function gtag(){dataLayer.push(arguments);}
+
+				  // Set default consent to 'denied' as a placeholder
+				  // Determine actual values based on your own requirements
+				  gtag('consent', 'default', {
+				    'ad_storage': 'denied',
+				    'ad_user_data': 'denied',
+				    'ad_personalization': 'denied',
+				    'analytics_storage': 'denied',
+				    'personalization_storage': 'denied',
+						'security_storage': 'denied',
+						'functionality_storage': 'denied',
+						'wait_for_update': '<?php echo apply_filters( 'gdpr_cc_gtm2_wait_for_update', '2000' ) ?>'
+				  });
+				</script>
+
+				<!-- Google Tag Manager -->
+				<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+				})(window,document,'script','dataLayer','<?php echo $gdin_modules['gtmc2']['tacking_id']; ?>');</script>
+				<!-- End Google Tag Manager -->
+			<?php
+		endif;
+	}
+
+	public static function gdpr_insert_integration_gtmc2_snippet( $cache_array, $_gdin_module ) {
+		if ( isset( $_gdin_module['tacking_id'] ) && $_gdin_module['tacking_id'] && intval( $_gdin_module['cookie_cat'] ) ) :
+			$cookie_cat_n = intval( $_gdin_module['cookie_cat'] ) === 2 ? 'thirdparty' : ( intval( $_gdin_module['cookie_cat'] ) === 3 ? 'advanced' : '' );
+			if ( $cookie_cat_n ) :
+				ob_start();
+				?>
+				<script>
+					gtag('consent', 'update', {
+			      'ad_storage': 'granted',
+				    'ad_user_data': 'granted',
+				    'ad_personalization': 'granted',
+				    'analytics_storage': 'granted',
+				    'personalization_storage': 'granted',
+						'security_storage': 'granted',
+						'functionality_storage': 'granted',
+			    });
+
+			    dataLayer.push({
+					 'event': 'cookie_consent_update'
+					});
+				</script>	
+				<?php
+				$cache_array[$cookie_cat_n]['header'] .= ob_get_clean();
+				ob_start();
 			endif;
 		endif;
 		return $cache_array;
@@ -493,6 +560,7 @@ class Moove_GDPR_Content {
 		if ( 'expired' === $type || 'activated' === $type || 'max_activation_reached' === $type ) :
 			if ( 'activated' !== $type ) :
 				?>
+				<br />
 				<button type="submit" name="gdpr_activate_license" class="button button-primary button-inverse">
 					<?php esc_html_e( 'Activate', 'gdpr-cookie-compliance' ); ?>
 				</button>
@@ -500,12 +568,14 @@ class Moove_GDPR_Content {
 			endif;
 		elseif ( 'invalid' === $type ) :
 			?>
+			<br />
 			<button type="submit" name="gdpr_activate_license" class="button button-primary button-inverse">
 				<?php esc_html_e( 'Activate', 'gdpr-cookie-compliance' ); ?>
 			</button>
 			<?php
 		else :
 			?>
+			<br />
 			<button type="submit" name="gdpr_activate_license" class="button button-primary button-inverse">
 				<?php esc_html_e( 'Activate', 'gdpr-cookie-compliance' ); ?>
 			</button>
@@ -672,7 +742,7 @@ class Moove_GDPR_Content {
 			<div class="gdpr-admin-alert gdpr-admin-alert-error">
 				<div class="gdpr-alert-content">        
 					<div class="gdpr-licence-key-wrap">
-						<p>License key: 
+						<p><?php esc_html_e( 'License key:', 'gdpr-cookie-compliance' ); ?>: 
 						<strong><?php echo esc_attr( apply_filters( 'gdpr_licence_key_visibility', isset( $response['key'] ) ? $response['key'] : ( isset( $gdpr_key['key'] ) ? $gdpr_key['key'] : $gdpr_key ) ) ); ?></strong>								
 						</p>
 					</div>
@@ -689,7 +759,7 @@ class Moove_GDPR_Content {
 			<div class="gdpr-admin-alert gdpr-admin-alert-success">    
 				<div class="gdpr-alert-content">
 					<div class="gdpr-licence-key-wrap">
-						<p>License key: 
+						<p><?php esc_html_e( 'License key:', 'gdpr-cookie-compliance' ); ?>: 
 						<strong><?php echo esc_attr( apply_filters( 'gdpr_licence_key_visibility', isset( $response['key'] ) ? $response['key'] : ( isset( $gdpr_key['key'] ) ? $gdpr_key['key'] : $gdpr_key ) ) ); ?></strong>								
 						</p>
 					</div>
@@ -751,6 +821,39 @@ class Moove_GDPR_Content {
 				<?php
 		endif;
 	endif;
+	}
+
+	/**
+	 * Licence Action Buttons
+	 */
+	public static function gdpr_cc_licence_manager_action_button( $show_title = true ) {
+		if ( function_exists('is_multisite') && is_multisite() ) :
+			$is_bulk_view 	= isset( $_GET['view'] );
+			$button_view 		= $is_bulk_view ? '' : '&view=bulk';
+			?>
+			<div class="gdpr-multisite-bal">
+				<?php if ( $show_title ) : ?>
+					<h3><?php esc_html_e( 'Bulk Multisite Activation', 'gdpr-cookie-compliance' ); ?></h3>
+					<p><?php esc_html_e( 'You can activate the Licence Key on all your subsites using the tool below.', 'gdpr-cookie-compliance' ); ?></p>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=moove-gdpr_licence&tab=licence' . $button_view ) ); ?>" class="button button-primary button-inverse">
+						<?php 
+							if ( ! $is_bulk_view ) : 
+								esc_html_e( 'Bulk Licence Activation', 'gdpr-cookie-compliance' );
+							else :
+								esc_html_e( 'Single Activation', 'gdpr-cookie-compliance' );
+							endif;
+						?>
+					</a>
+				<?php elseif ( $is_bulk_view ) : ?>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=moove-gdpr_licence&tab=licence' . $button_view ) ); ?>" class="button button-primary button-inverse">
+						<?php esc_html_e( 'Single Activation', 'gdpr-cookie-compliance' ); ?>
+					</a>
+				<?php endif; ?>
+
+			</div>
+			<!-- .gdpr-multisite-bal -->
+			<?php
+		endif;
 	}
 }
 new Moove_GDPR_Content();
