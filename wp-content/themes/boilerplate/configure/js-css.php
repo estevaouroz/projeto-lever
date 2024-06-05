@@ -8,7 +8,9 @@ function _add_javascript()
   // remove_action('wp_head', 'wp_enqueue_scripts', 1);
 
   wp_enqueue_script('jquery');
-  wp_enqueue_script('plyr', get_template_directory_uri() . '/node_modules/plyr/dist/plyr.min.js', ['jquery'], '3.6.8', true);
+
+  wp_enqueue_script('lenis', get_template_directory_uri() . '/assets/src/vendor/lenis-main/dist/lenis.min.js', ['jquery'], ASSETS_VERSION, true);
+
 
   wp_enqueue_script('main', get_template_directory_uri() . '/assets/dist/js/main.min.js', ['jquery'], ASSETS_VERSION, true);
 }
@@ -22,7 +24,6 @@ function _add_stylesheets()
   wp_dequeue_style('wc-block-style');
   wp_dequeue_style('global-styles');
   wp_dequeue_style('classic-theme-styles');
-  wp_enqueue_style('plry', get_template_directory_uri() . '/node_modules/plyr/dist/plyr.css', ['main'], ASSETS_VERSION);
 
   wp_enqueue_style('main', get_template_directory_uri() . '/assets/dist/css/main.css');
 }
