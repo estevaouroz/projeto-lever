@@ -1,4 +1,4 @@
-function initDyanmicModules() {
+function initDynamicModules() {
   /*
   Importar arquivos JS em formato de chunks, sob-demanda
 
@@ -34,6 +34,11 @@ function initDyanmicModules() {
       modulePath: './pages/home/homepage.js',
       moduleFunction: 'initPage',
     },
+    {
+      selector: 'body',
+      modulePath: './base/header.js',
+      moduleFunction: 'initHeader',
+    },
   ];
 
   dynamicModules.forEach(({selector, modulePath, moduleFunction}) => {
@@ -41,4 +46,4 @@ function initDyanmicModules() {
   });
 }
 
-export {initDyanmicModules};
+export {initDynamicModules};

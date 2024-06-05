@@ -1,5 +1,8 @@
-import {initDyanmicModules} from './dynamic-modules.js';
+import {initDynamicModules} from './dynamic-modules.js';
 
 $(document).ready(() => {
-  initDyanmicModules();
+  initDynamicModules();
+});
+$(window).on('load', () => {
+  initDynamicModules();
 });

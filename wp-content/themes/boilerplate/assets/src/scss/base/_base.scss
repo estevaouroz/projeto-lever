@@ -3,7 +3,23 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.lenis {
+  &.lenis-smooth {
+    scroll-behavior: auto;
 
+    [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+  }
+
+  &.lenis-stopped {
+    overflow: hidden;
+  }
+
+  &.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+}
 
 .smooth-scroll {
   width: 100vw;
