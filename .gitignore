@@ -22,7 +22,9 @@ wp-content/themes/boilerplate/node_modules/
 wp-content/themes/boilerplate/yarn-error.log
 wp-content/themes/boilerplate/_RESSOURCES/
 
-# 
+# Arquivos do WSL
+*.Zone.Identifier
+*:Zone.Identifier
 
 # Versionamento de build
 wp-content/themes/boilerplate/assets_version.php
