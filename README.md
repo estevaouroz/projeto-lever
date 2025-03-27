@@ -1,64 +1,120 @@
-# Engie Website 2023 Development
+# Boilerplate
 
-![](wp-content/themes/lohn-2023/screenshot.png)
+## Tecnologias Utilizadas
 
-## Under the hood
+### Under the Hood
+- [**ES6**](https://github.com/lukehoban/es6features#readme): JavaScript moderno, transpilado com [Babel](https://babeljs.io/) e lintado com [ESLint](https://eslint.org/).
+- [**SASS**](http://sass-lang.com/): Preprocessador CSS seguindo as [SASS Guidelines](https://sass-guidelin.es/#the-7-1-pattern).
+- [**Bootstrap 5**](https://getbootstrap.com/docs/5.2/getting-started/introduction/): Framework CSS customizável via [SASS](https://getbootstrap.com/docs/5.2/customize/sass/).
+- [**Gulp 4**](https://gulpjs.com/) e [**Webpack 5**](https://webpack.js.org/): Ferramentas para gerenciar, compilar e otimizar os assets do tema.
+- **SVG Sprite**: Crie uma pasta como assets/src/svg/ com seus SVGs e execute o comando de build ou watch.
 
-- [ES6](https://github.com/lukehoban/es6features#readme) for JavaScript (transpiling with [Babel](https://babeljs.io/) and linting with [ESLint](https://eslint.org/))
-- [SASS](http://sass-lang.com/) preprocessor for CSS following [SASS Guidelines](https://sass-guidelin.es/#the-7-1-pattern)
-- [Bootstrap 5](https://getbootstrap.com/docs/5.2/getting-started/introduction/) as CSS framework ([customizable with SASS](https://getbootstrap.com/docs/5.2/customize/sass/))
-- [Gulp 4](https://gulpjs.com/) & [Webpack 5](https://webpack.js.org/) to manage, compile and optimize theme assets
-- SVG Sprite : create a folder containing all your SVGs like `assets/src/svg/sprite` and run your watch or build
+## Requisitos
+Para utilizar este tema, certifique-se de atender aos seguintes requisitos:
 
-## Requirements
+- **Node.js**: Versão >= 16.0.0
+- **npm**: Versão >= 8.0.0
+- **Gulp**: Instalado globalmente (veja [Quick Start](https://gulpjs.com/docs/en/getting-started/quick-start))
 
-- Versão do node: >=16.0.0
-- Versão npm: >=8.0.0
-- [Gulp](https://gulpjs.com/docs/en/getting-started/quick-start)
+## Instalação e Uso
+*Passo a Passo*
+1. **Clone o Repositório**
+Clone este repositório no seu local de projetos.
+```bash
+git clone git@gitlab.dzigual.com.br:mint/nome-do-projeto
+```
 
-## Usage
+2. **Inicie o container do projeto**
+Dentro do projeto, rode no terminal:
+```bash
+docker compose up -d
+```
 
-Primeiro, clone este repositório no diretório de temas do WordPress.
+3. **Instale as Dependências**
+No diretório do tema, execute:
+```bash
+npm install
+```
 
-Em seguida, execute os seguintes comandos no diretório do tema para instalar as dependencias :
+4. **Gere o Build para Produção**
+Para compilar os assets em tempo real durante o desenvolvimento:
+```bash
+npm run start
+```
 
-    npm install
+5. **Inicie o Watch para Desenvolvimento**
+Para criar uma versão otimizada para produção:
+```bash
+npm run build
+```
 
-Launch your watch for assets with :
-
-    npm run start
-
-For production sites, create your build with :
-
-    npm run build
-
-Para compilar e minificar JS:
-
+6. **Compile e Minifique o JavaScript**
+Para compilar e minificar os arquivos JS separadamente:
+```bash
 npm run build-compiled
+```
 
-## Descrição
+## Estrutura e Desenvolvimento
 
-- Para criar uma nova pagina php crie direto no root do tema.
+### Sistema de Módulos Dinâmicos
+O tema utiliza um sistema de módulos dinâmicos baseado em jQuery para carregar scripts sob demanda. Veja um exemplo da função initDynamicModules:
 
-- Para arquivos JS use o caminho 'assets/src/js';
-  -E para injetar o JS na sua página PHP use a seguinte função "wp_enqueue_script()" que recebe 5 argumentos:
+```javascript
+function initDynamicModules() {
+  async function loadDynamicModule(selector, modulePath, moduleFunction) {
+    const elements = $(selector);
+    if (elements.length > 0) {
+      try {
+        const module = await import(`${modulePath}`);
+        module[moduleFunction]();
+      } catch (error) {
+        console.error(`Erro ao carregar/executar o módulo ${selector}: `, error);
+      }
+    }
+  }
 
-  1. A classe da sua página encontrada no body gerado pela função "body_class()" presente no header.php;
-  2. O caminho do arquivo JS;
-  3. um array de dependencias para aquele script ex: array('jquery');
-  4. a versão fará o controle de cache no navegador;
-  5. um booleano para inserir o script no footer ou no header;
+  const dynamicModules = [
+    {
+      selector: '.page-template-homepage',
+      modulePath: './pages/home/homepage.js',
+      moduleFunction: 'initHomePage',
+    },
+    {
+      selector: 'header',
+      modulePath: './base/header.js',
+      moduleFunction: 'initHeader',
+    },
+  ];
 
-- Para criar arquivos SCSS use o caminho 'assets/src/scss'; e com base na finalidade do seu arquivo ultilize um dos diretórios existentes e depois import o novo arquivo no main.scss. Após criar o arquivo use o seguinte seletor "body.(classe-da-pagina)" que é gerado pela função "body_class()" presente no header.php.
+  dynamicModules.forEach(({ selector, modulePath, moduleFunction }) => {
+    loadDynamicModule(selector, modulePath, moduleFunction);
+  });
+}
 
-- Para adicionar imagens ao projeto use o caminho 'assets/src/img'.
+export { initDynamicModules };
+```
 
-- Para adicionar svg ao projeto use o caminho 'assets/src/svg'.
+### Como Funciona
+- **selector**: Seletor jQuery presente na página.
+- **modulePath**: Caminho relativo ao arquivo JavaScript do módulo.
+- **moduleFunction**: Função exportada pelo módulo (ex.: export { funcName }).
 
-## Utilizar WPCLI no Docker:
+### Observações
+- Os módulos podem importar outros módulos usando import { funcName } from '../relative-path/module.js'.
 
-Execute o comando:
+### Adicionando SCSS
+- **Caminho**: Use assets/src/scss e organize nos diretórios existentes.
+- **Importação**: Adicione o novo arquivo ao main.scss.
+- **Seletor**: Use body.(classe-da-pagina) gerado por body_class() no header.php.
 
-docker exec <id-do-container-wp-cli> wp core version
+### Adicionando Imagens
+- **Caminho**: Use assets/src/img.
 
-E o script wpcli estará disponível, de fora do docker.
+### Adicionando SVGs
+- **Caminho**: Use assets/src/svg.
+
+### Utilizar WPCLI no Docker:
+Execute o comando abaixo para o script `wpcli` estar disponível fora do container:
+```bash
+docker exec wp core version
+```
