@@ -2,6 +2,7 @@ wp-config.php
 .DS_Store
 
 wp-content/uploads
+wp-content/languages
 wp-content/db.php
 
 # VAGRANT
@@ -25,6 +26,7 @@ wp-content/themes/boilerplate/_RESSOURCES/
 # Arquivos do WSL
 *.Zone.Identifier
 *:Zone.Identifier
+**/*:[Zz]one.Identifier
 
 # Versionamento de build
 wp-content/themes/boilerplate/assets_version.php
