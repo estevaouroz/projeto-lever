@@ -21,6 +21,7 @@
         var cookie_expiration = 365;
         var gdpr_cookies_loaded = [];
         var icons_loaded = false;
+        var consent_log_all = false;
         if ( typeof moove_frontend_gdpr_scripts.cookie_expiration !== 'undefined' ) {
           cookie_expiration = moove_frontend_gdpr_scripts.cookie_expiration;
         }
@@ -130,7 +131,7 @@
             if ( e.keyCode == 9 ) {
               e.preventDefault();
 
-              var items_to_focus = $('#moove_gdpr_cookie_modal .mgbutton, #moove_gdpr_cookie_modal .moove-gdpr-modal-close, #moove_gdpr_cookie_modal #moove-gdpr-menu > li');
+              var items_to_focus = $('#moove_gdpr_cookie_modal .mgbutton, #moove_gdpr_cookie_modal .moove-gdpr-modal-close, #moove_gdpr_cookie_modal #moove-gdpr-menu > li, #moove_gdpr_cookie_modal .moove-gdpr-branding');
 
               if ( items_to_focus.length > 0 ) {
                 var item_to_focus = false;       
@@ -258,7 +259,7 @@
             if ( e.keyCode == 9 ) {
               e.preventDefault();
 
-              var items_to_focus = $('#moove_gdpr_cookie_modal .cookie-switch, #moove_gdpr_cookie_modal .mgbutton, #moove_gdpr_cookie_modal a:not(.moove-gdpr-branding), #moove_gdpr_cookie_modal .moove-gdpr-modal-close');
+              var items_to_focus = $('#moove_gdpr_cookie_modal .cookie-switch, #moove_gdpr_cookie_modal .mgbutton, #moove_gdpr_cookie_modal a:not(.moove-gdpr-branding), #moove_gdpr_cookie_modal .moove-gdpr-modal-close, #moove_gdpr_cookie_modal .moove-gdpr-branding');
 
               if ( items_to_focus.length > 0 ) {
                 var item_to_focus = false;       
@@ -601,9 +602,12 @@
         var consent_values = '';
         // JavaScript to be fired on all pages
         function moove_gdpr_save_cookies( $log ) {
+          consent_log_all = true;
+          gdpr_save_analytics( 'accept_all', '' );
+          
           moove_gdpr_create_cookie('moove_gdpr_popup',JSON.stringify({strict: '1', thirdparty: '1', advanced: '1'}),cookie_expiration);
           moove_gdpr_check_reload( 'enabled-all' );
-          gdpr_save_analytics( 'accept_all', '' );
+          
         }   
 
         function moove_gdpr_check_reload( $log ) {
@@ -725,7 +729,6 @@
         }
 
         function moove_gdpr_change_switchers( cookies ) {
-          // console.warn(cookies);
           if ( cookies ) {
             gdpr_save_analytics( 'script_inject', cookies );
             if ( parseInt( cookies.strict ) === 1 ) {
@@ -744,7 +747,6 @@
               // WP Consent API
               if ( typeof moove_frontend_gdpr_scripts.wp_consent_api !== 'undefined' && 'true' === moove_frontend_gdpr_scripts.wp_consent_api ) {
                 wp_set_consent('functional', 'allow');
-                console.warn('functional allow');
               }
             } else {
               if ( $('#moove_gdpr_strict_cookies').is(':checked') ) {
@@ -760,7 +762,6 @@
               // WP Consent API
               if ( typeof moove_frontend_gdpr_scripts.wp_consent_api !== 'undefined' && 'true' === moove_frontend_gdpr_scripts.wp_consent_api ) {
                 wp_set_consent('functional', 'deny');
-                console.warn('functional deny');
               }
             }
 
@@ -773,7 +774,6 @@
               // WP Consent API
               if ( typeof moove_frontend_gdpr_scripts.wp_consent_api !== 'undefined' && 'true' === moove_frontend_gdpr_scripts.wp_consent_api ) {
                 wp_set_consent('statistics', 'allow');
-                console.warn('statistics allow');
               }
             } else {
               if ( $('#moove_gdpr_performance_cookies').is(':checked') ) {
@@ -784,7 +784,6 @@
               // WP Consent API
                 if ( typeof moove_frontend_gdpr_scripts.wp_consent_api !== 'undefined' && 'true' === moove_frontend_gdpr_scripts.wp_consent_api ) {
                   wp_set_consent('statistics', 'deny');
-                  console.warn('statistics deny');
                 }
             }
             if ( parseInt( cookies.advanced ) === 1 ) {
@@ -796,7 +795,6 @@
               // WP Consent API
               if ( typeof moove_frontend_gdpr_scripts.wp_consent_api !== 'undefined' && 'true' === moove_frontend_gdpr_scripts.wp_consent_api ) {
                 wp_set_consent('marketing', 'allow');
-                console.warn('marketing allow');
               }
             } else {
               if ( $('#moove_gdpr_advanced_cookies').is(':checked') ) {
@@ -807,9 +805,9 @@
               // WP Consent API
               if ( typeof moove_frontend_gdpr_scripts.wp_consent_api !== 'undefined' && 'true' === moove_frontend_gdpr_scripts.wp_consent_api ) {
                 wp_set_consent('marketing', 'deny');
-                console.warn('marketing deny');
               }
             }
+
             $('input[data-name="moove_gdpr_performance_cookies"]').prop('checked',$('#moove_gdpr_performance_cookies').is(':checked'));
             $('input[data-name="moove_gdpr_strict_cookies"]').prop('checked',$('#moove_gdpr_strict_cookies').is(':checked'));
             $('input[data-name="moove_gdpr_advanced_cookies"]').prop('checked',$('#moove_gdpr_advanced_cookies').is(':checked'));
@@ -1752,6 +1750,7 @@
           try {
             $(document).find('script[data-gdpr]').each(function() {
               gdpr_cc_log( 'script_removed: ' + $(this).attr('src') );
+              $(this).remove();
             });
             var cookies = document.cookie.split(";");
             var domain  = window.location.hostname;
@@ -1826,7 +1825,9 @@
             $('#moove_gdpr_save_popup_settings_button').show();
           } else {
             if ( cookies ) {
-              moove_gdpr_create_cookie('moove_gdpr_popup',JSON.stringify({strict: strict, thirdparty: thirdparty, advanced: advanced}),cookie_expiration);
+              if ( ! consent_log_all ) {
+                moove_gdpr_create_cookie('moove_gdpr_popup',JSON.stringify({strict: strict, thirdparty: thirdparty, advanced: advanced}),cookie_expiration);
+              }
             }
           }
           var cookies = moove_gdpr_read_cookie('moove_gdpr_popup');

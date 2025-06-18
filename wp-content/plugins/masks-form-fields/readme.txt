@@ -3,9 +3,9 @@ Contributors: ivanpetermann
 Donate link: https://ivanpetermann.com/donation
 Tags: form, mask, phone, field, contact form 7
 Requires at least: 4.5
-Tested up to: 6.5
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 1.11.1
+Stable tag: 1.12.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,34 +22,34 @@ Example of use with [Contact Form 7](https://wordpress.org/plugins/contact-form-
 Listing of classes available for use.
 
 `
-('span.start, input.start').mask('00/0000');
-('span.date, input.date').mask('00/00/0000');
-('span.time, input.time').mask('00:00:00');
-('span.time2, input.time2').mask('00:00');
-('input.date_time').mask('00/00/0000 00:00:00');
-('input.date_time2').mask('00/00/0000 00:00');
-('input.cep').mask('00000-000');
-('input.zip').mask('00000');
-('input.phone, input[name="phonebr"]').mask(PhoneMaskBehavior, nonoOptions);
-('input.phone_us').mask('(000) 000-0000');
-('input.taxid').mask('00-0000000');
-('input.ssn').mask('000-00-0000');
-('input.mixed').mask('AAA 000-S0S');
-('input.cpf').mask('000.000.000-00', { reverse: true });
-('input.cnpj').mask('00.000.000/0000-00', { reverse: true });
-('input.money').mask('000.000.000.000.000,00', { reverse: true });
-('input.money2').mask('#.##0,00', { reverse: true });
-('input.money3').mask('#,##0.00', { reverse: true });
-('input.money4').mask('000,000,000,000,000.00', { reverse: true });
-('input.money5').mask('#.##0', { reverse: true });
-('input.money6').mask('#,##0', { reverse: true });
-('input.ip_address').mask('099.099.099.099');
-('input.percent').mask('##0,00%', { reverse: true });
-('input.percent2').mask('##0.00%', { reverse: true });
-('input.percent3').mask('990,0%', { reverse: true });
-('input.percent4').mask('990.0%', { reverse: true });
-('input.percent5').mask('#,##0%', { reverse: true });
-('input.percent6').mask('#.##0%', { reverse: true });
+('span.start, input.start').mff_mask('00/0000');
+('span.date, input.date').mff_mask('00/00/0000');
+('span.time, input.time').mff_mask('00:00:00');
+('span.time2, input.time2').mff_mask('00:00');
+('input.date_time').mff_mask('00/00/0000 00:00:00');
+('input.date_time2').mff_mask('00/00/0000 00:00');
+('input.cep').mff_mask('00000-000', { clearIfNotMatch: true });
+('input.zip').mff_mask('00000');
+('input.phone, input[name="phonebr"]').mff_mask(PhoneMaskBehavior, nonoOptions);
+('input.phone_us').mff_mask('(000) 000-0000');
+('input.taxid').mff_mask('00-0000000');
+('input.ssn').mff_mask('000-00-0000');
+('input.mixed').mff_mask('AAA 000-S0S');
+('input.cpf').mff_mask('000.000.000-00', { reverse: true, clearIfNotMatch: true });
+('input.cnpj').mff_mask('00.000.000/0000-00', { reverse: true, clearIfNotMatch: true });
+('input.money').mff_mask('000.000.000.000.000,00', { reverse: true });
+('input.money2').mff_mask('#.##0,00', { reverse: true });
+('input.money3').mff_mask('#,##0.00', { reverse: true });
+('input.money4').mff_mask('000,000,000,000,000.00', { reverse: true });
+('input.money5').mff_mask('#.##0', { reverse: true });
+('input.money6').mff_mask('#,##0', { reverse: true });
+('input.ip_address').mff_mask('099.099.099.099');
+('input.percent').mff_mask('##0,00%', { reverse: true });
+('input.percent2').mff_mask('##0.00%', { reverse: true });
+('input.percent3').mff_mask('990,0%', { reverse: true });
+('input.percent4').mff_mask('990.0%', { reverse: true });
+('input.percent5').mff_mask('#,##0%', { reverse: true });
+('input.percent6').mff_mask('#.##0%', { reverse: true });
 `
 
 [Click here](https://gist.github.com/petermann/fd1a898e02ca91a0d7231a9f8ee662b4) for more details on how to add custom mask.
@@ -77,6 +77,14 @@ This plugin to add masks in the form’s fields.
 [Click here](https://gist.github.com/petermann/fd1a898e02ca91a0d7231a9f8ee662b4) for more details on how to add custom mask.
 
 == Changelog ==
+
+= 1.12.2 =
+* Add the clearIfNotMatch option to the Brazilian masks: CEP, CPF, CNPJ, and phone number.
+* Tested in WordPress 6.8
+
+= 1.11.2 =
+* Convert line endings from CRLF to LF
+* Tested in WordPress 6.7
 
 = 1.11.1 =
 * Fixed JS minification conflict: Added semicolon after JSON declaration in wp_add_inline_script. (commit#3529ce1)

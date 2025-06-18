@@ -173,6 +173,13 @@ class Connector_BuddyPress extends Connector {
 	 * @return array Action links
 	 */
 	public function action_links( $links, $record ) {
+
+		// Check we have access to BuddyPress on this blog and that the user will have access to the links.
+		if ( ! $this->is_dependency_satisfied() || ! bp_current_user_can_moderate() ) {
+			return array();
+		}
+
+		// In the links, we also need to check the functions themselves as they're dependent on the BuddyPress module being enabled.
 		if ( in_array( $record->context, array( 'components' ), true ) ) {
 			$option_key = $record->get_meta( 'option_key', true );
 
@@ -181,7 +188,7 @@ class Connector_BuddyPress extends Connector {
 					array(
 						'page' => 'bp-components',
 					),
-					admin_url( 'admin.php' )
+					get_admin_url( $record->blog_id, 'admin.php' )
 				);
 			} elseif ( 'bp-pages' === $option_key ) {
 				$page_id = $record->get_meta( 'page_id', true );
@@ -190,7 +197,7 @@ class Connector_BuddyPress extends Connector {
 					array(
 						'page' => 'bp-page-settings',
 					),
-					admin_url( 'admin.php' )
+					get_admin_url( $record->blog_id, 'admin.php' )
 				);
 
 				if ( $page_id ) {
@@ -203,9 +210,9 @@ class Connector_BuddyPress extends Connector {
 				array(
 					'page' => $record->get_meta( 'page', true ),
 				),
-				admin_url( 'admin.php' )
+				get_admin_url( $record->blog_id, 'admin.php' )
 			);
-		} elseif ( in_array( $record->context, array( 'groups' ), true ) ) {
+		} elseif ( in_array( $record->context, array( 'groups' ), true ) && function_exists( 'groups_get_group' ) ) {
 			$group_id = $record->get_meta( 'id', true );
 			$group    = \groups_get_group(
 				array(
@@ -218,13 +225,13 @@ class Connector_BuddyPress extends Connector {
 				$base_url   = \bp_get_admin_url( 'admin.php?page=bp-groups&amp;gid=' . $group_id );
 				$delete_url = wp_nonce_url( $base_url . '&amp;action=delete', 'bp-groups-delete' );
 				$edit_url   = $base_url . '&amp;action=edit';
-				$visit_url  = \bp_get_group_permalink( $group );
+				$visit_url  = function_exists( 'bp_get_group_url' ) ? \bp_get_group_url( $group ) : \bp_get_group_permalink( $group );
 
 				$links[ esc_html__( 'Edit group', 'stream' ) ]   = $edit_url;
 				$links[ esc_html__( 'View group', 'stream' ) ]   = $visit_url;
 				$links[ esc_html__( 'Delete group', 'stream' ) ] = $delete_url;
 			}
-		} elseif ( in_array( $record->context, array( 'activity' ), true ) ) {
+		} elseif ( in_array( $record->context, array( 'activity' ), true ) && function_exists( 'bp_activity_get' ) ) {
 			$activity_id = $record->get_meta( 'id', true );
 			$activities  = \bp_activity_get(
 				array(
@@ -271,7 +278,7 @@ class Connector_BuddyPress extends Connector {
 					),
 					admin_url( 'users.php' )
 				);
-			} else {
+			} elseif ( class_exists( 'BP_XProfile_Field' ) ) {
 				$field = new \BP_XProfile_Field( $field_id );
 				if ( empty( $field->type ) ) {
 					return $links;
@@ -355,12 +362,12 @@ class Connector_BuddyPress extends Connector {
 	/**
 	 * Track buddyPress-specific option changes.
 	 *
-	 * @param string $option Option key.
-	 * @param string $old    Old value.
-	 * @param string $new    New value.
+	 * @param string $option    Option key.
+	 * @param string $old_value Old value.
+	 * @param string $new_value New value.
 	 */
-	public function callback_update_option( $option, $old, $new ) {
-		$this->check( $option, $old, $new );
+	public function callback_update_option( $option, $old_value, $new_value ) {
+		$this->check( $option, $old_value, $new_value );
 	}
 
 	/**
@@ -385,12 +392,12 @@ class Connector_BuddyPress extends Connector {
 	/**
 	 * Track buddyPress-specific site option changes
 	 *
-	 * @param string $option Option key.
-	 * @param string $old    Old value.
-	 * @param string $new    New value.
+	 * @param string $option    Option key.
+	 * @param string $old_value Old value.
+	 * @param string $new_value New value.
 	 */
-	public function callback_update_site_option( $option, $old, $new ) {
-		$this->check( $option, $old, $new );
+	public function callback_update_site_option( $option, $old_value, $new_value ) {
+		$this->check( $option, $old_value, $new_value );
 	}
 
 	/**

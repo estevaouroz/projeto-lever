@@ -39,7 +39,7 @@ $bunny_fonts = mtnc_add_bunny_fonts();
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-	<meta charset="<?php esc_attr_e( get_bloginfo( 'charset' ) ); ?>" />
+	<meta charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>" />
 	<?php mtnc_get_page_title(); ?>
 	<?php
 	if ( function_exists( 'wp_site_icon' ) ) {
@@ -67,26 +67,22 @@ $bunny_fonts = mtnc_add_bunny_fonts();
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php echo esc_url( get_bloginfo( 'pingback_url' ) ); ?>" />
 	<?php do_action( 'load_custom_style' ); ?>
-	<?php do_action( 'add_gg_analytics_code' ); ?>
+    <?php do_action( 'add_gg_analytics_code' ); ?>
 
     <?php
     if (mtnc_is_weglot_setup()) {
-        echo '<link rel="stylesheet" href="' . esc_url(WEGLOT_URL_DIST . '/css/front-css.css?v=' . WEGLOT_VERSION) . '" type="text/css">';
-        echo '<script src="' . esc_url(WEGLOT_URL_DIST . '/front-js.js?v=' . WEGLOT_VERSION) . '"></script>';
+        // we don't want to load wp_head(), just the stuff we need
+        echo '<link rel="stylesheet" href="' . esc_url(WEGLOT_URL_DIST . '/css/front-css.css?v=' . WEGLOT_VERSION) . '" type="text/css">'; //phpcs:ignore
+        echo '<script src="' . esc_url(WEGLOT_URL_DIST . '/front-js.js?v=' . WEGLOT_VERSION) . '"></script>'; //phpcs:ignore
     }
-    ?>
-
-	<!--[if IE]>
-	<style type="text/css">
-
-	</style>
-	<script type="text/javascript" src="<?php echo esc_url( MTNC_URI . 'load/js/jquery.backstretch.min.js' ); ?>"></script>
-	<![endif]-->
-	<?php
+    
+    // we don't want to load wp_head(), just the stuff we need
+	echo '<!--[if IE]><script type="text/javascript" src="' . esc_url( MTNC_URI . "load/js/jquery.backstretch.min.js" ) . '"></script><![endif]-->'; //phpcs:ignore
+    
 	if ( ! empty( $bunny_fonts[1] ) ) {
-		echo '<link rel="stylesheet" href="' . esc_url( 'https://fonts.bunny.net/css?family=' . esc_attr( $bunny_fonts[1] ) . '|' . esc_attr( $bunny_fonts[0] ) ) . '">';
+		echo '<link rel="stylesheet" href="' . esc_url( 'https://fonts.bunny.net/css?family=' . esc_attr( $bunny_fonts[1] ) . '|' . esc_attr( $bunny_fonts[0] ) ) . '">'; //phpcs:ignore
 	} elseif ( ! empty( $bunny_fonts[0] ) ) {
-		echo '<link rel="stylesheet" href="' . esc_url( 'https://fonts.bunny.net/css?family=' . esc_attr( $bunny_fonts[0] ) ) . '">';
+		echo '<link rel="stylesheet" href="' . esc_url( 'https://fonts.bunny.net/css?family=' . esc_attr( $bunny_fonts[0] ) ) . '">'; //phpcs:ignore
   }
 	?>
 </head>
@@ -127,13 +123,13 @@ $bunny_fonts = mtnc_add_bunny_fonts();
 				?>
 				<source media="(max-width: 100vh)" srcset="<?php echo esc_url( $bg_image_portrait ); ?>">
 			<?php endif; ?>
-			<img src="<?php echo esc_url( $body_bg ); ?>">
+			<img class="skip-lazy" src="<?php echo esc_url( $body_bg ); ?>">
 		</picture>
 	<?php endif; ?>
 </div>
 
 <?php do_action( 'after_main_container' ); ?>
-<?php if ( isset( $mt_options['is_login'] ) ) : ?>
+<?php if ( isset( $mt_options['is_login'] ) && $mt_options['is_login'] == true ) : ?>
 	<div class="login-form-container">
 		<?php mtnc_do_login_form( esc_attr( $mess_arr[3] ), esc_attr( $mess_arr[1] ), esc_attr( $mess_arr[2] ), esc_attr( $mess_arr[0] ) ); ?>
 		<?php mtnc_do_button_login_form(); ?>

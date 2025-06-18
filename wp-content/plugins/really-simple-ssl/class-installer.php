@@ -61,9 +61,9 @@ if ( ! class_exists( 'rsssl_installer' ) ) {
 		 */
 		public function get_activation_slug() {
 			$slugs = [
-				'burst-statistics'           => 'burst-statistics/burst.php',
 				'complianz-gdpr'             => 'complianz-gdpr/complianz-gpdr.php',
 				'complianz-terms-conditions' => 'complianz-terms-conditions/complianz-terms-conditions.php',
+				'simplybook'                 => 'simplybook/simplybook.php',
 			];
 			return $slugs[ $this->slug ];
 		}
@@ -74,9 +74,9 @@ if ( ! class_exists( 'rsssl_installer' ) ) {
 		 */
 		public function cancel_tour() {
 			$prefixes = [
-				'burst-statistics'           => 'burst',
 				'complianz-gdpr'             => 'cmplz',
 				'complianz-terms-conditions' => 'cmplz_tc',
+				'simplybook'                 => 'simplybook',
 			];
 			$prefix   = $prefixes[ $this->slug ];
 			update_site_option( $prefix . '_tour_started', false );

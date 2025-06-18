@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpComposerExtensionStubsInspection */
+<?php
 
 use security\wordpress\vulnerabilities\Rsssl_File_Storage;
 
@@ -7,7 +7,7 @@ defined('ABSPATH') or die();
 require_once(rsssl_path . 'security/wordpress/vulnerabilities/class-rsssl-file-storage.php');
 
 /**
- * @package Really Simple SSL
+ * @package Really Simple Security
  * @subpackage RSSSL_VULNERABILITIES
  */
 if (!class_exists("rsssl_vulnerabilities")) {
@@ -47,20 +47,60 @@ if (!class_exists("rsssl_vulnerabilities")) {
 
         public function __construct()
         {
+	        $this->init();
+            $this->load_translations_just_in_time();
+
+	        add_filter('rsssl_vulnerability_data', array($this, 'get_stats'));
+
+	        //now we add the action to the cron.
+	        add_action('rsssl_three_hours_cron', array($this, 'run_cron'));
+	        add_filter('rsssl_notices', [$this, 'show_help_notices'], 10, 1);
+	        add_action( 'rsssl_after_save_field', array( $this, 'maybe_delete_local_files' ), 10, 4 );
+	        add_action( 'rsssl_upgrade', array( $this, 'upgrade_encrypted_files') );
+        }
+
+        /**
+         * As this class is not only instantiated by requiring this file
+         * but also in other class instances, we are not 100% sure of the
+         * current filter or action. So we check if we are in the init action
+         * or if the init action has already been executed. If so, we load the
+         * translations immediately and just in time.
+         */
+        public function load_translations_just_in_time(): void
+        {
+            add_action('init', [$this, 'load_translations']);
+
+            if (current_filter() === 'init' || did_action('init') > 0) {
+                $this->load_translations();
+            }
+        }
+
+        /**
+         * Load the translations for the risk levels
+         */
+        public function load_translations(): void
+        {
             $this->risk_naming = [
                 'l' => __('low-risk', 'really-simple-ssl'),
                 'm' => __('medium-risk', 'really-simple-ssl'),
                 'h' => __('high-risk', 'really-simple-ssl'),
                 'c' => __('critical', 'really-simple-ssl'),
             ];
+        }
 
-	        $this->init();
-	        add_filter('rsssl_vulnerability_data', array($this, 'get_stats'));
+	    /**
+         * Upgrade to the new encryption system by deleting all files en re-downloading
+         *
+	     * @return void
+	     */
+        public function upgrade_encrypted_files($prev_version) : void {
+	        if ( $prev_version && version_compare( $prev_version, '8.3.0', '<' ) ) {
+		        //delete all files and reload
+		        Rsssl_File_Storage::DeleteAll();
+		        $this->force_reload_files();
+		        delete_option( 'rsssl_hashkey' );
+            }
 
-	        //now we add the action to the cron.
-	        add_filter('rsssl_every_three_hours_cron', array($this, 'run_cron'));
-	        add_filter('rsssl_notices', [$this, 'show_help_notices'], 10, 1);
-	        add_action( 'rsssl_after_save_field', array( $this, 'maybe_delete_local_files' ), 10, 4 );
         }
 
 //	    /**
@@ -151,9 +191,11 @@ if (!class_exists("rsssl_vulnerabilities")) {
 		    if ( ! rsssl_admin_logged_in() ) {
 			    return;
 		    }
+            
 		    \security\wordpress\vulnerabilities\Rsssl_File_Storage::DeleteOldFiles();
 
-		    if ( isset($_GET['rsssl_check_vulnerabilities']) || get_option('rsssl_reload_vulnerability_files') ) {
+		    if ( get_option('rsssl_reload_vulnerability_files') ) {
+
 			    delete_option('rsssl_reload_vulnerability_files');
 			    $this->reload_files_on_update();
 			    update_option('rsssl_clear_vulnerability_notices', true, false);
@@ -284,7 +326,7 @@ if (!class_exists("rsssl_vulnerabilities")) {
 			    ),
 			    'actions'     => sprintf(
 				    '<p><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></p>',
-				    esc_url( __( add_query_arg(array('page'=>'really-simple-security#settings/vulnerabilities/vulnerabilities-overview'), rsssl_admin_url() ) ) ),
+				    esc_url( rsssl_admin_url([], '#settings/vulnerabilities/vulnerabilities-overview') ),
 				    __( 'View vulnerabilities', 'really-simple-ssl' )
 			    ),
 			    'test' => 'rsssl_vulnerabilities',
@@ -357,8 +399,8 @@ if (!class_exists("rsssl_vulnerabilities")) {
 			            'output'            => [
 				            'true' => [
 					            'title'        => __( 'Site wide - Test Notification', 'really-simple-ssl' ),
-					            'msg'          => __( 'This is a test notification from Really Simple SSL. You can safely dismiss this message.', 'really-simple-ssl' ),
-					            'url' => add_query_arg(['page'=>'really-simple-security#settings/vulnerabilities/vulnerabilities-overview'], rsssl_admin_url() ),
+					            'msg'          => __( 'This is a test notification from Really Simple Security. You can safely dismiss this message.', 'really-simple-ssl' ),
+					            'url' => rsssl_admin_url([], '#settings/vulnerabilities/vulnerabilities-overview'),
 					            'icon'         => $site_wide_icon,
 					            'dismissible'  => true,
 					            'admin_notice' => true,
@@ -379,7 +421,7 @@ if (!class_exists("rsssl_vulnerabilities")) {
 			                'output'            => [
 				                'true' => [
 					                'title'        => __( 'Dashboard - Test Notification', 'really-simple-ssl' ),
-					                'msg'          => __( 'This is a test notification from Really Simple SSL. You can safely dismiss this message.', 'really-simple-ssl' ),
+					                'msg'          => __( 'This is a test notification from Really Simple Security. You can safely dismiss this message.', 'really-simple-ssl' ),
 					                'icon'         => $dashboard_icon,
 					                'dismissible'  => true,
 					                'admin_notice' => false,
@@ -457,6 +499,7 @@ if (!class_exists("rsssl_vulnerabilities")) {
             if ( !$force_update && !empty($this->workable_plugins) ) {
                 return;
             }
+
 		    //first we get all installed plugins
 		    $installed_plugins = get_plugins();
 
@@ -840,7 +883,6 @@ if (!class_exists("rsssl_vulnerabilities")) {
          * @param string $url
          *
          * @return mixed|null
-         * @noinspection PhpComposerExtensionStubsInspection
          */
         private function download(string $url)
         {
@@ -1490,7 +1532,7 @@ if (!class_exists("rsssl_vulnerabilities")) {
             $mailer = new rsssl_mailer();
             $mailer->subject = sprintf(__("Vulnerability Alert: %s", "really-simple-ssl"), $this->site_url() );
 	        $mailer->title = sprintf(_n("%s: %s vulnerability found", "%s: %s vulnerabilities found", $total, "really-simple-ssl"), $this->date(), $total);
-            $message = sprintf(__("This is a vulnerability alert from Really Simple SSL for %s. ","really-simple-ssl"), $this->domain() );
+            $message = sprintf(__("This is a vulnerability alert from Really Simple Security for %s. ","really-simple-ssl"), $this->domain() );
             $mailer->message = $message;
             $mailer->warning_blocks = $blocks;
             if ($total > 0) {
@@ -1528,9 +1570,9 @@ if (!class_exists("rsssl_vulnerabilities")) {
             return [
                 'title' => $title,
                 'message' => $message . ' ' .
-                             __('Based on your settings, Really Simple SSL will take appropriate action, or you will need to solve it manually.','really-simple-ssl') .' '.
-                             sprintf(__('Get more information from the Really Simple SSL dashboard on %s'), $this->domain() ),
-                'url' => rsssl_admin_url('#settings/vulnerabilities_notifications'),
+                             __('Based on your settings, Really Simple Security will take appropriate action, or you will need to solve it manually.','really-simple-ssl') .' '.
+                             sprintf(__('Get more information from the Really Simple Security dashboard on %s'), $this->domain() ),
+                'url' => rsssl_admin_url( [], '#settings/vulnerabilities_notifications'),
             ];
         }
 
@@ -1577,7 +1619,7 @@ if (!class_exists("rsssl_vulnerabilities")) {
 	    }
 
 	    /**
-         * Cron triggers may sometimes result in http URL's, even though SSL is enabled in Really Simple SSL.
+         * Cron triggers may sometimes result in http URL's, even though SSL is enabled in Really Simple Security.
          * We ensure that the URL is returned with https if SSL is enabled.
          *
 	     * @return string

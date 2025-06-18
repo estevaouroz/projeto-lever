@@ -145,7 +145,7 @@ class Moove_GDPR_Actions {
 					'name'				=> 'Google Tag Manager',
 					'desc'				=> 'Compatibility for GTM4WP',
 					'cookie_cat'	=> isset( $gdin_values['gtm4wp'] ) ? intval( $gdin_values['gtm4wp'] ) : 2,
-					'tacking_id'	=> isset(  $storedoptions['gtm-code'] ) && $storedoptions['gtm-code'] ? $storedoptions['gtm-code'] : '',
+					'tacking_id'	=> isset(  $storedoptions['gtm-code'] ) && $storedoptions['gtm-code'] ? esc_attr( $storedoptions['gtm-code'] ) : '',
 					'id_format'		=> 'G-XXXXXXX',
 					'atts'				=> array(
 						'toggle'		=> true,
@@ -601,7 +601,7 @@ class Moove_GDPR_Actions {
 			$button_order = in_array( 'settings', $buttons_order ) ? array_search( 'settings', $buttons_order ) : 'auto';
 			$button_label = isset( $modal_options[ 'moove_gdpr_infobar_settings_button_label' . $wpml_lang ] ) && $modal_options[ 'moove_gdpr_infobar_settings_button_label' . $wpml_lang ] ? $modal_options[ 'moove_gdpr_infobar_settings_button_label' . $wpml_lang ] : __( 'Settings', 'gdpr-cookie-compliance' );
 			?>
-				<button class="mgbutton moove-gdpr-infobar-settings-btn change-settings-button gdpr-fbo-<?php echo esc_attr( $button_order ); ?>" data-href="#moove_gdpr_cookie_modal"<?php echo apply_filters('gdpr_tabindex_attribute', '', $button_order ); ?> aria-label="<?php echo esc_attr( $button_label ); ?>"><?php echo esc_attr( $button_label ); ?></button>
+				<button class="mgbutton moove-gdpr-infobar-settings-btn change-settings-button gdpr-fbo-<?php echo esc_attr( $button_order ); ?>" aria-haspopup="true" data-href="#moove_gdpr_cookie_modal"<?php echo apply_filters('gdpr_tabindex_attribute', '', $button_order ); ?> aria-label="<?php echo esc_attr( $button_label ); ?>"><?php echo esc_attr( $button_label ); ?></button>
 			<?php
 		endif;
 	}
@@ -698,7 +698,7 @@ class Moove_GDPR_Actions {
 			<div class="gdpr-locked-section">
 				<span>
 					<i class="dashicons dashicons-lock"></i>
-					<h4>This feature is part of the Premium Add-on</h4>
+					<h4><?php esc_html_e( 'This feature is part of the Premium Add-on', 'gdpr-cookie-compliance' ); ?></h4>
 					<?php
 					$gdpr_default_content = new Moove_GDPR_Content();
 					$option_key           = $gdpr_default_content->moove_gdpr_get_key_name();

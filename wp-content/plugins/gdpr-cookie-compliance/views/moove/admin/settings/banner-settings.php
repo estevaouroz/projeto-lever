@@ -32,6 +32,7 @@ if ( isset( $_POST ) && isset( $_POST['moove_gdpr_nonce'] ) ) :
 				'moove_gdpr_colour_scheme',
 				'gdpr_close_button_bhv_redirect',
 				'gdpr_accesibility',
+				'gdpr_cb_show_mobile',
 			);
 			// Cookie Banner Visibility.
 			$moove_gdpr_infobar_visibility = 'hidden';
@@ -101,14 +102,22 @@ if ( isset( $_POST ) && isset( $_POST['moove_gdpr_nonce'] ) ) :
 			endif;
 			$gdpr_options['gdpr_accesibility'] = $gdpr_accesibility;
 
+			// Cookie Banner Hide on Mobile.
+			$gdpr_cb_show_mobile = '0';
+			
+			if ( isset( $_POST['gdpr_cb_show_mobile'] ) ) :
+				$gdpr_cb_show_mobile = '1';
+			endif;
+			$gdpr_options['gdpr_cb_show_mobile'] = $gdpr_cb_show_mobile;
 			update_option( $option_name, $gdpr_options );
 
 			foreach ( $_POST as $form_key => $form_value ) :
 				if ( 'moove_gdpr_info_bar_content' === $form_key ) :
+					$form_value 														= wp_kses_post( $form_value );
 					$value                                  = wpautop( wp_unslash( $form_value ) );
 					$gdpr_options[ $form_key . $wpml_lang ] = $value;
 				elseif ( 'moove_gdpr_modal_strictly_secondary_notice' . $wpml_lang === $form_key ) :
-					$value                     = wpautop( wp_unslash( $form_value ) );
+					$value                     = wp_kses_post( wpautop( wp_unslash( $form_value ) ) );
 					$gdpr_options[ $form_key ] = $value;
 				elseif ( 'gdpr_initialization_delay' === $form_key ) :
 					$value                     = intval( $form_value );
@@ -146,6 +155,9 @@ endif;
 $buttons_order 				= isset( $gdpr_options['gdpr_bs_buttons_order'] ) ? json_decode( $gdpr_options['gdpr_bs_buttons_order'], true ) : array('accept', 'reject', 'settings', 'close');
 
 $initalization_delay 	= isset( $gdpr_options['gdpr_initialization_delay'] ) && intval( $gdpr_options['gdpr_initialization_delay'] ) >= 0 ? intval( $gdpr_options['gdpr_initialization_delay'] ) : apply_filters( 'gdpr_init_script_delay', 2000 );
+
+$gdpr_cb_show_mobile = isset( $gdpr_options['gdpr_cb_show_mobile'] ) && intval( $gdpr_options['gdpr_cb_show_mobile'] ) >= 0 ? intval( $gdpr_options['gdpr_cb_show_mobile'] ) : apply_filters( 'gdpr_show_banner_on_mobile', 1 );
+
 ?>
 <form action="<?php echo esc_url( admin_url( 'admin.php?page=moove-gdpr&tab=banner-settings' ) ); ?>" method="post" id="moove_gdpr_tab_banner_settings">
 	<?php wp_nonce_field( 'moove_gdpr_nonce_field', 'moove_gdpr_nonce' ); ?>
@@ -181,6 +193,7 @@ $initalization_delay 	= isset( $gdpr_options['gdpr_initialization_delay'] ) && i
 						$_content .= '<p>' . sprintf( esc_html__( 'You can find out more about which cookies we are using or switch them off in [%s]settings[/%s].', 'gdpr-cookie-compliance' ), 'setting', 'setting' ) . '</p>';
 						$content  = $_content;
 					endif;
+					$content = wp_kses_post( $content );
 					?>
 					<?php
 					$settings = array(
@@ -551,12 +564,24 @@ $initalization_delay 	= isset( $gdpr_options['gdpr_initialization_delay'] ) && i
 
 			<tr>
 				<th scope="row">
+					<label for="gdpr_cb_show_mobile"><?php esc_html_e( 'Banner Visibility on Mobile', 'gdpr-cookie-compliance' ); ?></label>
+				</th>
+				<td>
+					<label class="gdpr-checkbox-toggle">
+						<input type="checkbox" name="gdpr_cb_show_mobile" <?php echo $gdpr_cb_show_mobile === 1 ? 'checked' : ''; ?> >
+						<span class="gdpr-checkbox-slider" data-enable="<?php esc_html_e( 'Visible', 'gdpr-cookie-compliance' ); ?>" data-disable="<?php esc_html_e( 'Hidden', 'gdpr-cookie-compliance' ); ?>"></span>
+					</label>   
+				</td>
+			</tr>
+
+			<tr>
+				<th scope="row">
 					<label for="gdpr_initialization_delay"><?php esc_html_e( 'Banner initialization delay', 'gdpr-cookie-compliance' ); ?></label>
 				</th>
 				<td>
 					<span style="white-space: nowrap;">
 						<input type="number" value="<?php echo $initalization_delay; ?>" min="0" step="1" name="gdpr_initialization_delay" id="gdpr_initialization_delay" style="width: 100px;">
-						milliseconds
+						<?php esc_html_e( 'milliseconds', 'gdpr-cookie-compliance' ); ?>
 					</span>
 
 					<p class="description">

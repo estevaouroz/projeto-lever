@@ -9,6 +9,7 @@ import filterData from "./FilterData";
 import {useEffect, useState} from '@wordpress/element';
 import ErrorBoundary from "../utils/ErrorBoundary";
 import PremiumOverlay from "./PremiumOverlay";
+import GroupFilter from "./GroupFilter";
 
 /**
  * Render a grouped block of settings
@@ -100,33 +101,28 @@ const SettingsGroup = (props) => {
     let anchor = getAnchor('main');
     let disabledClass = disabled || networkwide_error ? 'rsssl-disabled' : '';
     const filterId = "rsssl-group-filter-" + activeGroup.id;
+    //filter out all fields that are not visible
+    selectedFields = selectedFields.filter((field) => {
+        if (field.hasOwnProperty('visible')) {
+            return field.visible;
+        }
+        return true;
+    });
+    //if there are no visible fields, return null
+    if (selectedFields.length === 0) {
+        return null;
+    }
     return (
         <div className={"rsssl-grid-item rsssl-" + activeGroup.id + ' ' + disabledClass}>
             {activeGroup.title && <div className="rsssl-grid-item-header">
                 <h3 className="rsssl-h4">{activeGroup.title}</h3>
                 {activeGroup.groupFilter && (
-                        <div className="rsssl-grid-item-controls">
-                            <select
-                                className="rsssl-group-filter"
-                                id={filterId}
-                                name={filterId}
-                                value={selectedFilter[filterId]}
-                                onChange={(e) => {
-                                    const selectedValue = e.target.value;
-                                    setSelectedFilter(selectedValue, filterId);
-                                }}
-                            >
-                                {activeGroup.groupFilter.options.map((option) => (
-                                    //if the value is equal to the selected value, set it as selected
-                                    <option
-                                        key={'option-'+option.id}
-                                        value={option.id}
-                                    >
-                                        {option.title}
-                                    </option>
-                                ))}
-                            </select>
-                    </div>
+                    <GroupFilter
+                        groupFilter={activeGroup.groupFilter}
+                        filterId={filterId}
+                        selectedFilter={selectedFilter}
+                        setSelectedFilter={setSelectedFilter}
+                    />
                 )}
                 {!activeGroup.groupFilter && activeGroup.helpLink && anchor !== 'letsencrypt' && (
                     <div className="rsssl-grid-item-controls">
