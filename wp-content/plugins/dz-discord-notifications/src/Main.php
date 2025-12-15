@@ -39,9 +39,11 @@ class Main {
 
         // Hooks delegados ao registry
         add_action('upgrader_process_complete', [$this->handler_registry, 'handle_upgrader'], 10, 2);
+        add_action('deleted_plugin', [$this->handler_registry, 'handle_plugin_deleted'], 10, 2);
         add_action('activate_plugin',           [$this->handler_registry, 'handle_plugin_activation'], 10, 2);
         add_action('deactivate_plugin',         [$this->handler_registry, 'handle_plugin_deactivation'], 10, 2);
         add_action('user_register',             [$this->handler_registry, 'handle_user_registration']);
         add_action('delete_user',               [$this->handler_registry, 'handle_user_deletion'], 10, 3);
+        add_action('_core_updated_successfully', [$this->handler_registry, 'handle_core_updated_successfully']);
     }
 }

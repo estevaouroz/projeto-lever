@@ -38,11 +38,13 @@ class Settings {
 
     public function register_settings() {
         register_setting('dzn_discord_group', 'dzn_discord_webhook_url', ['sanitize_callback' => 'esc_url_raw']);
+        register_setting('dzn_discord_group', 'dzn_discord_bot_name', ['sanitize_callback' => 'sanitize_text_field']);  // ← Nova opção para nome do bot
         register_setting('dzn_discord_group', 'dzn_discord_alerts');
 
         add_settings_section('dzn_main_section', __('Configurações principais', 'discord-notifications'), null, 'dzn-discord-notifications');
 
         add_settings_field('webhook_url', __('Webhook URL do Discord', 'discord-notifications'), [$this, 'field_webhook_url'], 'dzn-discord-notifications', 'dzn_main_section');
+        add_settings_field('bot_name', __('Nome do Bot no Discord', 'discord-notifications'), [$this, 'field_bot_name'], 'dzn-discord-notifications', 'dzn_main_section');  // ← Novo campo
         add_settings_field('alerts',       __('Alertas que deseja receber', 'discord-notifications'), [$this, 'field_alerts'],       'dzn-discord-notifications', 'dzn_main_section');
     }
 
@@ -53,6 +55,16 @@ class Settings {
 
         if (defined('DISCORD_WEBHOOK_URL') && DISCORD_WEBHOOK_URL !== 'example.com' && DISCORD_WEBHOOK_URL !== '') {
             echo '<p class="description" style="color:#d63638;"><strong>Atenção:</strong> Webhook definido via constante no wp-config.php (campo ignorado).</p>';
+        }
+    }
+
+    public function field_bot_name() {
+        $value = get_option('dzn_discord_bot_name', 'Spidey Bot');
+        echo '<input type="text" name="dzn_discord_bot_name" value="' . esc_attr($value) . '" class="regular-text" />';
+        echo '<p class="description">' . __('Defina o nome que aparecerá como remetente das mensagens no Discord.', 'discord-notifications') . '</p>';
+
+        if (defined('DISCORD_BOT_NAME') && !empty(DISCORD_BOT_NAME)) {
+            echo '<p class="description" style="color:#d63638;"><strong>Atenção:</strong> Nome do bot definido via constante no wp-config.php (campo ignorado).</p>';
         }
     }
 
