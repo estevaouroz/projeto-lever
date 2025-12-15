@@ -7,7 +7,7 @@ Plugin desenvolvido para integrar o WordPress ao Discord via Webhook. Ele monito
 Este projeto foi construído seguindo os padrões de engenharia de software modernos aplicados ao WordPress.
 
 ### Boilerplate DZigual
-A estrutura base de projeto utilizada para a construção do plugin foi **DZigual Boilerplate 2024**,  onde se pode ter mais informações sobre o mesmo abaixo.
+A estrutura base de projeto utilizada para a construção do plugin foi **DZigual Boilerplate 2024**, onde se pode ter mais informações sobre o mesmo abaixo.
 
 * **Referência do Boilerplate:** [GitLab DZigual - Boilerplate 2024](https://gitlab.dzigual.com.br/mint/boilerplate-2024)
 
@@ -22,8 +22,7 @@ Toda vez que você adicionar uma nova classe, alterar o nome de um arquivo ou mo
 
 ```bash
 composer dump-autoload
-````
-
+```
 
 ## ⚙️ Configuração (wp-config.php)
 
@@ -36,6 +35,7 @@ O uso dessas constantes tem prioridade sobre as configurações salvas no banco 
 | Constante | Tipo | Descrição e Motivo de Uso |
 | :--- | :--- | :--- |
 | `DISCORD_WEBHOOK_URL` | `string` | **Define a URL do Webhook do Discord.**<br>• **Por que usar:** Permite "hardcodar" o destino das notificações, impedindo que administradores alterem a URL via painel. Ideal para deploys automatizados onde a URL é injetada via variáveis de ambiente do servidor. |
+| `DISCORD_BOT_NAME` | `string` | **Define o nome do bot que aparece nas mensagens no Discord.**<br>• **Por que usar:** Permite personalizar o remetente das notificações de forma segura, sem expor a configuração no painel admin. Útil para branding ou integração com múltiplos bots, injetando via variáveis de ambiente em deploys. |
 | `DISCORD_NOTIFICATIONS_HIDE_SETTINGS` | `bool` | **Oculta o menu de configurações.**<br>• **Por que usar:** Se definido como `true`, a página de configurações do plugin desaparece do menu do WordPress. Útil para entregar o site ao cliente final sem permitir que ele desative alertas ou veja configurações sensíveis de infraestrutura. |
 
 ### Exemplo de Uso
@@ -44,7 +44,10 @@ Adicione ao seu `wp-config.php`:
 
 ```php
 // Define o Webhook fixo (o campo no admin será desabilitado/ignorado)
-define('DISCORD_WEBHOOK_URL', '[https://discord.com/api/webhooks/123456/abcdef](https://discord.com/api/webhooks/123456/abcdef)...');
+define('DISCORD_WEBHOOK_URL', 'https://discord.com/api/webhooks/123456/abcdef...');
+
+// Define o nome do bot personalizado (prioridade sobre o admin)
+define('DISCORD_BOT_NAME', 'Meu Bot Personalizado');
 
 // Oculta o menu "Discord Notifications" do painel admin
 define('DISCORD_NOTIFICATIONS_HIDE_SETTINGS', true);
@@ -58,21 +61,11 @@ O plugin utiliza a classe `Src\Main` para orquestrar os hooks e `Src\Notifier` p
 
 Os seguintes eventos geram notificações (configuráveis via Admin, a menos que oculto):
 
-  * **Plugins:** Atualização, Ativação, Desativação e Exclusão.
-  * **Core:** Atualização do núcleo do WordPress.
-  * **Segurança:** Login de usuários com perfil de Administrador.
-  * **Gestão de Usuários:** Criação e Exclusão de administradores.
-
-## 💻 Desenvolvimento Local
-
-1.  Clone o plugin dz-discord-notifications dentro de `wp-content/plugins/`.
-2.  Instale as dependências (mesmo que apenas o autoloader):
-    ```bash
-    composer install
-    ```
-3.  Ative o plugin no painel do WordPress.
+* **Plugins:** Atualização, Ativação, Desativação e Exclusão.
+* **Core:** Atualização do núcleo do WordPress.
+* **Gestão de Usuários:** Criação e Exclusão de administradores.
 
 -----
 
-**Autor:** Dzigual
+**Autor:** Dzigual  
 **Versão:** 1.2 (Refatorado Multi-arquivos)
