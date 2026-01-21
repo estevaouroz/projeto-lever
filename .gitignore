@@ -13,15 +13,15 @@ wp-content/db.php
 .idea/*
 
 # Composer
-wp-content/themes/boilerplate/composer.phar
+wp-content/themes/villa-camboa-website/composer.phar
 
 # Project
-wp-content/themes/boilerplate/.sass-cache
-wp-content/themes/boilerplate/assets/dist/
-wp-content/themes/boilerplate/bower_components/
-wp-content/themes/boilerplate/node_modules/
-wp-content/themes/boilerplate/yarn-error.log
-wp-content/themes/boilerplate/_RESSOURCES/
+wp-content/themes/villa-camboa-website/.sass-cache
+wp-content/themes/villa-camboa-website/assets/dist/
+wp-content/themes/villa-camboa-website/bower_components/
+wp-content/themes/villa-camboa-website/node_modules/
+wp-content/themes/villa-camboa-website/yarn-error.log
+wp-content/themes/villa-camboa-website/_RESSOURCES/
 
 # Arquivos do WSL
 *.Zone.Identifier
@@ -29,4 +29,4 @@ wp-content/themes/boilerplate/_RESSOURCES/
 **/*:[Zz]one.Identifier
 
 # Versionamento de build
-wp-content/themes/boilerplate/assets_version.php
+wp-content/themes/villa-camboa-website/assets_version.php
