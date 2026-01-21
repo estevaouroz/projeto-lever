@@ -1,0 +1,14 @@
+{
+    "name": "dzigual/discord-notifications",
+    "description": "Envia notificações do WordPress para o Discord",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    }
+}
