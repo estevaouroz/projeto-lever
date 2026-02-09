@@ -13,15 +13,15 @@ wp-content/db.php
 .idea/*
 
 # Composer
-wp-content/themes/boilerplate/composer.phar
+wp-content/themes/lever/composer.phar
 
 # Project
-wp-content/themes/boilerplate/.sass-cache
-wp-content/themes/boilerplate/assets/dist/
-wp-content/themes/boilerplate/bower_components/
-wp-content/themes/boilerplate/node_modules/
-wp-content/themes/boilerplate/yarn-error.log
-wp-content/themes/boilerplate/_RESSOURCES/
+wp-content/themes/lever/.sass-cache
+wp-content/themes/lever/assets/dist/
+wp-content/themes/lever/bower_components/
+wp-content/themes/lever/node_modules/
+wp-content/themes/lever/yarn-error.log
+wp-content/themes/lever/_RESSOURCES/
 
 # Arquivos do WSL
 *.Zone.Identifier
@@ -29,4 +29,4 @@ wp-content/themes/boilerplate/_RESSOURCES/
 **/*:[Zz]one.Identifier
 
 # Versionamento de build
-wp-content/themes/boilerplate/assets_version.php
+wp-content/themes/lever/assets_version.php
