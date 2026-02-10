@@ -36,13 +36,35 @@
             a {
                 color: #000;
                 font-size: 14px;
-                font-weight: 300;
+                font-weight: 400;
                 text-decoration: none;
                 transition: opacity 0.3s;
+                opacity: 0.7;
+                cursor: pointer;
+                
+                position: relative; 
+                display: inline-flex;
+                flex-direction: column;
+                align-items: center;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -15px; 
+                    width: 4px;
+                    height: 4px;
+                    background-color: #27EBDC;
+                    border-radius: 50%; 
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
 
                 &:hover {
-                    font-weight: 400;
-                    opacity: 0.7;
+                    opacity: 1;
+
+                    &::after {
+                        opacity: 1; 
+                    }
                 }
             }
         }
@@ -400,7 +422,8 @@
     .family-office {
         background: linear-gradient(288deg, #191C58 0%, #070932 69.45%);
         padding: 145px 0 156px 0;
-        overflow: hidden;
+        position: relative;
+        overflow: visible;
 
         .container-fo {
             display: flex;
@@ -432,13 +455,18 @@
                 letter-spacing: 0.08px;
                 margin-bottom: 156px;
             }
+        }
 
-            .fo-floating-icon {
-                margin-top: 80px;
-                img {
-                    width: 120px;
-                    height: auto;
-                }
+        .fo-floating-icon {
+            position: absolute;
+            bottom: 0;         
+            left: 100px;     
+            z-index: 10;
+            transform: translateY(50%);
+            img {
+                width: 120px;
+                height: auto;
+                display: block;
             }
         }
 

@@ -39,8 +39,8 @@ get_header();
         </nav>
     </header>
     
-    <section class="hero-content">
-        <div class="hero-text-wrapper">
+    <section class="hero-content" id="home">
+        <div class="hero-text-wrapper" data-aos="fade-left" data-aos-duration="2000">
             <h1><?php echo get_field('hero_titulo'); ?></h1>
             <p><?php echo get_field('hero_texto'); ?></p>
         </div>
@@ -62,7 +62,7 @@ get_header();
         </div>
 
         <div class="content-direita">
-            <div class="image-wrapper">
+            <div class="image-wrapper" data-aos="fade-up" data-aos-duration="2000">
                 <?php
                 $image = get_field('foco_imagem');
                 if ($image) : ?>
@@ -81,7 +81,7 @@ get_header();
     </div>
 </section>
 
-<section class="valores">
+<section class="valores" id="sobre">
     <div class="bg-valores">
         <?php 
         $image = get_field('fundo_secao_valores'); 
@@ -91,12 +91,20 @@ get_header();
     </div>
 
     <div class="container-valores">
-        <h2><?php echo get_field('valores_titulo'); ?></h2>
+        <h2 data-aos="fade-up" data-aos-duration="1000"><?php echo get_field('valores_titulo'); ?></h2>
 
         <div class="grid-valores">
             <?php if (have_rows('valores_repetidor')) : ?>
+                <?php 
+                $delay = 0; 
+                ?>
                 <?php while (have_rows('valores_repetidor')) : the_row(); ?>
-                    <div class="item-valor">
+                    
+                    <div class="item-valor" 
+                            data-aos="fade-up" 
+                            data-aos-duration="1500" 
+                            data-aos-delay="<?php echo $delay; ?>">
+                        
                         <div class="box-svg">
                             <?php 
                             $svg_file = get_sub_field('valores_repetirodes_icon'); 
@@ -108,13 +116,17 @@ get_header();
                         <h3><?php echo get_sub_field('valores_repetidor_titulo'); ?></h3>
                         <p><?php echo get_sub_field('valores_repetidor_texto'); ?></p>
                     </div>
+
+                    <?php 
+                    $delay += 400; 
+                    ?>
                 <?php endwhile; ?>
             <?php endif; ?>
         </div>
     </div>
 </section>
 
-<section class="family-office">
+<section class="family-office" id="family-office">
     <div class="container-fo">
         <div class="fo-col-esquerda">
             <div class="fo-header">
@@ -122,45 +134,57 @@ get_header();
             </div>
             <div class="fo-content">
                 <h3><?php echo get_field('family_texto'); ?></h3>
-                <?php
-                $image = get_field('icon_flutuante');
-                if ($image) : ?>
-                    <div class="fo-floating-icon">
-                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-                    </div>
-                <?php endif; ?>
             </div>
         </div>
-
-        <div class="fo-col-direita">
-            <div class="accordion-container">
-                <?php if (have_rows('family_acordeao')) : ?>
-                    <?php while (have_rows('family_acordeao')) : the_row(); ?>
-                        <div class="accordion-item">
-                            <button class="accordion-header">
-                                <h4><?php echo get_sub_field('family_repetidor_titulo'); ?></h4>
-                                <span class="accordion-icon">
-                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <circle opacity="0.15" cx="16" cy="16" r="15.5" stroke="white"/>
-                                        <path d="M10 14L16 20L22 14" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </span>
-                            </button>
-                            <div class="accordion-content">
-                                <div class="content-inner">
-                                    <h5><?php echo get_sub_field('family_repetidor_texto'); ?></h5>
-                                </div>
-                            </div>
+        
+<div class="fo-col-direita">
+    <div class="accordion-container">
+        <?php if (have_rows('family_acordeao')) : ?>
+            <?php 
+            $delay = 100;
+            ?>
+            <?php while (have_rows('family_acordeao')) : the_row(); ?>
+                
+                <div class="accordion-item" 
+                        data-aos="fade-up" 
+                        data-aos-delay="<?php echo $delay; ?>" 
+                        data-aos-duration="1000">
+                    
+                    <button class="accordion-header">
+                        <h4><?php echo get_sub_field('family_repetidor_titulo'); ?></h4>
+                        <span class="accordion-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle opacity="0.15" cx="16" cy="16" r="15.5" stroke="white"/>
+                                <path d="M10 14L16 20L22 14" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                    </button>
+                    
+                    <div class="accordion-content">
+                        <div class="content-inner">
+                            <h5><?php echo get_sub_field('family_repetidor_texto'); ?></h5>
                         </div>
-                    <?php endwhile; ?>
-                <?php endif; ?>
-            </div>
-        </div>
+                    </div>
+                </div>
+
+                <?php 
+                $delay += 150; 
+                ?>
+            <?php endwhile; ?>
+        <?php endif; ?>
     </div>
+</div>
+    </div> <?php
+    $image = get_field('icon_flutuante');
+    if ($image) : ?>
+        <div class="fo-floating-icon">
+            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+        </div>
+    <?php endif; ?>
 </section>
 
-<section class="experiencia">
-    <div class="exp-content">
+<section class="experiencia" id="expertise">
+    <div class="exp-content" data-aos="fade-left" data-aos-duration="2000">
         <h2><?php echo get_field('expertise_titulo'); ?></h2>
         <h3><?php echo get_field('expertise_titulo_2'); ?></h3>
         <p><?php echo get_field('expertise_texto'); ?></p>
@@ -168,17 +192,19 @@ get_header();
 </section>
 
 <section class="processos">
-    <h2><?php echo get_field('processo_titulo'); ?></h2>
+    <h2 data-aos="fade-up"><?php echo get_field('processo_titulo'); ?></h2>
 
     <div class="processos-container">
         <?php
         if (have_rows('processo_lever_repetidor')) :
+            $delay = 0;
+            
             while (have_rows('processo_lever_repetidor')) : the_row(); 
                 $col_index = get_row_index();
                 $display_col = str_pad($col_index, 2, '0', STR_PAD_LEFT);
                 ?>
                 
-                <div class="processo-coluna">
+                <div class="processo-coluna" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
                     <div class="processo-header">
                         <span class="num-col"><?php echo $display_col; ?></span>
                         <div class="header-text">
@@ -200,7 +226,10 @@ get_header();
                         endif; ?>
                     </div>
                 </div>
-            <?php endwhile;
+
+                <?php 
+                $delay += 800;
+            endwhile;
         endif; ?>
     </div>
 </section>
@@ -213,7 +242,7 @@ get_header();
 <section class="footer" id="contato" style="background-image: url('<?php echo esc_url($bg_url); ?>');">
     <div class="footer-container">
         
-        <div class="footer-body">
+        <div class="footer-body" data-aos="fade-left" data-aos-duration="2000">
             
 
         

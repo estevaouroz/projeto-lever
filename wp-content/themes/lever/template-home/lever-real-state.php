@@ -37,7 +37,7 @@ get_header();
         
         <!-- <div class="overlay-gradient"></div> -->
 
-        <div class="hero-text">
+        <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
             <h1><?php echo get_field('hero_titulo'); ?></h1>
             <p><?php echo get_field('hero_texto'); ?></p>
         </div>
@@ -72,7 +72,7 @@ get_header();
                 </div>
             </div>
 
-            <div class="dev-text">
+            <div class="dev-text" data-aos="fade-left" data-aos-duration="1000">
                 <h2><?php echo get_field('vocacao_texto'); ?></h2>
                 <p><?php echo get_field('vocacao_titulo'); ?></p>
             </div>
@@ -88,27 +88,39 @@ get_header();
             <p>VALORES ORIENTADORES</p>
         </div>
     
-        <div class="valores-orientadores-box">
-            <?php
-            if (have_rows('valores_repetidor')) :
-                while (have_rows('valores_repetidor')) : the_row(); ?>
-                    <div class="valores-orientadores-item">
-                        <div class="box-svg">
-                            <?php 
-                            $svg_file = get_sub_field('valores_repetidor_icon');
-                            if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+<div class="valores-orientadores-box">
+    <?php
+    if (have_rows('valores_repetidor')) :
+        $delay = 100; 
         
-                                $path = get_attached_file($svg_file['ID']);
-                                echo '<i class="element">' . file_get_contents($path) . '</i>';
-                            } ?>
-                        </div>
-    
-                        <h2><?php echo get_sub_field('valores_titulo'); ?></h2>
-                        <p><?php echo get_sub_field('valores_texto'); ?></p>
-                    </div>
-                <?php endwhile;
-            endif; ?>
-        </div>
+        while (have_rows('valores_repetidor')) : the_row(); ?>
+            
+            <div class="valores-orientadores-item" 
+                 data-aos="fade-up" 
+                 data-aos-delay="<?php echo $delay; ?>"
+                 data-aos-duration="1000">
+                
+                <div class="box-svg">
+                    <?php 
+                    $svg_file = get_sub_field('valores_repetidor_icon');
+                    if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                        $path = get_attached_file($svg_file['ID']);
+                        if ($path) {
+                            echo '<i class="element">' . file_get_contents($path) . '</i>';
+                        }
+                    } ?>
+                </div>
+
+                <h2><?php echo get_sub_field('valores_titulo'); ?></h2>
+                <p><?php echo get_sub_field('valores_texto'); ?></p>
+            </div>
+
+            <?php 
+            $delay += 500; 
+            ?>
+        <?php endwhile;
+    endif; ?>
+</div>
 
     </div>
 
@@ -132,29 +144,40 @@ get_header();
             </div>
 
             <div class="teses-direita">
-                <?php if (have_rows('teses_repetidor')) : ?>
-                    <div class="accordion-container">
-                        <?php while (have_rows('teses_repetidor')) : the_row(); ?>
-                            <div class="accordion-item">
-                                <button class="accordion-header">
-                                    <h4><?php echo get_sub_field('repetidor_item_'); ?></h4>
-                                    <span class="accordion-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <circle opacity="0.15" cx="16" cy="16" r="15.5" stroke="#111445"/>
-                                            <path d="M10 14L16 20L22 14" stroke="#111445" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </span>
-                                </button>
-                                <div class="accordion-content">
-                                    <div class="content-inner">
-                                        <h5><?php echo get_sub_field('repetidor_texto'); ?></h5>
-                                    </div>
-                                </div>
+    <?php if (have_rows('teses_repetidor')) : ?>
+        <div class="accordion-container">
+            <?php 
+            $delay = 100; 
+            while (have_rows('teses_repetidor')) : the_row(); 
+            ?>
+                <div class="accordion-item" 
+                        data-aos="fade-up" 
+                        data-aos-delay="<?php echo $delay; ?>" 
+                        data-aos-duration="1000">
+                        
+                        <button class="accordion-header">
+                            <h4><?php echo get_sub_field('repetidor_item_'); ?></h4>
+                            <span class="accordion-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                    <circle opacity="0.15" cx="16" cy="16" r="15.5" stroke="#111445"/>
+                                    <path d="M10 14L16 20L22 14" stroke="#111445" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        
+                        <div class="accordion-content">
+                            <div class="content-inner">
+                                <h5><?php echo get_sub_field('repetidor_texto'); ?></h5>
                             </div>
-                        <?php endwhile; ?>
+                        </div>
                     </div>
-                <?php endif; ?>
+                <?php 
+                $delay += 400;
+                endwhile; 
+                ?>
             </div>
+            <?php endif; ?>
+        </div>
 
         </div>
     </div>
@@ -225,7 +248,7 @@ get_header();
     <?php endif; ?>
 
     <div class="container-footer">
-        <div class="footer-content-wrapper">
+        <div class="footer-content-wrapper" data-aos="fade-left" data-aos-duration="1000">
             <div class="quote-wrapper">
                 <div class="quote-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="93" height="62" viewBox="0 0 93 62" fill="none">

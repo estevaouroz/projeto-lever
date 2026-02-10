@@ -6,7 +6,7 @@ get_header();
 
 <section class="home">
     <div class="box-esquerda">
-        <div class="box-esquerda-text">
+        <div class="box-esquerda-text" data-aos="fade-right" data-aos-duration="1200">
             <div class="box-svg">
                 <?php $svg_file = get_field('logo_home');
                 if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
@@ -21,13 +21,13 @@ get_header();
         </div>
     </div>
 
-        <div class="box-direita">
+        <div class="box-direita" >
             <?php 
             $img_cima = get_field('family_office_background'); 
             $img_baixo = get_field('real_state_background');
             ?>
 
-            <div class="box-direita-cima" style="background-image: url('<?php echo esc_url($img_cima['url']); ?>');">
+            <div class="box-direita-cima" data-aos="fade-up" data-aos-duration="3000" style="background-image: url('<?php echo esc_url($img_cima['url']) ; ?>');">
                 <div class="box-svg">
                     <?php $svg_file = get_field('logo_1');
                     if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
@@ -43,7 +43,7 @@ get_header();
                 <?php endif; ?>
             </div>
 
-            <div class="box-direita-baixo" style="background-image: url('<?php echo esc_url($img_baixo['url']); ?>');">
+            <div class="box-direita-baixo" data-aos="fade-up" data-aos-duration="3000" style="background-image: url('<?php echo esc_url($img_baixo['url']); ?>');">
                 <div class="box-svg">
                     <?php $svg_file = get_field('logo_2');
                     if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
