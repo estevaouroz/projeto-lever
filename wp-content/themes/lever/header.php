@@ -18,24 +18,4 @@
 
 <body <?php body_class(""); ?>>
 
-    <!-- <header class="header">
-        <div class="box-svg">
-            <?php $svg_file = get_field('hero_logo');
-            if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
-                echo '<i class="element">' . file_get_contents($svg_file['url']) . '</i>';
-            } ?>
-        </div>
-
-        <nav class="header-menu">
-            <?php if (have_rows('hero_menu')) :
-                while (have_rows('hero_menu')) : the_row();
-                    $link = get_sub_field('hero_menu_item');
-                    if ($link) : ?>
-                        <a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target'] ?: '_self'); ?>">
-                            <span><?php echo esc_html($link['title']); ?></span>
-                        </a>
-                    <?php endif;
-                endwhile;
-            endif; ?>
-        </nav>
-    </header> -->
+ 

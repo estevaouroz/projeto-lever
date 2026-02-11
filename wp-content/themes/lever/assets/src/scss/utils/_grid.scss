@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 $grid-columns: 12;
 $grid-sm-columns: 6;
@@ -15,11 +15,12 @@ $grid-sm-columns: 6;
 
   @include media-breakpoint-up(md) {
     padding: 0 48px;
-
   }
 
   @include media-breakpoint-up(lg) {
     // max-width: 1440px;
+    padding: 0 80px;
+
     margin: 0 auto;
   }
 }
@@ -45,21 +46,15 @@ $grid-sm-columns: 6;
     @include media-breakpoint-up(sm) {
       @include col-general($grid-columns);
     }
-  }
-
-  @else if $breakpoint ==md {
+  } @else if $breakpoint ==md {
     @include media-breakpoint-up(md) {
       @include col-general($grid-columns);
     }
-  }
-
-  @else if $breakpoint ==lg {
+  } @else if $breakpoint ==lg {
     @include media-breakpoint-up(lg) {
       @include col-general($grid-columns);
     }
-  }
-
-  @else if $breakpoint ==xl {
+  } @else if $breakpoint ==xl {
     @include media-breakpoint-up(xl) {
       @include col-general($grid-columns);
     }
