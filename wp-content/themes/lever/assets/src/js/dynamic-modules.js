@@ -35,7 +35,7 @@ function initDynamicModules() {
       moduleFunction: 'initPage',
     },
     {
-      selector: '.page-template-lever-real-state', 
+      selector: '.page-template-lever-real-state',
       modulePath: './pages/lever-real-state.js',
       moduleFunction: 'initPage',
     },

@@ -1,35 +1,31 @@
 function initAccordionTeses() {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
-    
-    if (accordionHeaders.length === 0) return; // Segurança caso a seção não exista na página
+  const $headers = $('.accordion-header');
+  console.log('Página inicializada...');
 
-    accordionHeaders.forEach(button => {
-        button.addEventListener('click', () => {
-            const accordionItem = button.parentElement;
-            const content = accordionItem.querySelector('.accordion-content');
-            const isOpen = accordionItem.classList.contains('active');
+  if ($headers.length === 0) return; // Segurança caso a seção não exista na página
 
-            // 1. Fecha os outros itens (efeito exclusivo)
-            document.querySelectorAll('.accordion-item').forEach(item => {
-                item.classList.remove('active');
-                item.querySelector('.accordion-content').style.maxHeight = null;
-            });
+  $(document).off('click', '.accordion-header');
+  $(document).on('click', '.accordion-header', function handleAccordionClick() {
+    const $button = $(this);
+    const $item = $button.closest('.accordion-item');
+    const $content = $item.find('.accordion-content');
+    const isOpen = $item.hasClass('active');
 
-            // 2. Se o item clicado não estava aberto, abre ele
-            if (!isOpen) {
-                accordionItem.classList.add('active');
-                // scrollHeight calcula a altura real do conteúdo interno
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    });
+    // 1. Fecha os outros itens (efeito exclusivo)
+    $('.accordion-item').removeClass('active');
+    $('.accordion-item .accordion-content').css('max-height', '');
+
+    // 2. Se o item clicado não estava aberto, abre ele
+    if (!isOpen) {
+      $item.addClass('active');
+      // scrollHeight calcula a altura real do conteúdo interno
+      $content.css('max-height', `${$content[0].scrollHeight}px`);
+    }
+  });
 }
 
-
 function initPage() {
-    console.log("Página inicializada...");
-    console.warn('INIT PAGE HOME');
-    initAccordionTeses();
+  initAccordionTeses();
 }
 
 export {initPage};
