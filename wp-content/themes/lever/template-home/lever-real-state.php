@@ -56,22 +56,25 @@ get_header();
         <?php endif; ?> -->
 
             <div class="desenvolvemos-content">
-                <div class="dev-imagem">
-                    <?php
-                    $main_image = get_field('vocacao_imagem');
-                    if ($main_image): ?>
-                        <img src="<?php echo esc_url($main_image['url']); ?>"
-                            alt="<?php echo esc_attr($main_image['alt']); ?>">
-                    <?php endif; ?>
 
-                    <div class="elipse">
+                <div class="dev-box-image">
+                    <div class="dev-imagem">
                         <?php
-                        $image = get_field('icon_flutuante');
-                        if ($image):
-                            $image_url = $image['url'];
-                            $image_alt = $image['alt']; ?>
-                            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+                        $main_image = get_field('vocacao_imagem');
+                        if ($main_image): ?>
+                            <img src="<?php echo esc_url($main_image['url']); ?>"
+                                alt="<?php echo esc_attr($main_image['alt']); ?>">
                         <?php endif; ?>
+    
+                        <div class="elipse">
+                            <?php
+                            $image = get_field('icon_flutuante');
+                            if ($image):
+                                $image_url = $image['url'];
+                                $image_alt = $image['alt']; ?>
+                                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
 
@@ -79,6 +82,7 @@ get_header();
                     <h2><?php echo get_field('vocacao_texto'); ?></h2>
                     <p><?php echo get_field('vocacao_titulo'); ?></p>
                 </div>
+
             </div>
         </div>
     </section>
@@ -86,13 +90,10 @@ get_header();
 
 <section class="valores">
 
-    <div class="wrapper">
-
         <div class="valores-header">
             <p>VALORES ORIENTADORES</p>
         </div>
 
-        <div class="valores-orientadores-box wrapper">
             <?php
             if (have_rows('valores_repetidor')):
                 $delay = 100;
@@ -123,9 +124,6 @@ get_header();
                     ?>
                 <?php endwhile;
             endif; ?>
-        </div>
-
-    </div>
 
 </section>
 

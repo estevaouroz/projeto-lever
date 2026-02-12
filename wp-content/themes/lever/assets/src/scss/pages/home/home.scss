@@ -65,6 +65,21 @@ body.page-template-homepage {
                 background-size: cover;      
                 background-position: center;
                 background-repeat: no-repeat;
+
+                &:hover {
+                    a {
+                        border-color: #070932;
+                        background: #070932;
+
+                        p {
+                            color: #ffffff;
+                        }
+
+                        &::after {
+                            transform: translateX(5px);
+                        }
+                    }
+                }
             }
 
             .box-direita-cima {
@@ -116,24 +131,11 @@ body.page-template-homepage {
                     font-size: 20px;
                     transition: transform 0.3s ease;
                 }
-
-                &:hover {
-                    border-color: #070932;
-                    background: #070932;
-
-                    p{
-                        color: #ffffff;
-                    }
-
-                    &::after {
-                        transform: translateX(5px);
-                    }
-                }
             }
         }
     }    
 
-    @media (max-width: 375px) {
+    @include media-breakpoint-down(md) {
         html, body {
                 height: auto !important;
                 overflow-y: visible !important;
@@ -205,7 +207,22 @@ body.page-template-homepage {
                     box-sizing: border-box;
                     background-image: none !important; 
                     background-color: #F3F8FB !important;
-                }
+
+                    &:hover {
+                        a {
+                            border-color: transparent;
+                            background: transparent;
+
+                            p {
+                                color: #070932;
+                            }
+
+                            &::after {
+                                transform: translateX(5px);
+                            }
+                        }
+                    }
+                                }
 
                 .box-direita-cima { 
                     background: #F3F8FB;; 
