@@ -52,7 +52,7 @@ function menuSticy() {
 }
 function initHeader() {
   menuSticy();
-  scrollsmooth();
+  // scrollsmooth();
 }
 
 export {initHeader};

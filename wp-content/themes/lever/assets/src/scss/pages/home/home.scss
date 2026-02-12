@@ -53,105 +53,119 @@ body.page-template-homepage {
             display: flex;
             flex-direction: column;
 
-            .box-direita-cima, .box-direita-baixo {
+        .box-direita-cima, .box-direita-baixo {
                 height: 50vh;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                border-left: 1px solid rgba(255,255,255,0.1);
-                box-sizing: border-box;
                 position: relative;
-                background-size: cover;      
+                background-size: cover;
                 background-position: center;
-                background-repeat: no-repeat;
+                cursor: pointer; 
+                overflow: hidden;
+
+
+                .full-link {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 5; 
+                }
+
+                .box-svg {
+                    position: relative;
+                    z-index: 2;
+                    margin-bottom: 35px;
+                    .element svg {
+                        width: 220px;
+                        height: auto;
+                    }
+                }
+
+                .fake-button {
+                    position: relative;
+                    z-index: 2; 
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 160px;
+                    height: 48px;
+                    padding: 0 20px;
+                    border: 1px solid #ced4da;
+                    background: rgba(255, 255, 255, 0.5);
+                    transition: all 0.3s ease;
+                    box-sizing: border-box;
+
+                    p {
+                        margin: 0;
+                        color: #070932;
+                        font-size: 13px;
+                        font-weight: 400;
+                    }
+
+                    &::after {
+                        content: '→';
+                        color: #1ECEC1;
+                        font-size: 20px;
+                        transition: transform 0.3s ease;
+                    }
+                }
 
                 &:hover {
-                    a {
+                    .fake-button {
                         border-color: #070932;
                         background: #070932;
-
-                        p {
-                            color: #ffffff;
-                        }
-
-                        &::after {
-                            transform: translateX(5px);
+                        p { color: #ffffff; }
+                        &::after { transform: translateX(5px); 
                         }
                     }
                 }
             }
 
-            .box-direita-cima {
-                border-bottom: 1px solid rgba(0,0,0,0.05);
-                border-left: 1px solid rgba(255,255,255,0.1);
-            }
+                    .box-direita-cima {
+                        border-bottom: 1px solid rgba(0,0,0,0.05);
+                        border-left: 1px solid rgba(255,255,255,0.1);
+                    }
 
-            .box-direita-baixo {
-                border-left: 1px solid rgba(255,255,255,0.1);
+                    .box-direita-baixo {
+                        border-left: 1px solid rgba(255,255,255,0.1);
 
-            }
+                    }
 
-            .box-svg, a {
-                position: relative;
-                z-index: 2;
-            }
+                    .box-svg, a {
+                        position: relative;
+                        z-index: 2;
+                    }
 
-            .box-svg {
-                margin-bottom: 35px;
-                .element svg {
-                    width: 220px;
-                    height: auto;
+                    .box-svg {
+                        margin-bottom: 35px;
+                        .element svg {
+                            width: 220px;
+                            height: auto;
+                        }
+                    }
                 }
-            }
-
-            a {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                width: 160px;
-                height: 48px;
-                padding: 0 20px;
-                text-decoration: none;
-                border: 1px solid #ced4da;
-                background: rgba(255, 255, 255, 0.5);
-                transition: all 0.3s ease;
-                box-sizing: border-box;
-                
-                p {
-                    margin: 0;
-                    color: #070932;
-                    font-size: 13px;
-                    font-weight: 400;
-                }
-
-                &::after {
-                    content: '→';
-                    color: #1ECEC1;
-                    font-size: 20px;
-                    transition: transform 0.3s ease;
-                }
-            }
-        }
-    }    
+            }    
 
     @include media-breakpoint-down(md) {
         html, body {
-                height: auto !important;
-                overflow-y: visible !important;
-                overflow-x: hidden;
-            }
+            height: auto ;
+            overflow-y: visible ;
+            overflow-x: hidden;
+        }
 
-            .home {
-                display: flex;
-                flex-direction: column; 
-                height: auto !important; 
-                min-height: 100vh; 
-                overflow: visible !important;
-            
-        
+        .home {
+            display: flex;
+            flex-direction: column; 
+            height: auto ; 
+            min-height: 100vh; 
+            overflow: visible ;
+
             .box-esquerda {
-                background: #F3F8FB;; 
+                background: #F3F8FB; 
                 padding: 66px 15px 60px 32px; 
                 display: flex;
                 flex-direction: column;
@@ -162,34 +176,26 @@ body.page-template-homepage {
                 min-height: 259px; 
                 border-bottom: 1px solid rgba(0,0,0,0.05);
 
-
                 .box-esquerda-text {
                     max-width: 100%;
                     margin-bottom: 0;
 
                     .box-svg {
-                        margin-bottom: 30px
+                        margin-bottom: 30px;
+                        .element svg {
+                            width: auto;
+                            height: 18px;
+                            path { fill: #070932; }
+                        }
                     }
                     
                     h1 {
                         color: #070932;
                         font-size: 24px;
-                        font-style: normal;
                         font-weight: 300;
                         line-height: 120%; 
                     }
-                    h2{
-                        display: none;
-                    }
-                    .box-svg {
-                        .element svg {
-                            width: auto;
-                            height: 18px;
-                            path {
-                                fill: #070932; 
-                            }
-                        }
-                    }
+                    h2 { display: none; }
                 }
             }
 
@@ -198,73 +204,49 @@ body.page-template-homepage {
 
                 .box-direita-cima, .box-direita-baixo {
                     display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
+                    flex-direction: row; 
+                    justify-content: space-between; 
                     padding: 0 32px; 
                     border-left: none;
                     border-bottom: 1px solid rgba(0,0,0,0.05);
                     box-sizing: border-box;
                     background-image: none !important; 
-                    background-color: #F3F8FB !important;
+                    background-color: #F3F8FB ;
+                    position: relative; 
 
-                    &:hover {
-                        a {
-                            border-color: transparent;
-                            background: transparent;
-
-                            p {
-                                color: #070932;
-                            }
-
-                            &::after {
-                                transform: translateX(5px);
-                            }
+                    .box-svg {
+                        margin: 0;
+                        z-index: 2;
+                        .element svg {
+                            width: 152px ;
+                            height: 56px ;
                         }
                     }
-                                }
 
-                .box-direita-cima { 
-                    background: #F3F8FB;; 
-                    height: 220px;
-                }
+                    .fake-button {
+                        background: transparent ; 
+                        border: none ;
+                        width: auto ;
+                        padding: 0 ;
+                        height: auto ;
+                        z-index: 2;
 
-                .box-direita-baixo { 
-                    background: #F3F8FB;; 
-                    height: 240px;
-                }
+                        p {
+                            font-weight: 400;
+                        }
 
-                .box-svg {
-                    margin: 0;
-                    .element svg {
-                        width: 150px;
-                        height: auto;
+                        &::after {
+                            margin-left: 10px;
+                        }
+                    }
+                    
+                    .full-link {
+                        z-index: 10;
                     }
                 }
 
-                a {
-                    display: flex;
-                    align-items: center;
-                    text-decoration: none;
-                    background: transparent;
-                    border: none;
-                    width: auto;
-                    height: auto;
-                    padding: 0;
-
-                    p {
-                        margin: 0 10px 0 0;
-                        color: #070932;
-                        font-weight: 400;
-                        font-size: 14px;
-                    }
-
-                    &::after {
-                        content: '→';
-                        color: #1ECEC1;
-                        font-size: 20px;
-                    }
-                }
+                .box-direita-cima { height: 220px; }
+                .box-direita-baixo { height: 240px; }
             }
         }
     }

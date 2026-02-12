@@ -21,41 +21,51 @@ get_header();
         </div>
     </div>
 
-        <div class="box-direita" >
+        <div class="box-direita">
             <?php 
             $img_cima = get_field('family_office_background'); 
             $img_baixo = get_field('real_state_background');
+            $link1 = get_field('botao_1');
+            $link2 = get_field('botao_2');
             ?>
 
-            <div class="box-direita-cima" data-aos="fade-up" data-aos-duration="3000" style="background-image: url('<?php echo esc_url($img_cima['url']) ; ?>');">
+            <div class="box-direita-cima" data-aos="fade-up" data-aos-duration="3000" style="background-image: url('<?php echo esc_url($img_cima['url']); ?>');">
+            <?php if ($link1) : ?>
+                    <a href="<?php echo esc_url($link1['url']); ?>" 
+                    target="<?php echo esc_attr($link1['target'] ?: '_self'); ?>" 
+                    class="full-link"></a>
+                <?php endif; ?>
+
                 <div class="box-svg">
                     <?php $svg_file = get_field('logo_1');
                     if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
                         echo '<i class="element">' . file_get_contents($svg_file['url']) . '</i>';
                     } ?>
                 </div>
-                <?php
-                $link1 = get_field('botao_1');
-                if ($link1) : ?>
-                    <a href="<?php echo esc_url($link1['url']); ?>" target="<?php echo esc_attr($link1['target'] ?: '_self'); ?>">
-                        <p><?php echo esc_html($link1['title']); ?></p>
-                    </a>
-                <?php endif; ?>
+                
+                <?php if ($link1) : ?>
+                        <div class="fake-button">
+                            <p><?php echo esc_html($link1['title']); ?></p>
+                        </div>
+                    <?php endif; ?>
             </div>
 
             <div class="box-direita-baixo" data-aos="fade-up" data-aos-duration="3000" style="background-image: url('<?php echo esc_url($img_baixo['url']); ?>');">
+                <?php if ($link2) : ?>
+                    <a href="<?php echo esc_url($link2['url']); ?>" target="<?php echo esc_attr($link2['target'] ?: '_self'); ?>" class="full-link"></a>
+                <?php endif; ?>
+
                 <div class="box-svg">
                     <?php $svg_file = get_field('logo_2');
                     if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
                         echo '<i class="element">' . file_get_contents($svg_file['url']) . '</i>';
                     } ?>
                 </div>
-                <?php
-                $link2 = get_field('botao_2');
-                if ($link2) : ?>
-                    <a href="<?php echo esc_url($link2['url']); ?>" target="<?php echo esc_attr($link2['target'] ?: '_self'); ?>">
+
+                <?php if ($link2) : ?>
+                    <div class="fake-button">
                         <p><?php echo esc_html($link2['title']); ?></p>
-                    </a>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
