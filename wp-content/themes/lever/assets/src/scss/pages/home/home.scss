@@ -1,57 +1,59 @@
+@import '../../global/breakpoints';
+@import '../../global/colors';
 body.page-template-homepage {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 
-    .home {
-        display: flex;
-        height: 100vh;
-        width: 100%;
+  .home {
+    display: flex;
+    height: 100vh;
+    width: 100%;
 
-        .box-esquerda {
-            width: 50%;
-            background: #070932;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            padding: 0 118px 0 80px;
+    .box-esquerda {
+      width: 50%;
+      background: #070932;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 0 118px 0 80px;
 
-            .box-esquerda-text {
-                max-width: 480px;
+      .box-esquerda-text {
+        max-width: 480px;
 
-                .box-svg {
-                    margin-bottom: 40px;
+        .box-svg {
+          margin-bottom: 40px;
 
-                    .element svg {
-                        width: 140px;
-                        height: auto;
-                    }
-                }
-
-                h1 {
-                    color: #FFF;
-                    font-size: 32px;
-                    font-style: normal;
-                    font-weight: 300;
-                    line-height: 115%;
-                }
-
-                h2 {
-                    padding-top: 32px;
-                    color: #FFF;
-                    font-size: 16px;
-                    font-style: italic;
-                    font-weight: 300;
-                    line-height: normal;
-                }
-            }
+          .element svg {
+            width: 140px;
+            height: auto;
+          }
         }
 
-        .box-direita {
-            width: 50%;
-            display: flex;
-            flex-direction: column;
+        h1 {
+          color: #fff;
+          font-size: 32px;
+          font-style: normal;
+          font-weight: 300;
+          line-height: 115%;
+        }
+
+        h2 {
+          padding-top: 32px;
+          color: #fff;
+          font-size: 16px;
+          font-style: italic;
+          font-weight: 300;
+          line-height: normal;
+        }
+      }
+    }
+
+    .box-direita {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
 
         .box-direita-cima, .box-direita-baixo {
                 height: 50vh;
@@ -176,9 +178,9 @@ body.page-template-homepage {
                 min-height: 259px; 
                 border-bottom: 1px solid rgba(0,0,0,0.05);
 
-                .box-esquerda-text {
-                    max-width: 100%;
-                    margin-bottom: 0;
+        .box-esquerda-text {
+          max-width: 100%;
+          margin-bottom: 0;
 
                     .box-svg {
                         margin-bottom: 30px;
@@ -199,8 +201,8 @@ body.page-template-homepage {
                 }
             }
 
-            .box-direita {
-                width: 100%;
+      .box-direita {
+        width: 100%;
 
                 .box-direita-cima, .box-direita-baixo {
                     display: flex;
@@ -251,5 +253,3 @@ body.page-template-homepage {
         }
     }
 }
-
-

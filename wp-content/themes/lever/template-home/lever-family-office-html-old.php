@@ -1,6 +1,6 @@
 <?php
 /* 
-Template Name: Lever Family Office 
+Template Name: Lever Family Office old
 */
 get_header();
 ?>

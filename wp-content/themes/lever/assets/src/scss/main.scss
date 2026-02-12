@@ -10,12 +10,11 @@
 // Base
 @import './base/base';
 
-@import 'pages/home/home';
+// @import 'pages/home/home';
 
-@import "pages/lever-family-office";
+// @import "pages/lever-family-office";
 
-@import "pages/lever-real-state";
-
+// @import "pages/lever-real-state";
 
 // Não incluir pages diretamente no main.css. Deverá ser puxada em cada página utilizando enqueue_style(), puxando da pasta dist
 // @import "./pages"

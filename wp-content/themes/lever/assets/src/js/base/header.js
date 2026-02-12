@@ -21,6 +21,17 @@ function menuSticy() {
     $('.sidebar').removeClass('active-sidebar');
   });
 
+  $(window).scroll(function () {
+    var scroll = $(window).scrollTop();
+
+    //>=, not <=
+    if (scroll >= 100) {
+      //clearHeader, not clearheader - caps H
+      $('header').addClass('scrolled');
+    } else {
+      $('header').removeClass('scrolled');
+    }
+  });
   window.onscroll = function () {
     var headers = document.querySelectorAll('.header, .hero-header');
     headers.forEach(function (header) {
