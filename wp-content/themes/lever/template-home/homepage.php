@@ -1,5 +1,6 @@
 <?php
 //Template Name: home
+wp_enqueue_style('Home', get_template_directory_uri() . '/assets/dist/css/home/home.css', ['main'], ASSETS_VERSION);
 get_header();
 
 ?>

@@ -2,6 +2,7 @@
 /* 
 Template Name: Lever Real State 
 */
+wp_enqueue_style('Lever Family Office', get_template_directory_uri() . '/assets/dist/css/lever-real-state.css', ['main'], ASSETS_VERSION);
 get_header();
 ?>
 
