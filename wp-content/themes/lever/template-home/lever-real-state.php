@@ -85,7 +85,7 @@ get_header();
             </div>
         </div>
     </section>
-    
+
 </div>
 
 <section class="valores">
@@ -241,64 +241,6 @@ get_header();
                     <p class=""><?php echo esc_html($link_title); ?></p>
                 </a>
             <?php endif; ?>
-        </div>
-    </div>
-</section>
-
-<section class="footer" id="contato">
-    <?php if ($bg = get_field('footer_background')): ?>
-        <div class="footer-bg-image">
-            <img src="<?php echo $bg['url']; ?>" alt="<?php echo $bg['alt']; ?>">
-        </div>
-    <?php endif; ?>
-
-    <div class="container-footer wrapper">
-        <div class="footer-content-wrapper" data-aos="fade-left" data-aos-duration="1000">
-            <div class="quote-wrapper">
-                <div class="quote-svg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="93" height="62" viewBox="0 0 93 62" fill="none">
-
-                        <path opacity="0.2" fill-rule="evenodd" clip-rule="evenodd"
-                            d="M93 0L59.2904 62H41.6891L75.3987 0H93ZM51.3109 0L17.6013 62H0L33.7096 0H51.3109ZM91.8021 0.712964H75.8213L42.8869 61.287H58.8678L91.8021 0.712964ZM50.1131 0.712964H34.1322L1.19789 61.287H17.1787L50.1131 0.712964Z"
-                            fill="#070932" />
-                    </svg>
-                </div>
-
-                <h2><?php echo get_field('footer_texto'); ?></h2>
-
-                <div class="signature-box">
-                    <?php $svg_file = get_field('assinatura_real_state');
-                    if ($svg_file): ?>
-                        <img src="<?php echo $svg_file['url']; ?>" alt="Assinatura">
-                    <?php endif; ?>
-                </div>
-            </div>
-
-            <div class="contact-box">
-                <a href="mailto:<?php echo get_field('footer_contato'); ?>">
-                    <?php echo get_field('footer_contato'); ?>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="footer-brand-bottom">
-        <?php $ano_atual = date('Y'); ?>
-
-        <h4>© lever <?php echo $ano_atual ?></h4>
-        <div class="footer-logo-svg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="31" viewBox="0 0 22 31" fill="none">
-                <g opacit y="0.15">
-
-                    <path
-                        d="M17.166 23.5503L17.166 4.90626L6.86787 4.90626L10.7929 -6.39223e-05L22 -6.29425e-05L22 17.6627L17.166 23.5503Z"
-                        fill="#07093
-                       2" />
-                    <path
-                        d="M4.83402 6.86426L4.83402 25.5083L15.1321 25.5083L11.2071 30.4146L-4.14334e-06 30.4146L-1.03583e-06 12.7518L4.83402 6.86426Z"
-                        fill="#070932" />
-                </g>
-            </svg>
         </div>
     </div>
 </section>
