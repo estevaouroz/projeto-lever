@@ -6,27 +6,71 @@ wp_enqueue_style('Lever Family Office', get_template_directory_uri() . '/assets/
 get_header();
 ?>
 
-<header class="header">
-    <a class="box-svg" href="<?php echo esc_url(home_url('/')); ?>">
-        <?php $svg_file = get_field('hero_logo');
-        if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
-            echo '<i class="element">' . file_get_contents($svg_file['url']) . '</i>';
-        } ?>
-    </a>
+<header>
+    <!-- <div class="box-img">
 
-    <nav class="header-menu">
-        <?php if (have_rows('hero_menu')):
-            while (have_rows('hero_menu')):
-                the_row();
-                $link = get_sub_field('hero_menu_item');
-                if ($link): ?>
-                    <a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link['target'] ?: '_self'); ?>">
-                        <span><?php echo esc_html($link['title']); ?></span>
-                    </a>
-                <?php endif;
-            endwhile;
-        endif; ?>
+        <?php
+        $image = get_field('hero_imagem');
+        if ($image):
+            $image_url = $image['url'];
+            $image_alt = $image['alt']; ?>
+            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+        <?php endif; ?>
+
+    </div> -->
+    <nav>
+        <div class="wrapper">
+            <div class="logo" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+
+
+                <a class="box-svg" href="<?php echo esc_url(home_url('/')); ?>">
+                    <?php $svg_file = get_field('hero_logo');
+                    if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                        echo '<i class="element">' . file_get_contents($svg_file['url']) . '</i>';
+                    } ?>
+                </a>
+            </div>
+            <ul class="menu" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                <?php
+                if (have_rows('hero_menu')):
+                    while (have_rows('hero_menu')):
+                        the_row(); ?>
+                        <li>
+                            <?php
+
+                            $link = get_sub_field('hero_menu_item');
+                            if ($link):
+                                $link_url = $link['url'];
+                                $link_title = $link['title'];
+                                $link_target = $link['target'] ? $link['target'] : '_self'; ?>
+                                <a href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                                    <?php echo esc_html($link_title); ?>
+                                </a>
+                            <?php endif; ?>
+
+                        </li>
+                    <?php endwhile;
+                endif; ?>
+            </ul>
+
+        </div>
+
     </nav>
+    <!-- <img src="img/wechi-symbol.svg" alt="" class="symbol"> -->
+    <!-- <img src="img/slogan.svg" alt="" class="slogan"> -->
+    <!-- <div data-aos="fade-left" data-aos-duration="1300" class="content">
+        <h1><?php echo get_field('hero_titulo'); ?></h1>
+        <div class="line"></div>
+        <h3><?php echo get_field('hero_texto'); ?></h3>
+    </div>
+
+    <div class="scroll-indicator">
+        <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.5 -1.74846e-07L4.5 14.2222M4.5 14.2222L8.5 10.1587M4.5 14.2222L0.499999 10.1587"
+                stroke="#070932" />
+        </svg>
+
+    </div> -->
 </header>
 
     <div class="fundo">
@@ -94,6 +138,8 @@ get_header();
             <p>VALORES ORIENTADORES</p>
         </div>
 
+        <div class="valores-orientadores-box">
+
             <?php
             if (have_rows('valores_repetidor')):
                 $delay = 100;
@@ -124,6 +170,8 @@ get_header();
                     ?>
                 <?php endwhile;
             endif; ?>
+
+        </div>
 
 </section>
 

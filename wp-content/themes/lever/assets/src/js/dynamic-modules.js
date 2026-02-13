@@ -35,6 +35,11 @@ function initDynamicModules() {
       moduleFunction: 'initPage',
     },
     {
+      selector: '.page-template-lever-family-office',
+      modulePath: './pages/lever-family-office.js',
+      moduleFunction: 'initPage',
+    },
+    {
       selector: '.page-template-lever-real-state',
       modulePath: './pages/lever-real-state.js',
       moduleFunction: 'initPage',

@@ -1,0 +1,202 @@
+@import '../../global/breakpoints';
+@import '../../global/colors';
+
+/* FOOTER */
+
+.content,
+.logo {
+  position: relative;
+  z-index: 2;
+}
+
+footer {
+  display: flex;
+  padding: 180px 120px 80px;
+  height: 100vh;
+  min-height: 600px;
+  background: url('../img/footer-background.webp') left bottom no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  @include media-breakpoint-up(md) {
+    margin-top: -200px;
+  }
+}
+
+footer .left {
+  position: relative;
+  width: 50%;
+}
+
+footer .right {
+  position: relative;
+  width: 50%;
+  display: flex;
+  /* align-items: flex-end; */
+  justify-content: center;
+  flex-direction: column;
+}
+
+.quote h3 {
+  position: relative;
+  font-size: 24px;
+  line-height: 140%;
+}
+
+.quote h3:before {
+  font-weight: 100 !important;
+  content: url('../img/quote.svg');
+  width: 100px;
+  height: 100px;
+  top: -20px;
+  left: -65px;
+  position: absolute;
+}
+
+.quote img {
+  margin-top: 20px;
+}
+
+footer .right .contact {
+  margin-top: 140px;
+}
+
+footer .right .mail {
+  margin-top: 160px;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 26px;
+  color: #070932;
+  text-decoration: none;
+}
+
+footer .right .location {
+  display: flex;
+  margin-top: 60px;
+}
+
+footer .right .location-item {
+  margin-right: 80px;
+}
+
+footer .right .country {
+  color: #070932;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+footer .right .address {
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: 13px;
+  line-height: 150%;
+  color: #070932;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 30px;
+  right: 0;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 12px;
+  color: rgba(7, 9, 50, 0.5);
+}
+
+.copyright span {
+  margin-right: 20px;
+  svg {
+    width: 70px;
+    height: 9px;
+    @include media-breakpoint-up(md) {
+    }
+  }
+}
+
+input {
+  height: 40px;
+  width: 100%;
+  margin-bottom: 48px;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid black;
+  font-size: 16px;
+  font-weight: 100;
+  padding: 10px 0;
+  outline: none;
+  font-family: 'benzin regular';
+}
+
+.mobile-contact {
+  display: none;
+}
+@media only screen and (max-width: 1280px) {
+  footer {
+    padding: 180px 80px 100px;
+  }
+
+  footer .right .location-item {
+    margin-right: 50px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  footer {
+    display: flex;
+    flex-direction: column;
+    padding: 140px 24px 200px;
+    background: url('../img/footer-background.webp') left bottom -78px no-repeat;
+    background-size: 1080px;
+    min-height: 940px;
+  }
+
+  footer .right .contact {
+    margin-top: 80px;
+  }
+
+  footer .right .mail {
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  footer .right .location {
+    margin-top: 40px;
+  }
+
+  footer .right .location-item {
+    margin-right: 20px;
+  }
+
+  footer .right .location-item:last-child {
+    margin-right: 0;
+  }
+
+  .quote h3 {
+    font-size: 18px;
+    line-height: 140%;
+    margin: 18px 0;
+  }
+
+  .quote h3:before {
+    top: -60px;
+    left: inherit;
+    right: 0px;
+    transform: scaleY(-1);
+  }
+
+  .quote img {
+    width: 200px;
+    margin-top: 10px;
+  }
+
+  footer .right {
+    width: 100%;
+  }
+
+  .copyright {
+    bottom: 20px;
+  }
+}
