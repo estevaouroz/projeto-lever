@@ -28,18 +28,16 @@ get_header();
         endif; ?>
     </nav>
 </header>
-<div class="fundo">
-    <div class="bg-fundo">
-        <img class=""
-            src="<?php echo get_template_directory_uri(); ?>/assets/dist/img/fundo-bg-02.webp"
-            alt="" />
+
+    <div class="fundo">
+        <div class="bg-fundo">
+            <img class=""
+                src="<?php echo get_template_directory_uri(); ?>/assets/dist/img/fundo-bg-02.webp"
+                alt="" />
     </div>
 
     <section class="hero">
-
         <div class="hero-content wrapper">
-
-
             <div class="hero-text" data-aos="fade-up" data-aos-duration="1000">
                 <h1><?php echo get_field('hero_titulo'); ?></h1>
                 <p><?php echo get_field('hero_texto'); ?></p>
@@ -87,6 +85,7 @@ get_header();
             </div>
         </div>
     </section>
+    
 </div>
 
 <section class="valores">
