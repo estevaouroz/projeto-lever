@@ -1,10 +1,11 @@
 @import '../global/breakpoints';
 @import '../global/colors';
 
+html {
+  scroll-behavior: smooth;
+}
+
 .page-template-lever-family-office {
-  html {
-    scroll-behavior: smooth;
-  }
 
   body {
     margin: 0;
@@ -54,6 +55,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #070932;
+    margin: 28px 0;
   }
 
   .white {
@@ -128,8 +130,15 @@
   }
 
   header nav .logo {
-    min-width: 140px;
+    width: 130px;
+    height: 50px;
     transition: all 450ms;
+    a{
+      svg{
+        width: 120px;
+        height: 50px;
+      }
+    }
   }
 
   header nav .menu {
@@ -332,6 +341,10 @@
     transform: translateX(-50%);
   }
 
+    #valores svg {
+    height: 80px;
+  }
+
   #valores .column {
     display: flex;
     height: 100%;
@@ -354,7 +367,7 @@
     margin: 0;
     padding: 0 24px;
     font-size: 16px;
-    max-width: 320px;
+    max-width: 368px;
   }
 
   /* FAMILY */
@@ -367,7 +380,7 @@
   }
 
   #family-office .right {
-    margin-top: 110px;
+    margin-top: 60px;
   }
 
   #family-office h2,
@@ -633,7 +646,7 @@
     }
 
     #process {
-      padding: 80px 0 140px;
+      padding: 80px 0 0px;
     }
 
     footer {
@@ -799,7 +812,7 @@
     #map .left {
       padding: 0 24px;
       h2 {
-        font-size: 24px;
+        font-size: 38px;
       }
     }
     #map .right img {

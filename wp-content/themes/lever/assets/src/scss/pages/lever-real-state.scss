@@ -143,8 +143,8 @@ html {
     backdrop-filter: blur(40px);
     z-index: 9;
     transition: all 450ms;
-    .menu li a {
-    }
+    // .menu li a {
+    // }
   }
 
   header.scrolled .logo {
@@ -153,8 +153,16 @@ html {
   }
 
   header.scrolled .wrapper {
-    padding: 16px 120px;
+    padding: 16px 80px;
     transition: all 450ms;
+    background-color: #ffffff;
+      a{
+        color: #070932;
+      }
+  }
+
+  header.scrolled .logo svg {
+    filter: brightness(0);
   }
 
   .container {
@@ -163,6 +171,7 @@ html {
     padding: 0 80px;
     margin: 0 auto;
   }
+
   @media only screen and (max-width: 1280px) {
     header h1 {
       font-size: 9vw;
@@ -306,6 +315,7 @@ html {
         // --- DOWN: TABLET / MOBILE ---
         @include media-breakpoint-down(md) {
           padding: 100px 20px 20px;
+          text-align: left;
 
           h1 {
             font-size: 26px;
@@ -523,7 +533,7 @@ html {
         letter-spacing: 2px;
         font-weight: 400;
         text-transform: uppercase;
-        margin: 0;
+        margin: 28px 0;
       }
     }
 
@@ -543,17 +553,18 @@ html {
       height: 100%;
       justify-content: center;
       width: 33.33%;
-
-      &:not(:last-child) {
-        &::after {
-          content: '';
-          bottom: 0px;
-          width: 1px;
-          height: 100%;
-          transition: 0.6s;
-          right: -25px;
-          position: absolute;
-          background-color: rgba(0, 0, 0, 0.05);
+      @include media-breakpoint-up(md) {
+        &:not(:last-child) {
+          &::after {
+            content: '';
+            bottom: -230px;
+            width: 1px;
+            height: 400%;
+            transition: 0.6s;
+            right: -25px;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.05);
+          }
         }
       }
 
@@ -858,7 +869,8 @@ html {
 
       .produto-info {
         z-index: 2;
-        margin-bottom: 7%;
+        position: absolute;
+        top: 40%;
 
         h2 {
           color: #fff;
@@ -930,7 +942,7 @@ html {
 
         .produto-info {
           h2 {
-            font-size: 18px;
+            font-size: 22px;
             line-height: 32px;
             margin-bottom: 20px;
           }
@@ -1018,181 +1030,6 @@ html {
       .porta-text p {
         font-size: 24px;
         line-height: 32px;
-      }
-    }
-  }
-
-  .footer {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    overflow: hidden;
-    padding: 100px 0;
-
-    .footer-bg-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: left bottom;
-      }
-    }
-
-    .container-footer {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .footer-content-wrapper {
-      max-width: 600px;
-    }
-
-    .quote-wrapper {
-      position: relative;
-
-      .quote-svg {
-        position: absolute;
-        top: -25px;
-        left: -45px;
-        z-index: -1;
-      }
-
-      h2 {
-        color: #070932;
-        font-size: 22px;
-        font-weight: 300;
-        line-height: 140%;
-        letter-spacing: 0.088px;
-        margin: 0;
-      }
-    }
-
-    .signature-box {
-      margin-top: 30px;
-      img {
-        width: 219px;
-        height: auto;
-      }
-    }
-
-    .contact-box {
-      margin-top: 120px;
-      a {
-        color: #070932;
-        font-size: 26px;
-        font-weight: 300;
-        text-decoration: none;
-      }
-    }
-
-    .footer-brand-bottom {
-      position: absolute;
-      bottom: 40px;
-      right: 40px;
-      z-index: 3;
-      display: flex;
-      align-items: center;
-      gap: 50px;
-
-      h4 {
-        color: rgba(7, 9, 50, 0.5);
-        font-family: 'Sansation', sans-serif;
-        font-size: 11px;
-        text-transform: uppercase;
-      }
-    }
-
-    @include media-breakpoint-down(md) {
-      min-height: 100vh;
-      padding: 40px 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      .footer-bg-image img {
-        object-position: 35% center;
-        opacity: 0.2;
-      }
-
-      .container-footer {
-        justify-content: flex-start;
-        padding: 0;
-        margin-top: 40px;
-      }
-
-      .footer-content-wrapper {
-        max-width: 100%;
-        text-align: left;
-      }
-
-      .quote-wrapper {
-        .quote-svg {
-          position: static;
-          margin-bottom: 20px;
-          transform: scale(0.6);
-          transform-origin: left;
-          opacity: 0.3;
-        }
-
-        h2 {
-          font-size: 16px;
-          line-height: 1.6;
-          color: #111445;
-          font-weight: 300;
-          letter-spacing: 0.5px;
-        }
-      }
-
-      .signature-box {
-        margin-top: 24px;
-        justify-content: flex-start;
-        img {
-          width: 130px;
-          filter: grayscale(1);
-        }
-      }
-
-      .contact-box {
-        margin-top: 60px;
-        a {
-          font-size: 14px;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-          border-bottom: 1px solid rgba(7, 9, 50, 0.2);
-          padding-bottom: 4px;
-        }
-      }
-
-      .footer-brand-bottom {
-        position: static;
-        margin-top: auto;
-        padding-top: 60px;
-        justify-content: space-between;
-        width: 100%;
-
-        h4 {
-          font-size: 8px;
-          letter-spacing: 1px;
-        }
-
-        svg,
-        img {
-          width: 50px;
-        }
       }
     }
   }

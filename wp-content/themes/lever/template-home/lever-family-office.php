@@ -224,13 +224,18 @@ get_header();
                 $etapa_delay = ($etapa_index - 1) * 500;
                 ?>
                 <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="<?php echo esc_attr($etapa_delay); ?>" class="column">
+
                     <div class="table-header">
+                        
                         <div class="number"><?php echo esc_html($etapa_label); ?></div>
                         <div class="title-wrapper">
                             <p>Etapa</p>
-                            <div class="title"><?php echo get_field('processo_titulo'); ?></div>
+                            <div class="title">
+                                <?php echo get_sub_field('processo_titulo_rep'); ?>
+                            </div>
                         </div>
                     </div>
+
                     <?php
                     if (have_rows('processo_item_repetidor')):
                         while (have_rows('processo_item_repetidor')):
