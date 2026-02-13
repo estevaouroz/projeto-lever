@@ -679,7 +679,7 @@
             "label": "Expertise Imagem",
             "name": "expertise_imagem",
             "aria-label": "",
-            "type": "image",
+            "type": "file",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -690,15 +690,10 @@
             },
             "return_format": "array",
             "library": "all",
-            "min_width": "",
-            "min_height": "",
             "min_size": "",
-            "max_width": "",
-            "max_height": "",
             "max_size": "",
             "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
+            "allow_in_bindings": 0
         },
         {
             "key": "field_697e8bf8889f9",
@@ -804,6 +799,7 @@
                     "collapsed": "",
                     "button_label": "Adicionar linha",
                     "rows_per_page": 20,
+                    "parent_repeater": "field_697e8c10889fa",
                     "sub_fields": [
                         {
                             "key": "field_6987a9078d864",
@@ -827,248 +823,9 @@
                             "append": "",
                             "parent_repeater": "field_697e8c4e889fc"
                         }
-                    ],
-                    "parent_repeater": "field_697e8c10889fa"
+                    ]
                 }
             ]
-        },
-        {
-            "key": "field_697e8c6f889ff",
-            "label": "Footer",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
-            "key": "field_697e8c7b88a00",
-            "label": "Footer Texto",
-            "name": "footer_texto",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_6987ae55e125c",
-            "label": "Assinatura Footer",
-            "name": "assinatura_footer",
-            "aria-label": "",
-            "type": "file",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_size": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0
-        },
-        {
-            "key": "field_697e8c8888a01",
-            "label": "Footer Nome",
-            "name": "footer_nome",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_697e8ca488a02",
-            "label": "Footer Background",
-            "name": "footer_background",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0,
-            "preview_size": "medium"
-        },
-        {
-            "key": "field_697e8cb388a03",
-            "label": "Footer contato",
-            "name": "footer_contato",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_697e8cc188a04",
-            "label": "Footer Repetidor",
-            "name": "footer_repetidor",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "table",
-            "pagination": 0,
-            "min": 0,
-            "max": 0,
-            "collapsed": "",
-            "button_label": "Adicionar linha",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_697e8cc888a05",
-                    "label": "Footer Repetidor País",
-                    "name": "footer_repetidor_pais",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_697e8cc188a04"
-                },
-                {
-                    "key": "field_697e8cd988a06",
-                    "label": "Footer Repetidor Endereço",
-                    "name": "footer_repetidor_endereco",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_697e8cc188a04"
-                }
-            ]
-        },
-        {
-            "key": "field_697e8cf588a08",
-            "label": "Footer Marca",
-            "name": "footer_marca",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_697e8d0788a09",
-            "label": "Footer Logo",
-            "name": "footer_logo",
-            "aria-label": "",
-            "type": "file",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "library": "all",
-            "min_size": "",
-            "max_size": "",
-            "mime_types": "",
-            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -1090,5 +847,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1770864247
+    "modified": 1770938913
 }

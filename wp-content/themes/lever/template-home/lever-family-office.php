@@ -117,36 +117,27 @@ get_header();
 </section>
 
 <section id="valores">
-    <h6>Valores orientadores</h6>
-    <div data-aos="fade-up" data-aos-duration="1300" class="column">
-        <img src="img/barbell.svg" alt="">
-        <h3>Barbell</h3>
-        <p>
-            Equilibrando solidez com impacto. Expondo a maior parte do portfólio ao menor risco existente, protegemos o
-            patrimônio. Já com a menor parcela, busca-se a convexidade para produzir alpha. Essa simbiose guia-nos em
-            cenários imprevisíveis.
-        </p>
-    </div>
+    <h6><?php echo get_field('valores_titulo'); ?></h6>
+    <?php
+    if (have_rows('valores_repetidor')):
+        while (have_rows('valores_repetidor')):
+            the_row(); ?>
 
-    <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="500" class="column">
-        <img src="img/negativo.svg" alt="">
-        <h3>Via Negativa</h3>
-        <p>
-            Simplicidade inteligente: eliminar o inútil. Ao invés de adicionar, subtraímos ações desnecessárias e ou
-            prejudiciais. Clareza do que não fazer reduz complexidade, evita riscos e prioriza o essencial.
-        </p>
-
-    </div>
-
-    <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="1000" class="column">
-        <img src="img/opcionalidade.svg" alt="">
-        <h3>Opcionalidade</h3>
-        <p>
-            Acumular escolhas e não obrigações permite explorar assimetrias e proteger-se da ruína. Em essência: a
-            sobrevivência é a prioridade, as opções o motor para prosperar.
-        </p>
-
-    </div>
+            <div data-aos="fade-up" data-aos-duration="1300" class="column">
+                <div class="box-svg">
+                    <?php $svg_file = get_sub_field('valores_repetirodes_icon');
+                    if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                        echo '<i class="element">';
+                        echo file_get_contents($svg_file['url']);
+                        echo '</i>';
+                    } ?>
+                </div>
+                <h3><?php echo get_sub_field('valores_repetidor_titulo'); ?></h3>
+                <p><?php echo get_sub_field('valores_repetidor_texto'); ?>
+                </p>
+            </div>
+        <?php endwhile;
+    endif; ?>
 
 </section>
 
@@ -154,98 +145,50 @@ get_header();
 <section id="family-office">
     <div class="container">
         <div class="left">
-            <h6 class="white">family office</h6>
+            <h6 class="white"><?php echo get_field('family_titulo'); ?></h6>
             <!-- <h2>Atuação LEVER<br> Family Office</h2> -->
-            <p>Com um espírito de alfaiataria e posicionamento boutique, dedicamo-nos a "costurar" cuidadosamente as
-                melhores práticas para preservar a riqueza das famílias High Net Worth. Priorizamos o tempo necessário
-                para oferecer soluções personalizadas e exclusivas, garantindo o crescimento sustentável do patrimônio
-                às gerações seguintes.</p>
+            <p><?php echo get_field('family_texto'); ?></p>
             <!-- <a href="" class="button">
             <span>Conheça</span>
             </a> -->
         </div>
         <div class="right">
             <div class="accordion">
-                <div data-aos="fade-up" data-aos-duration="1300" class="accordion-item">
-                    <div class="accordion-header">
-                        <h3>Governança Patrimonial</h3>
-                        <div class="circle">
-                            <img src="img/arrow.svg" alt="">
+                <?php
+                if (have_rows('family_acordeao')):
+                    while (have_rows('family_acordeao')):
+                        the_row(); ?>
+
+                        <div data-aos="fade-up" data-aos-duration="1300" class="accordion-item">
+                            <div class="accordion-header">
+                                <h3><?php echo get_sub_field('family_repetidor_titulo'); ?></h3>
+                                <div class="circle">
+                                    <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L6 6L11 1" stroke="white" />
+                                    </svg>
+
+                                </div>
+                            </div>
+                            <div class="accordion-body">
+                                <p><?php echo get_sub_field('family_repetidor_texto'); ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="accordion-body">
-                        <p>Elaboração e gestão da estratégia de governança, preservando e desenvolvendo o patrimônio de
-                            acordo com as metas e restrições de cada família.</p>
-                    </div>
-                </div>
-                <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="250" class="accordion-item">
-                    <div class="accordion-header">
-                        <h3>Alocação de Ativos</h3>
-                        <div class="circle">
-                            <img src="img/arrow.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="accordion-body">
-                        <p>Definição e implementação do portfólio de investimentos financeiros, imobiliários e
-                            societários, tanto em território nacional quanto no exterior.</p>
-                    </div>
-                </div>
-                <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="500" class="accordion-item">
-                    <div class="accordion-header">
-                        <h3>Planejamento societário, tributário e sucessório</h3>
-                        <div class="circle">
-                            <img src="img/arrow.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="accordion-body">
-                        <p>Coordenação e implementação de estruturas societárias nacionais e internacionais, com foco na
-                            proteção, elisão fiscal e sucessão patrimonial.</p>
-                    </div>
-                </div>
-                <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="750" class="accordion-item">
-                    <div class="accordion-header">
-                        <h3>Gerenciamento de riscos</h3>
-                        <div class="circle">
-                            <img src="img/arrow.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="accordion-body">
-                        <p>Desenho, implementação e monitoramento de estratégias para proteção contra riscos conhecidos
-                            e desconhecidos.
-                        </p>
-                    </div>
-                </div>
-                <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="1000" class="accordion-item">
-                    <div class="accordion-header">
-                        <h3>Family Business</h3>
-                        <div class="circle">
-                            <img src="img/arrow.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="accordion-body">
-                        <p>Assessoramento em finanças corporativas e estratégia dos negócios familiares, incluindo
-                            estruturação de capital, fusões e aquisições, análise de investimentos e gestão de riscos.
-                            Participação de conselhos consultivos ou de administração para garantir crescimento
-                            sustentável e preservação patrimonial.</p>
-                    </div>
-                </div>
-                <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="1250" class="accordion-item">
-                    <div class="accordion-header">
-                        <h3>Coordenação de serviços</h3>
-                        <div class="circle">
-                            <img src="img/arrow.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="accordion-body">
-                        <p>Gerenciamento de prestadores de serviços locais e internacionais, como advogados, contadores,
-                            banqueiros e corretores, para implementar a estratégia planejada de forma eficiente.</p>
-                    </div>
-                </div>
+                    <?php endwhile;
+                endif; ?>
+
             </div>
         </div>
     </div>
     <div class="container">
-        <img src="img/circle-02.svg" alt="" class="circle-secondary">
+        <?php
+        $image = get_field('icon_flutuante');
+        if ($image):
+            $image_url = $image['url'];
+            $image_alt = $image['alt']; ?>
+            <img class="circle-secondary" src="<?php echo esc_url($image_url); ?>"
+                alt="<?php echo esc_attr($image_alt); ?>">
+        <?php endif; ?>
     </div>
 </section>
 
@@ -253,138 +196,63 @@ get_header();
 <section id="map">
     <div class="overflow">
         <div data-aos="fade-up" data-aos-duration="1300" class="left">
-            <h6>nossa expertise</h6>
-            <h2>Experiência e atuação internacional</h2>
-            <p>Nossa experiência em atender famílias High Net Worth (HNW), levou-nos a escolher um caminho que prioriza
-                a diversificação geográfica, cambial e econômica, tanto para os investimentos, quanto para as estruturas
-                de proteção, elisão e sucessão patrimonial. A inteligência, o relacionamento de longo prazo, a ausência
-                de conflito de interesse, a discrição e o sigilo serão ingredientes que sempre farão parte dessa longa
-                jornada.</p>
+            <h6><?php echo get_field('expertise_titulo'); ?></h6>
+            <h2><?php echo get_field('expertise_titulo_2'); ?></h2>
+            <p><?php echo get_field('expertise_texto'); ?></p>
         </div>
         <div data-aos="fade-left" data-aos-duration="1300" data-aos-delay="500" class="right">
-            <img src="img/map.svg" alt="" class="map">
+            <?php
+            $image = get_field('expertise_imagem');
+            if ($image):
+                $image_url = $image['url'];
+                $image_alt = $image['alt']; ?>
+                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>" class="map">
+            <?php endif; ?>
         </div>
     </div>
 </section>
 
 <section id="process">
-    <h2>Processo LEVER Family Office</h2>
+    <h2><?php echo get_field('processo_titulo'); ?></h2>
     <div class="board container">
+        <?php
+        if (have_rows('processo_lever_repetidor')):
+            while (have_rows('processo_lever_repetidor')):
+                the_row();
+                $etapa_index = get_row_index();
+                $etapa_label = str_pad((string) $etapa_index, 2, '0', STR_PAD_LEFT);
+                $etapa_delay = ($etapa_index - 1) * 500;
+                ?>
+                <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="<?php echo esc_attr($etapa_delay); ?>" class="column">
+                    <div class="table-header">
+                        <div class="number"><?php echo esc_html($etapa_label); ?></div>
+                        <div class="title-wrapper">
+                            <p>Etapa</p>
+                            <div class="title"><?php echo get_field('processo_titulo'); ?></div>
+                        </div>
+                    </div>
+                    <?php
+                    if (have_rows('processo_item_repetidor')):
+                        while (have_rows('processo_item_repetidor')):
+                            the_row();
+                            $item_index = get_row_index();
+                            ?>
+                            <div class="table-item">
+                                <div class="number"><?php echo esc_html($etapa_index . '.' . $item_index); ?></div>
+                                <p><?php echo get_sub_field('processo_item'); ?></p>
+                            </div>
+                        <?php endwhile;
+                    endif; ?>
 
-        <div data-aos="fade-up" data-aos-duration="1300" class="column">
-            <div class="table-header">
-                <div class="number">01</div>
-                <div class="title-wrapper">
-                    <p>Etapa</p>
-                    <div class="title">Diagnóstico</div>
                 </div>
-            </div>
-            <div class="table-item">
-                <div class="number">1.1</div>
-                <p>NDA e recepção documental</p>
-            </div>
-            <div class="table-item">
-                <div class="number">1.2</div>
-                <p>Consolidação da estrutura patrimonial.</p>
-            </div>
-            <div class="table-item">
-                <div class="number">1.3</div>
-                <p>Análise e classificação através de metodologia proprietária.</p>
-            </div>
-        </div>
-
-        <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="500" class="column">
-            <div class="table-header">
-                <div class="number">02</div>
-                <div class="title-wrapper">
-                    <p>Etapa</p>
-                    <div class="title">Planejamento</div>
-                </div>
-            </div>
-            <div class="table-item">
-                <div class="number">2.1</div>
-                <p>Mapeamento das alternativas estratégicas.</p>
-            </div>
-            <div class="table-item">
-                <div class="number">2.2</div>
-                <p>Definição do modelo, governança e mandato.</p>
-            </div>
-            <div class="table-item">
-                <div class="number">2.3</div>
-                <p>Elaboração do plano de ação.</p>
-            </div>
-        </div>
-
-        <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="1000" class="column">
-            <div class="table-header">
-                <div class="number">03</div>
-                <div class="title-wrapper">
-                    <p>Etapa</p>
-                    <div class="title">Operacionalização</div>
-                </div>
-            </div>
-            <div class="table-item">
-                <div class="number">3.1</div>
-                <p>Implantação do plano de ação</p>
-            </div>
-            <div class="table-item">
-                <div class="number">3.2</div>
-                <p>Monitoramento contínuo da evolução das etapas.</p>
-            </div>
-            <div class="table-item">
-                <div class="number">3.2</div>
-                <p>Apresentação dos relatórios de resultado periodicamente.</p>
-            </div>
-        </div>
+            <?php endwhile;
+        endif; ?>
+     
 
     </div>
 </section>
 
 
-<footer id="footer">
 
-    <div class="left">
-    </div>
-
-    <div class="right">
-        <div data-aos="fade-left" data-aos-duration="1300" class="quote">
-            <h3>Saber o que não é possível controlar, entender como o desconhecido pode impactar suas decisões, buscar
-                as
-                assimetrias positivas e sempre possuir opcionalidade são alguns dos fatores essenciais à formação,
-                proteção e
-                perpetuação do patrimônio.</h3>
-            <img src="img/signature.svg" alt="" class="signature">
-        </div>
-        <div class="contact">
-            <div data-aos="fade-left" data-aos-duration="1300">
-                <a href="mailto:contato@lever.global" class="mail">contato@lever.global</a>
-            </div>
-            <!-- <div class="location">
-            <div data-aos="fade-up" data-aos-duration="1300" class="location-item">
-                <div class="country">Brasil</div>
-                <div class="address">Av. Tancredo Neves, 909<br> Salvador</div>
-            </div>
-            <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="250" class="location-item">
-                <div class="country">Portugal</div>
-                <div class="address">Rua Castilho, n. 20<br> Lisboa</div>
-            </div>
-            <div data-aos="fade-up" data-aos-duration="1300" data-aos-delay="500" class="location-item">
-                <div class="country">Estados Unidos</div>
-                <div class="address">6965 Piazza Grande Ave<br> Orlando</div>
-            </div>
-            </div> -->
-        </div>
-    </div>
-
-    <div class="copyright">
-        <span>
-            © LEVER Family Office
-            <script>document.write(new Date().getFullYear())</script> – by Grisotti
-        </span>
-        <img src="img/symbol.svg" alt="" class="symbol">
-    </div>
-
-
-</footer>
 
 <?php get_footer(); ?>

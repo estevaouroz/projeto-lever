@@ -174,7 +174,7 @@
 
   header .content h1,
   .content h3 {
-    max-width: 600px;
+    max-width: 700px;
     padding-left: 100px;
   }
 
@@ -274,10 +274,11 @@
 
   #about .left h3 {
     font-size: 24px;
+    margin: 24px 0;
   }
 
   #about .left p {
-    max-width: 570px;
+    max-width: 590px;
     width: 100%;
     margin-right: 80px;
     margin-top: 40px;
@@ -317,7 +318,8 @@
     width: 100%;
     height: 80vh;
     min-height: 800px;
-    background: url('img/background.jpg') top no-repeat;
+
+    background: url('../img/background.webp') top no-repeat;
     background-size: cover;
     overflow: hidden;
   }
@@ -344,6 +346,7 @@
   #valores h3 {
     font-size: 26px;
     font-weight: 400;
+    margin: 26px 0;
   }
 
   #valores p {
@@ -474,12 +477,14 @@
 
   #map .overflow {
     margin: 0 auto;
-    max-width: 1440px;
+    max-width: 1600px;
     padding: 0 80px;
     display: flex;
     align-items: center;
   }
-
+  #map .overflow h6 {
+    margin: 28px 0;
+  }
   #map .left {
     flex: 1;
     padding-right: 75px;
@@ -493,6 +498,7 @@
 
   #map p {
     max-width: 580px;
+    margin: 18px 0;
   }
 
   .map {
@@ -555,7 +561,7 @@
 
   .table-item {
     background: linear-gradient(90deg, #e4effc 0%, #eef5fd 100%);
-    min-height: 80px;
+    min-height: 120px;
     padding: 20px 24px;
     margin: 2px;
     display: flex;
@@ -590,9 +596,9 @@
     margin-top: -200px;
     display: flex;
     padding: 180px 120px 80px;
-    height: 70vh;
+    height: 100vh;
     min-height: 600px;
-    background: url(img/footer-background.jpg) left bottom no-repeat;
+    background: url('../img/footer-background.webp') left bottom no-repeat;
     background-size: cover;
     position: relative;
     overflow: hidden;
@@ -620,7 +626,7 @@
 
   .quote h3:before {
     font-weight: 100 !important;
-    content: url('img/quote.svg');
+    content: url('../img/quote.svg');
     width: 100px;
     height: 100px;
     top: -20px;
@@ -684,6 +690,12 @@
 
   .copyright span {
     margin-right: 20px;
+    svg {
+      width: 70px;
+      height: 9px;
+      @include media-breakpoint-up(md) {
+      }
+    }
   }
 
   input {
@@ -905,18 +917,20 @@
     }
 
     #map .overflow {
-      padding: 0 24px;
+      padding: 0;
       flex-direction: column;
     }
 
     #map .left {
       padding-right: 0;
+      p {
+        padding: 0 24px;
+      }
     }
-
     #map .right img {
-      width: 580px;
+      width: 100%;
       margin: 0 auto;
-      margin-left: 60px;
+      // margin-left: 60px;
     }
 
     #process .board {
@@ -926,7 +940,7 @@
 
     #process h2 {
       font-size: 32px;
-      padding: 0 0 20px;
+      padding: 0 20px 20px;
     }
 
     #process .column {
@@ -938,8 +952,9 @@
       display: flex;
       flex-direction: column;
       padding: 140px 24px 200px;
-      background: url(img/footer-background.jpg) left bottom -78px no-repeat;
+      background: url('../img/footer-background.webp') left bottom -78px no-repeat;
       background-size: 1080px;
+      min-height: 940px;
     }
 
     footer .right .contact {
@@ -966,6 +981,7 @@
     .quote h3 {
       font-size: 18px;
       line-height: 140%;
+      margin: 18px 0;
     }
 
     .quote h3:before {
