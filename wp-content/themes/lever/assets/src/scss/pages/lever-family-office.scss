@@ -401,6 +401,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
+
+    svg {
+      transition: all 450ms;
+    }
   }
 
   .accordion-header:hover {
@@ -417,9 +421,13 @@
   }
 
   .accordion-body {
+    max-height: 0;
+    overflow: hidden;
     opacity: 0;
     pointer-events: none;
-    height: 1px;
+    transition:
+      max-height 450ms ease,
+      opacity 300ms ease;
   }
 
   .accordion-body p {
@@ -428,12 +436,11 @@
 
   .accordion-header.-show ~ .accordion-body {
     opacity: 1;
-    pointer-events: none;
-    height: auto;
+    pointer-events: auto;
     padding-bottom: 20px;
   }
 
-  .accordion-header.-show img {
+  .accordion-header.-show svg {
     transform: rotate(180deg);
     transition: all 450ms;
   }
@@ -582,138 +589,6 @@
     height: 42px;
     border: 1px solid #ccdbec;
     flex: none;
-  }
-
-  /* FOOTER */
-
-  .content,
-  .logo {
-    position: relative;
-    z-index: 2;
-  }
-
-  footer {
-    margin-top: -200px;
-    display: flex;
-    padding: 180px 120px 80px;
-    height: 100vh;
-    min-height: 600px;
-    background: url('../img/footer-background.webp') left bottom no-repeat;
-    background-size: cover;
-    position: relative;
-    overflow: hidden;
-  }
-
-  footer .left {
-    position: relative;
-    width: 50%;
-  }
-
-  footer .right {
-    position: relative;
-    width: 50%;
-    display: flex;
-    /* align-items: flex-end; */
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  .quote h3 {
-    position: relative;
-    font-size: 24px;
-    line-height: 140%;
-  }
-
-  .quote h3:before {
-    font-weight: 100 !important;
-    content: url('../img/quote.svg');
-    width: 100px;
-    height: 100px;
-    top: -20px;
-    left: -65px;
-    position: absolute;
-  }
-
-  .quote img {
-    margin-top: 20px;
-  }
-
-  footer .right .contact {
-    margin-top: 140px;
-  }
-
-  footer .right .mail {
-    margin-top: 160px;
-    font-weight: 300;
-    font-size: 28px;
-    line-height: 26px;
-    color: #070932;
-    text-decoration: none;
-  }
-
-  footer .right .location {
-    display: flex;
-    margin-top: 60px;
-  }
-
-  footer .right .location-item {
-    margin-right: 80px;
-  }
-
-  footer .right .country {
-    color: #070932;
-    font-weight: 500;
-    font-size: 14px;
-  }
-
-  footer .right .address {
-    margin-top: 10px;
-    font-weight: 300;
-    font-size: 13px;
-    line-height: 150%;
-    color: #070932;
-  }
-
-  .copyright {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    font-size: 10px;
-    line-height: 14px;
-    font-weight: 400;
-    font-size: 11px;
-    line-height: 12px;
-    color: rgba(7, 9, 50, 0.5);
-  }
-
-  .copyright span {
-    margin-right: 20px;
-    svg {
-      width: 70px;
-      height: 9px;
-      @include media-breakpoint-up(md) {
-      }
-    }
-  }
-
-  input {
-    height: 40px;
-    width: 100%;
-    margin-bottom: 48px;
-    background-color: transparent;
-    border: 0;
-    border-bottom: 1px solid black;
-    font-size: 16px;
-    font-weight: 100;
-    padding: 10px 0;
-    outline: none;
-    font-family: 'benzin regular';
-  }
-
-  .mobile-contact {
-    display: none;
   }
 
   @media only screen and (max-width: 1280px) {
@@ -922,9 +797,9 @@
     }
 
     #map .left {
-      padding-right: 0;
-      p {
-        padding: 0 24px;
+      padding: 0 24px;
+      h2 {
+        font-size: 24px;
       }
     }
     #map .right img {
