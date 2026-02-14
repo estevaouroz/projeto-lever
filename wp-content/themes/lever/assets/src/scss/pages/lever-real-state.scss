@@ -116,10 +116,41 @@ html {
     height: 1px;
     width: 280px;
     margin-left: 100px;
-    /* background-color: #27EBDC; */
     background: linear-gradient(90deg, rgb(39, 235, 220, 0.2) 0%, #27ebdc 100%);
     margin-top: 20px;
     margin-bottom: 40px;
+  }
+
+  .logo {
+    width: 140px; 
+  }
+
+  .logo svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .logo-link {
+    position: relative;
+    display: block;
+  }
+
+  .logo-default,
+  .logo-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .logo-default {
+    position: relative;
+    opacity: 1;
+  }
+
+  .logo-dark {
+    opacity: 0;
   }
 
   header .scroll-indicator {
@@ -161,8 +192,12 @@ html {
       }
   }
 
-  header.scrolled .logo svg {
-    filter: brightness(0);
+  header.scrolled .logo-default {
+    opacity: 0;
+  }
+
+  header.scrolled .logo-dark {
+    opacity: 1;
   }
 
   .container {
@@ -309,7 +344,7 @@ html {
           font-size: 20px;
           line-height: 30px;
           margin: 0 auto;
-          max-width: 800px; // Evita que o texto espalhe demais no desktop
+          max-width: 800px;
         }
 
         // --- DOWN: TABLET / MOBILE ---
@@ -352,7 +387,7 @@ html {
     align-items: center;
     position: relative;
     overflow: hidden;
-    background: #070932; // Cor de fundo para o texto branco aparecer
+    background: #070932; 
 
     // --- ESTILO BASAL (DESKTOP PADRÃO) ---
     padding: 60px 20px 120px 60px;
@@ -371,10 +406,10 @@ html {
       position: relative;
       z-index: 2;
       display: flex;
-      flex-direction: row; // Lado a lado
+      flex-direction: row; 
       justify-content: space-between;
       width: 100%;
-      gap: 144px; // Gap conforme sua imagem
+      gap: 144px; 
     }
 
     .dev-box-image {

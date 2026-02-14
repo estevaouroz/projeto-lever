@@ -20,16 +20,23 @@ get_header();
     </div> -->
     <nav>
         <div class="wrapper">
-            <div class="logo" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                <div class="logo" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-link">
+                        <span class="logo-default">
+                            <?php $svg_file = get_field('hero_logo');
+                            if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                                echo file_get_contents($svg_file['url']);
+                            } ?>
+                        </span>
 
-
-                <a class="box-svg" href="<?php echo esc_url(home_url('/')); ?>">
-                    <?php $svg_file = get_field('hero_logo');
-                    if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
-                        echo '<i class="element">' . file_get_contents($svg_file['url']) . '</i>';
-                    } ?>
-                </a>
-            </div>
+                        <span class="logo-dark">
+                            <?php $svg_file = get_field('hero_logo_oculto');
+                            if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                                echo file_get_contents($svg_file['url']);
+                            } ?>
+                        </span>
+                    </a>
+                </div>
             <ul class="menu" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
                 <?php
                 if (have_rows('hero_menu')):
