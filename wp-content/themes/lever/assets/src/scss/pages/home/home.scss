@@ -171,6 +171,7 @@ body.page-template-homepage {
       height: auto;
       min-height: 100vh;
       overflow: visible;
+      background-color: #f3f8fb;
 
       .box-esquerda {
         background: #f3f8fb;
@@ -214,55 +215,64 @@ body.page-template-homepage {
       .box-direita {
         width: 100%;
 
-        .box-direita-cima,
-        .box-direita-baixo {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          padding: 0 32px;
-          border-left: none;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-          box-sizing: border-box;
-          background-image: none !important;
-          background-color: #f3f8fb;
-          position: relative;
+      .box-direita-cima,
+      .box-direita-baixo {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 32px;
+        border-left: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        box-sizing: border-box;
+        background-image: none !important;
+        background-color: #f3f8fb;
+        position: relative;
 
-          .box-svg {
-            margin: 0;
-            z-index: 2;
-            .element svg {
-              width: 152px;
-              height: 56px;
-            }
-          }
+        .box-svg {
+          margin: 0;
+          z-index: 2;
 
-          .fake-button {
-            background: transparent;
-            border: none;
-            width: auto;
-            padding: 0;
-            height: auto;
-            z-index: 2;
-
-            p {
-              font-weight: 400;
-            }
-
-            &::after {
-              margin-left: 10px;
-            }
-          }
-
-          .full-link {
-            z-index: 10;
+          .element svg {
+            width: 152px;
+            height: 56px;
           }
         }
 
-        .box-direita-cima {
-          height: 220px;
+        .fake-button {
+          background: transparent;
+          border: none;
+          width: auto;
+          padding: 0;
+          height: auto;
+          z-index: 2;
+
+          p {
+            font-weight: 400;
+          }
+
+          &::after {
+            margin-left: 10px;
+          }
         }
-        .box-direita-baixo {
-          height: 240px;
+
+        .full-link {
+          z-index: 10;
+        }
+
+          &:hover {
+            .fake-button {
+              border-color: transparent;
+              background: transparent;
+
+              p {
+                color: #070932;
+              }
+
+              &::after {
+                transform: none;
+              }
+            }
+          }
         }
       }
     }
