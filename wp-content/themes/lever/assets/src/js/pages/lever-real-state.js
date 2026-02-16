@@ -2,8 +2,8 @@ function initAccordionTeses() {
   const $headers = $('.accordion-header');
   console.log('Página inicializada...');
 
-  if ($headers.length === 0) return; // Segurança caso a seção não exista na página
-
+  if ($headers.length === 0) return;
+  
   $(document).off('click', '.accordion-header');
   $(document).on('click', '.accordion-header', function handleAccordionClick() {
     const $button = $(this);
@@ -11,21 +11,40 @@ function initAccordionTeses() {
     const $content = $item.find('.accordion-content');
     const isOpen = $item.hasClass('active');
 
-    // 1. Fecha os outros itens (efeito exclusivo)
     $('.accordion-item').removeClass('active');
     $('.accordion-item .accordion-content').css('max-height', '');
 
-    // 2. Se o item clicado não estava aberto, abre ele
     if (!isOpen) {
       $item.addClass('active');
-      // scrollHeight calcula a altura real do conteúdo interno
       $content.css('max-height', `${$content[0].scrollHeight}px`);
     }
   });
 }
 
+function initSideModals() {
+    const triggers = document.querySelectorAll('.open-sidebar');
+    const closeBtns = document.querySelectorAll('.close-modal, .modal-overlay-bg');
+
+    triggers.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-target');
+            const modal = document.getElementById(target);
+            if(modal) modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        });
+    });
+
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.side-modal').forEach(m => m.classList.remove('active'));
+            document.body.style.overflow = ''; 
+        });
+    });
+}
+
 function initPage() {
   initAccordionTeses();
+  initSideModals()
 }
 
 export {initPage};

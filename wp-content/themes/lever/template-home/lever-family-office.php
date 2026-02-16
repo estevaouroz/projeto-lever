@@ -66,13 +66,12 @@ get_header();
         <h3><?php echo get_field('hero_texto'); ?></h3>
     </div>
 
-    <div class="scroll-indicator">
+    <a href="#about" class="scroll-indicator">
         <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4.5 -1.74846e-07L4.5 14.2222M4.5 14.2222L8.5 10.1587M4.5 14.2222L0.499999 10.1587"
                 stroke="#070932" />
         </svg>
-
-    </div>
+    </a>
 </header>
 
 <section id="about">
