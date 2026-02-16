@@ -6,7 +6,6 @@ html {
 }
 
 .page-template-lever-family-office {
-
   body {
     margin: 0;
     padding: 0;
@@ -108,7 +107,7 @@ html {
         height: 100%;
         width: 100%;
         object-fit: cover;
-        object-position: center;
+        object-position: left;
       }
     }
   }
@@ -133,8 +132,8 @@ html {
     width: 130px;
     height: 50px;
     transition: all 450ms;
-    a{
-      svg{
+    a {
+      svg {
         width: 120px;
         height: 50px;
       }
@@ -341,7 +340,7 @@ html {
     transform: translateX(-50%);
   }
 
-    #valores svg {
+  #valores svg {
     height: 80px;
   }
 
@@ -768,12 +767,12 @@ html {
 
     #valores h6 {
       top: 40px;
-      left: 50px;
+      left: 90px;
       transform: inherit;
     }
 
     #valores .column {
-      min-width: 280px;
+      min-width: 340px;
     }
 
     #family-office {
