@@ -20,23 +20,23 @@ get_header();
     </div> -->
     <nav>
         <div class="wrapper">
-                <div class="logo" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-link">
-                        <span class="logo-default">
-                            <?php $svg_file = get_field('hero_logo');
-                            if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
-                                echo file_get_contents($svg_file['url']);
-                            } ?>
-                        </span>
+            <div class="logo" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-link">
+                    <span class="logo-default">
+                        <?php $svg_file = get_field('hero_logo');
+                        if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                            echo file_get_contents($svg_file['url']);
+                        } ?>
+                    </span>
 
-                        <span class="logo-dark">
-                            <?php $svg_file = get_field('hero_logo_oculto');
-                            if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
-                                echo file_get_contents($svg_file['url']);
-                            } ?>
-                        </span>
-                    </a>
-                </div>
+                    <span class="logo-dark">
+                        <?php $svg_file = get_field('hero_logo_oculto');
+                        if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                            echo file_get_contents($svg_file['url']);
+                        } ?>
+                    </span>
+                </a>
+            </div>
             <ul class="menu" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
                 <?php
                 if (have_rows('hero_menu')):
@@ -80,11 +80,9 @@ get_header();
     </div> -->
 </header>
 
-    <div class="fundo">
-        <div class="bg-fundo">
-            <img class=""
-                src="<?php echo get_template_directory_uri(); ?>/assets/dist/img/fundo-bg-02.webp"
-                alt="" />
+<div class="fundo">
+    <div class="bg-fundo">
+        <img class="" src="<?php echo get_template_directory_uri(); ?>/assets/dist/img/fundo-bg-02.webp" alt="" />
     </div>
 
     <section class="hero">
@@ -93,6 +91,13 @@ get_header();
                 <h1><?php echo get_field('hero_titulo'); ?></h1>
                 <p><?php echo get_field('hero_texto'); ?></p>
             </div>
+            <div class="scroll-indicator">
+                <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.5 -1.74846e-07L4.5 14.2222M4.5 14.2222L8.5 10.1587M4.5 14.2222L0.499999 10.1587"
+                        stroke="#fff" />
+                </svg>
+            </div>
+
         </div>
     </section>
 
@@ -115,7 +120,7 @@ get_header();
                             <img src="<?php echo esc_url($main_image['url']); ?>"
                                 alt="<?php echo esc_attr($main_image['alt']); ?>">
                         <?php endif; ?>
-    
+
                         <div class="elipse">
                             <?php
                             $image = get_field('icon_flutuante');
@@ -141,44 +146,44 @@ get_header();
 
 <section class="valores">
 
-        <div class="valores-header">
-            <p>VALORES ORIENTADORES</p>
-        </div>
+    <div class="valores-header">
+        <p>VALORES ORIENTADORES</p>
+    </div>
 
-        <div class="valores-orientadores-box">
+    <div class="valores-orientadores-box">
 
-            <?php
-            if (have_rows('valores_repetidor')):
-                $delay = 100;
+        <?php
+        if (have_rows('valores_repetidor')):
+            $delay = 100;
 
-                while (have_rows('valores_repetidor')):
-                    the_row(); ?>
+            while (have_rows('valores_repetidor')):
+                the_row(); ?>
 
-                    <div class="valores-orientadores-item" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>"
-                        data-aos-duration="1000">
+                <div class="valores-orientadores-item" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>"
+                    data-aos-duration="1000">
 
-                        <div class="box-svg">
-                            <?php
-                            $svg_file = get_sub_field('valores_repetidor_icon');
-                            if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
-                                $path = get_attached_file($svg_file['ID']);
-                                if ($path) {
-                                    echo '<i class="element">' . file_get_contents($path) . '</i>';
-                                }
-                            } ?>
-                        </div>
-
-                        <h2><?php echo get_sub_field('valores_titulo'); ?></h2>
-                        <p><?php echo get_sub_field('valores_texto'); ?></p>
+                    <div class="box-svg">
+                        <?php
+                        $svg_file = get_sub_field('valores_repetidor_icon');
+                        if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                            $path = get_attached_file($svg_file['ID']);
+                            if ($path) {
+                                echo '<i class="element">' . file_get_contents($path) . '</i>';
+                            }
+                        } ?>
                     </div>
 
-                    <?php
-                    $delay += 500;
-                    ?>
-                <?php endwhile;
-            endif; ?>
+                    <h2><?php echo get_sub_field('valores_titulo'); ?></h2>
+                    <p><?php echo get_sub_field('valores_texto'); ?></p>
+                </div>
 
-        </div>
+                <?php
+                $delay += 500;
+                ?>
+            <?php endwhile;
+        endif; ?>
+
+    </div>
 
 </section>
 

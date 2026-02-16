@@ -122,7 +122,7 @@ html {
   }
 
   .logo {
-    width: 140px; 
+    width: 140px;
   }
 
   .logo svg {
@@ -147,6 +147,8 @@ html {
   .logo-default {
     position: relative;
     opacity: 1;
+    width: 120px;
+    height: 50px;
   }
 
   .logo-dark {
@@ -187,9 +189,9 @@ html {
     padding: 16px 80px;
     transition: all 450ms;
     background-color: #ffffff;
-      a{
-        color: #070932;
-      }
+    a {
+      color: #070932;
+    }
   }
 
   header.scrolled .logo-default {
@@ -378,6 +380,21 @@ html {
           }
         }
       }
+      .scroll-indicator {
+        border: 1px solid #fff;
+        position: absolute;
+        bottom: 60px;
+        z-index: 2;
+        width: 26px;
+        height: 44px;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(-50%);
+        z-index: 2;
+        border-radius: 40px;
+      }
     }
   }
 
@@ -387,7 +404,7 @@ html {
     align-items: center;
     position: relative;
     overflow: hidden;
-    background: #070932; 
+    background: #070932;
 
     // --- ESTILO BASAL (DESKTOP PADRÃO) ---
     padding: 60px 20px 120px 60px;
@@ -406,10 +423,10 @@ html {
       position: relative;
       z-index: 2;
       display: flex;
-      flex-direction: row; 
+      flex-direction: row;
       justify-content: space-between;
       width: 100%;
-      gap: 144px; 
+      gap: 144px;
     }
 
     .dev-box-image {
@@ -649,7 +666,7 @@ html {
 
       .valores-header {
         top: 40px;
-        left: 50px;
+        left: 70px;
         transform: inherit;
       }
 
@@ -663,8 +680,8 @@ html {
 
         .valores-orientadores-item {
           flex: 0 0 280px;
-          width: 280px;
-          min-width: 280px;
+          width: 100%;
+          min-width: 340px;
           padding: 0 24px;
           border-right: 1px solid rgba(114, 134, 153, 0.2);
 
