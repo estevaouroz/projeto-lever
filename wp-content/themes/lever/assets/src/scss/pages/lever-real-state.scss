@@ -285,7 +285,7 @@ html {
   }
   .fundo {
     position: relative;
-    background-color: #0a0c36;
+    background: linear-gradient(180deg, #15184e 0%, #080a33 100%);
     overflow: hidden;
     .bg-fundo {
       position: absolute;
@@ -296,14 +296,9 @@ html {
       z-index: 1;
       overflow: hidden;
 
-      img {
+      svg {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-
-        @include media-breakpoint-up(md) {
-          object-fit: initial;
-        }
+        height: auto;
       }
     }
   }
@@ -409,7 +404,7 @@ html {
     align-items: center;
     position: relative;
     overflow: hidden;
-    background: #070932;
+    // background: #070932;
 
     // --- ESTILO BASAL (DESKTOP PADRÃO) ---
     padding: 60px 20px 120px 60px;
