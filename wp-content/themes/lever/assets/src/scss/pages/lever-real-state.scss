@@ -297,6 +297,11 @@ html {
       overflow: hidden;
 
       svg {
+        @include media-breakpoint-down(md) {
+          height: auto;
+          left: -50%;
+          position: absolute;
+        }
         width: 100%;
         height: auto;
       }
