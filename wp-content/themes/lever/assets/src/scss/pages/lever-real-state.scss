@@ -528,20 +528,23 @@ html {
       .dev-box-image .dev-imagem {
         img {
           width: 100%;
-          max-width: 320px;
+          // max-width: 320px;
           height: auto;
         }
         .elipse {
-          top: 20px;
-          img {
-            width: 60px;
-          }
+          display: none;
+          // img {
+          //   width: 60px;
+          // }
         }
       }
 
       .dev-text {
         padding-top: 0;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        text-align: justify;
         h2 {
           font-size: 24px;
           margin-bottom: 20px;
@@ -1018,7 +1021,6 @@ html {
         z-index: 9999;
         transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         color: #070932;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.1); 
 
         &.active {
             right: 0;
