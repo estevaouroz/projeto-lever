@@ -5,6 +5,11 @@ html {
 @import '../global/colors';
 
 .page-template-lever-real-state {
+  #sobre,
+  #teses {
+    scroll-margin-top: 150px;
+  }
+
   header {
     position: relative;
     // height: 100vh;
@@ -410,7 +415,7 @@ html {
     padding: 60px 20px 120px 60px;
 
     .wrapper {
-      padding: 0; 
+      padding: 0;
       width: 100%;
       max-width: 1440px;
 
@@ -1008,96 +1013,96 @@ html {
     }
 
     .side-modal {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        max-width: 450px;
-        height: 100vh;
-        background: #ffffff; 
-        z-index: 9999;
-        transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-        color: #070932;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.1); 
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      max-width: 450px;
+      height: 100vh;
+      background: #ffffff;
+      z-index: 9999;
+      transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+      color: #070932;
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
 
-        &.active {
-            right: 0;
+      &.active {
+        right: 0;
+      }
+
+      .modal-content {
+        padding: 60px 40px;
+        position: relative;
+        height: 100%;
+        overflow-y: auto;
+
+        h3 {
+          margin-top: 39px;
+          font-size: 26px;
+          font-weight: 300;
+          margin-bottom: 34px;
+          color: #0f1243;
         }
 
-        .modal-content {
-            padding: 60px 40px;
+        p {
+          font-size: 16px;
+          line-height: 1.6;
+          margin-bottom: 40px;
+          color: #070932;
+          line-height: 26px;
+          letter-spacing: 0.08px;
+          max-width: 346px;
+        }
+
+        .info-item {
+          border-bottom: 1px solid #a0f0f0;
+          padding: 20px 0;
+          font-size: 18px;
+          font-weight: 500;
+          color: #2d3748;
+        }
+
+        .side-list {
+          list-style: none;
+          padding: 0;
+          max-width: 346px;
+
+          li {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 26px;
+            letter-spacing: 0.09px;
+            color: #070932;
+            padding: 20px 0;
             position: relative;
-            height: 100%;
-            overflow-y: auto;
 
-            h3 {
-              margin-top: 39px;
-              font-size: 26px;
-              font-weight: 300;
-              margin-bottom: 34px;
-              color: #0F1243;
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              height: 1px;
+              background: linear-gradient(90deg, #27ebdc 0%, rgba(39, 235, 220, 0.2) 100%);
             }
 
-            p {
-              font-size: 16px;
-              line-height: 1.6;
+            &:last-child {
               margin-bottom: 40px;
-              color: #070932;
-              line-height: 26px;
-              letter-spacing: 0.08px;
-              max-width: 346px;
-            }
-
-            .info-item {
-                border-bottom: 1px solid #a0f0f0;
-                padding: 20px 0;
-                font-size: 18px;
-                font-weight: 500;
-                color: #2d3748;
-            }
-
-            .side-list {
-                list-style: none; 
-                padding: 0;
-                max-width: 346px;
-
-                li {
-                    font-size: 18px;
-                    font-weight: 400;
-                    line-height: 26px;
-                    letter-spacing: 0.09px;
-                    color: #070932;
-                    padding: 20px 0; 
-                    position: relative; 
-
-                    &::after {
-                        content: "";
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 1px;
-                        background: linear-gradient(90deg, #27EBDC 0%, rgba(39, 235, 220, 0.2) 100%);
-                    }
-
-                    &:last-child {
-                        margin-bottom: 40px;
-                    }
-                }
-            }
-
-            .btn-cta {
-                display: inline-block;
-                margin-top: 40px;
-                text-transform: uppercase;
-                font-size: 13px;
-                letter-spacing: 1px;
-                text-decoration: none;
-                color: #3e4b6e;
-                border-bottom: 1px solid #3e4b6e;
-                padding-bottom: 2px;
             }
           }
+        }
+
+        .btn-cta {
+          display: inline-block;
+          margin-top: 40px;
+          text-transform: uppercase;
+          font-size: 13px;
+          letter-spacing: 1px;
+          text-decoration: none;
+          color: #3e4b6e;
+          border-bottom: 1px solid #3e4b6e;
+          padding-bottom: 2px;
+        }
+      }
 
       .close-modal {
         position: absolute;
@@ -1117,31 +1122,29 @@ html {
         transition: 0.2s;
 
         &:hover {
-            background: #f7fafc;
+          background: #f7fafc;
         }
       }
     }
 
     .modal-overlay-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.6);
-        opacity: 0;
-        visibility: hidden;
-        transition: 0.3s;
-        z-index: 9998;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+      z-index: 9998;
 
-        .side-modal.active & {
-            opacity: 1;
-            visibility: visible;
-        }
+      .side-modal.active & {
+        opacity: 1;
+        visibility: visible;
+      }
     }
   }
-
-  
 
   .porta {
     background-color: #070932;

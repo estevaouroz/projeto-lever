@@ -49,8 +49,10 @@ get_header();
                             if ($link):
                                 $link_url = $link['url'];
                                 $link_title = $link['title'];
-                                $link_target = $link['target'] ? $link['target'] : '_self'; ?>
-                                <a href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                                $link_target = $link['target'] ? $link['target'] : '_self';
+                                $is_anchor = strpos($link_url, '#') === 0;
+                                $link_class = $is_anchor ? 'link-hover' : ''; ?>
+                                <a class="<?php echo esc_attr($link_class); ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
                                     <?php echo esc_html($link_title); ?>
                                 </a>
                             <?php endif; ?>
@@ -91,7 +93,7 @@ get_header();
                 <h1><?php echo get_field('hero_titulo'); ?></h1>
                 <p><?php echo get_field('hero_texto'); ?></p>
             </div>
-            <a href="#sobre" class="scroll-indicator">
+            <a href="#sobre" class="scroll-indicator link-hover">
                 <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.5 -1.74846e-07L4.5 14.2222M4.5 14.2222L8.5 10.1587M4.5 14.2222L0.499999 10.1587"
                         stroke="#fff" />
