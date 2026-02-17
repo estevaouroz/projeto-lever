@@ -1018,6 +1018,7 @@ html {
         z-index: 9999;
         transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         color: #070932;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1); 
 
         &.active {
             right: 0;
@@ -1030,21 +1031,21 @@ html {
             overflow-y: auto;
 
             h3 {
-            margin-top: 99px;
-            font-size: 32px;
-            font-weight: 300;
-            margin-bottom: 34px;
-            color: #4a5568;
+              margin-top: 39px;
+              font-size: 26px;
+              font-weight: 300;
+              margin-bottom: 34px;
+              color: #0F1243;
             }
 
             p {
-                font-size: 16px;
-                line-height: 1.6;
-                margin-bottom: 40px;
-                color: #070932;
-                line-height: 26px;
-                letter-spacing: 0.08px;
-                max-width: 346px;
+              font-size: 16px;
+              line-height: 1.6;
+              margin-bottom: 40px;
+              color: #070932;
+              line-height: 26px;
+              letter-spacing: 0.08px;
+              max-width: 346px;
             }
 
             .info-item {

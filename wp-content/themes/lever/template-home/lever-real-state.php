@@ -273,7 +273,12 @@ get_header();
 
         <aside id="side-<?php echo $i; ?>" class="side-modal">
             <div class="modal-content">
-                <button class="close-modal">&times;</button>
+                <button class="close-modal">
+                    <svg width="14" height="14" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L10 10" stroke="#111445" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M10 1L1 10" stroke="#111445" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                </button>
                 
                 <?php if (have_rows('side_bar')) : while (have_rows('side_bar')) : the_row(); ?>
                     <h3><?php the_sub_field('side_title'); ?></h3>
