@@ -1021,6 +1021,7 @@ html {
         z-index: 9999;
         transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         color: #070932;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1); 
 
       &.active {
         right: 0;

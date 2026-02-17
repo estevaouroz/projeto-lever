@@ -810,6 +810,7 @@ html {
 
     #map .left {
       padding: 0 24px;
+      margin-bottom: 60px;
       h2 {
         font-size: 38px;
       }
@@ -818,6 +819,9 @@ html {
       width: 100%;
       margin: 0 auto;
       // margin-left: 60px;
+      object-fit: cover;
+      transform: scale(1.55);
+      margin: 55px 0 55px 30px;
     }
 
     #process .board {
