@@ -47,18 +47,9 @@ function menuSticy() {
     e.preventDefault();
     var target = this.hash;
     var $target = $(target);
-    $('html, body')
-      .stop()
-      .animate(
-        {
-          scrollTop: $target.offset().top - 150,
-        },
-        900,
-        'swing',
-        function () {
-          // window.location.hash = target;
-        }
-      );
+    if ($target.length) {
+      window.scrollTo(0, $target.offset().top - 150);
+    }
   });
 }
 function initHeader() {

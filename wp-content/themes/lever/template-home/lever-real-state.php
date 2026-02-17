@@ -7,17 +7,7 @@ get_header();
 ?>
 
 <header>
-    <!-- <div class="box-img">
 
-        <?php
-        $image = get_field('hero_imagem');
-        if ($image):
-            $image_url = $image['url'];
-            $image_alt = $image['alt']; ?>
-            <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
-        <?php endif; ?>
-
-    </div> -->
     <nav>
         <div class="wrapper">
             <div class="logo" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
@@ -49,8 +39,10 @@ get_header();
                             if ($link):
                                 $link_url = $link['url'];
                                 $link_title = $link['title'];
-                                $link_target = $link['target'] ? $link['target'] : '_self'; ?>
-                                <a href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                                $link_target = $link['target'] ? $link['target'] : '_self';
+                                $is_anchor = strpos($link_url, '#') === 0;
+                                $link_class = $is_anchor ? 'link-hover' : ''; ?>
+                                <a class="<?php echo esc_attr($link_class); ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
                                     <?php echo esc_html($link_title); ?>
                                 </a>
                             <?php endif; ?>
@@ -63,26 +55,19 @@ get_header();
         </div>
 
     </nav>
-    <!-- <img src="img/wechi-symbol.svg" alt="" class="symbol"> -->
-    <!-- <img src="img/slogan.svg" alt="" class="slogan"> -->
-    <!-- <div data-aos="fade-left" data-aos-duration="1300" class="content">
-        <h1><?php echo get_field('hero_titulo'); ?></h1>
-        <div class="line"></div>
-        <h3><?php echo get_field('hero_texto'); ?></h3>
-    </div>
-
-    <div class="scroll-indicator">
-        <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4.5 -1.74846e-07L4.5 14.2222M4.5 14.2222L8.5 10.1587M4.5 14.2222L0.499999 10.1587"
-                stroke="#070932" />
-        </svg>
-
-    </div> -->
+  
 </header>
 
 <div class="fundo">
     <div class="bg-fundo">
-        <img class="" src="<?php echo get_template_directory_uri(); ?>/assets/dist/img/fundo-bg-02.webp" alt="" />
+       <div class="box-svg">
+           <?php $svg_file = get_field('hero_imagem');
+           if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+               echo '<i class="element">';
+               echo file_get_contents($svg_file['url']);
+               echo '</i>';
+           } ?>
+       </div>
     </div>
 
     <section class="hero">
@@ -91,7 +76,7 @@ get_header();
                 <h1><?php echo get_field('hero_titulo'); ?></h1>
                 <p><?php echo get_field('hero_texto'); ?></p>
             </div>
-            <a href="#sobre" class="scroll-indicator">
+            <a href="#sobre" class="scroll-indicator link-hover">
                 <svg width="9" height="15" viewBox="0 0 9 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.5 -1.74846e-07L4.5 14.2222M4.5 14.2222L8.5 10.1587M4.5 14.2222L0.499999 10.1587"
                         stroke="#fff" />
