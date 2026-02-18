@@ -42,7 +42,8 @@ get_header();
                                 $link_target = $link['target'] ? $link['target'] : '_self';
                                 $is_anchor = strpos($link_url, '#') === 0;
                                 $link_class = $is_anchor ? 'link-hover' : ''; ?>
-                                <a class="<?php echo esc_attr($link_class); ?>" href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                                <a class="<?php echo esc_attr($link_class); ?>" href="<?php echo esc_url($link_url); ?>"
+                                    target="<?php echo esc_attr($link_target); ?>">
                                     <?php echo esc_html($link_title); ?>
                                 </a>
                             <?php endif; ?>
@@ -55,19 +56,19 @@ get_header();
         </div>
 
     </nav>
-  
+
 </header>
 
 <div class="fundo">
     <div class="bg-fundo">
-       <div class="box-svg">
-           <?php $svg_file = get_field('hero_imagem');
-           if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
-               echo '<i class="element">';
-               echo file_get_contents($svg_file['url']);
-               echo '</i>';
-           } ?>
-       </div>
+        <div class="box-svg">
+            <?php $svg_file = get_field('hero_imagem');
+            if ($svg_file && pathinfo($svg_file['url'], PATHINFO_EXTENSION) === 'svg') {
+                echo '<i class="element">';
+                echo file_get_contents($svg_file['url']);
+                echo '</i>';
+            } ?>
+        </div>
     </div>
 
     <section class="hero">
@@ -120,7 +121,19 @@ get_header();
 
                 <div class="dev-text" data-aos="fade-left" data-aos-duration="1000">
                     <h2><?php echo get_field('vocacao_texto'); ?></h2>
-                    <p><?php echo get_field('vocacao_titulo'); ?></p>
+                    <p class="description-dev-text"><?php echo get_field('vocacao_titulo'); ?></p>
+
+                    <div class="box-big-numbers">
+                        <?php
+                        if (have_rows('big_numbers')) :
+                            while (have_rows('big_numbers')) : the_row(); ?>
+
+                            <p class="text-big-numbers">
+                                <?php echo get_sub_field('text_big_numbers'); ?>
+                            </p>
+                            <?php endwhile;
+                        endif; ?>
+                    </div>
                 </div>
 
             </div>
@@ -232,65 +245,82 @@ get_header();
 </section>
 
 <section class="produtos">
-    <?php if (have_rows('produtos')): $i = 0;
-        while (have_rows('produtos')): the_row(); $i++;
+    <?php if (have_rows('produtos')):
+        $i = 0;
+        while (have_rows('produtos')):
+            the_row();
+            $i++;
             $image = get_sub_field('produtos_imagem');
             $titulo = get_sub_field('produtos_titulo');
             $botao = get_sub_field('produtos_botao'); // Link do ACF
-    ?>
+            ?>
 
-    <div class="produto-item">
-        <?php if ($image): ?>
-            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
-        <?php endif; ?>
-
-        <div class="produto-overlay">
-            <div class="produto-info">
-                <h2><?php echo esc_html($titulo); ?></h2>
-                
+            <div class="produto-item">
                 <?php if ($botao): ?>
                     <a href="javascript:void(0)" class="open-sidebar" data-target="side-<?php echo $i; ?>">
-                        <p><?php echo esc_html($botao['title']); ?></p>
+                    <?php endif; ?>
+
+                    <?php if ($image): ?>
+                        <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>">
+                    <?php endif; ?>
+
+                    <div class="produto-overlay">
+                        <div class="produto-info">
+                            <h2><?php echo esc_html($titulo); ?></h2>
+
+                            <?php if ($botao): ?>
+                                <div class="btn">
+
+                                    <p><?php echo esc_html($botao['title']); ?></p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <?php if ($botao): ?>
                     </a>
                 <?php endif; ?>
+
+                <aside id="side-<?php echo $i; ?>" class="side-modal">
+                    <div class="modal-content">
+                        <button class="close-modal">
+                            <svg width="14" height="14" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L10 10" stroke="#111445" stroke-width="1.2" stroke-linecap="round" />
+                                <path d="M10 1L1 10" stroke="#111445" stroke-width="1.2" stroke-linecap="round" />
+                            </svg>
+                        </button>
+
+                        <?php if (have_rows('side_bar')):
+                            while (have_rows('side_bar')):
+                                the_row(); ?>
+                                <h3><?php the_sub_field('side_title'); ?></h3>
+                                <p><?php the_sub_field('side_text'); ?></p>
+
+                                <?php if (have_rows('side_itens')): ?>
+                                    <ul class="side-list">
+                                        <?php while (have_rows('side_itens')):
+                                            the_row(); ?>
+                                            <li>
+                                                <h4><?php the_sub_field('side_item'); ?></h4>
+                                            </li>
+                                        <?php endwhile; ?>
+                                    </ul>
+                                <?php endif; ?>
+
+                                <?php
+                                $cta = get_sub_field('side_cta');
+                                if ($cta): ?>
+                                    <a href="<?php echo esc_url($cta['url']); ?>" class="btn-cta" target="<?php echo $cta['target']; ?>">
+                                        <?php echo esc_html($cta['title']); ?>
+                                    </a>
+                                <?php endif; ?>
+                            <?php endwhile; endif; ?>
+                    </div>
+                    <div class="modal-overlay-bg"></div>
+                </aside>
             </div>
-        </div>
 
-        <aside id="side-<?php echo $i; ?>" class="side-modal">
-            <div class="modal-content">
-                <button class="close-modal">
-                    <svg width="14" height="14" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L10 10" stroke="#111445" stroke-width="1.2" stroke-linecap="round"/>
-                        <path d="M10 1L1 10" stroke="#111445" stroke-width="1.2" stroke-linecap="round"/>
-                    </svg>
-                </button>
-                
-                <?php if (have_rows('side_bar')) : while (have_rows('side_bar')) : the_row(); ?>
-                    <h3><?php the_sub_field('side_title'); ?></h3>
-                    <p><?php the_sub_field('side_text'); ?></p>
-
-                    <?php if (have_rows('side_itens')) : ?>
-                        <ul class="side-list">
-                            <?php while (have_rows('side_itens')) : the_row(); ?>
-                                <li><h4><?php the_sub_field('side_item'); ?></h4></li>
-                            <?php endwhile; ?>
-                        </ul>
-                    <?php endif; ?>
-
-                    <?php 
-                    $cta = get_sub_field('side_cta');
-                    if ($cta) : ?>
-                        <a href="<?php echo esc_url($cta['url']); ?>" class="btn-cta" target="<?php echo $cta['target']; ?>">
-                            <?php echo esc_html($cta['title']); ?>
-                        </a>
-                    <?php endif; ?>
-                <?php endwhile; endif; ?>
-            </div>
-            <div class="modal-overlay-bg"></div>
-        </aside>
-    </div>
-
-    <?php endwhile; endif; ?>
+        <?php endwhile; endif; ?>
 </section>
 
 <section class="porta">

@@ -311,6 +311,52 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_6995e05ecb9fb",
+            "label": "Big Numbers",
+            "name": "big_numbers",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Adicionar linha",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_6995e066cb9fc",
+                    "label": "Text Big Numbers",
+                    "name": "text_big_numbers",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6995e05ecb9fb"
+                }
+            ]
+        },
+        {
             "key": "field_697e916aa021c",
             "label": "Valores Orientadores",
             "name": "",
@@ -1034,5 +1080,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771343370
+    "modified": 1771430005
 }
