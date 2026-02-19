@@ -107,7 +107,9 @@ html {
         height: 100%;
         width: 100%;
         object-fit: cover;
-        object-position: -40px;
+          @include media-breakpoint-up(md) {
+          object-position: -40px;
+        }
       }
     }
   }
