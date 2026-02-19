@@ -16,8 +16,12 @@ RUN apt-get install -y libcurl4
 RUN apt-get install -y libzip-dev
 RUN apt-get install -y libonig-dev
 RUN apt-get install -y libpng-dev
+RUN apt-get install -y libjpeg62-turbo-dev
+RUN apt-get install -y libwebp-dev
+RUN apt-get install -y libfreetype6-dev
 
 #Docker Apache modules
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install mysqli pdo_mysql xml zip mbstring session json exif gd fileinfo gettext iconv 
 RUN docker-php-ext-enable mysqli pdo_mysql xml zip mbstring session json exif gd fileinfo gettext iconv 
 RUN a2enmod rewrite

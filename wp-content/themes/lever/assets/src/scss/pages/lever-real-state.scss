@@ -361,7 +361,7 @@ html {
           text-align: left;
 
           h1 {
-            font-size: 26px;
+            font-size: 32px;
             line-height: 38px;
             margin-bottom: 24px;
 
@@ -496,6 +496,9 @@ html {
         line-height: 30px;
         color: rgba(255, 255, 255, 0.8);
       }
+      .description-dev-text {
+        margin-bottom: 32px;
+      }
     }
 
     @include media-breakpoint-up(xxl) {
@@ -519,9 +522,6 @@ html {
           font-size: 20px;
           line-height: 1.5;
         }
-        .description-dev-text {
-          margin-bottom: 32px;
-        }
       }
     }
     .box-big-numbers {
@@ -533,7 +533,7 @@ html {
         font-size: 18px;
         font-style: normal;
         font-weight: 300;
-        line-height: 34px; /* 188.889% */
+        line-height: 130%; /* 188.889% */
         letter-spacing: 0.09px;
         padding-bottom: 12px;
         position: relative;
@@ -578,7 +578,7 @@ html {
         display: flex;
         flex-direction: column;
         justify-content: left;
-        text-align: justify;
+        // text-align: justify;
         h2 {
           font-size: 24px;
           margin-bottom: 20px;

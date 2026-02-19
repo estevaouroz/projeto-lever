@@ -16,6 +16,9 @@ RUN apt-get install -y libcurl4
 RUN apt-get install -y libzip-dev
 RUN apt-get install -y libonig-dev
 RUN apt-get install -y libpng-dev
+RUN apt-get install -y libjpeg62-turbo-dev
+RUN apt-get install -y libwebp-dev
+RUN apt-get install -y libfreetype6-dev
 
 #Docker Apache modules
 RUN docker-php-ext-install mysqli
@@ -26,6 +29,7 @@ RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install session
 # RUN docker-php-ext-install json # não é mais necessário em php8
 RUN docker-php-ext-install exif
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install fileinfo
 RUN docker-php-ext-install gettext
