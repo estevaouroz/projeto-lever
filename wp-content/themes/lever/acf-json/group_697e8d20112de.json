@@ -285,6 +285,34 @@
             "preview_size": "medium"
         },
         {
+            "key": "field_69977cbe525b1",
+            "label": "Vocação Imagens",
+            "name": "vocacao_imagens",
+            "aria-label": "",
+            "type": "gallery",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min": "",
+            "max": "",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "insert": "append",
+            "preview_size": "medium"
+        },
+        {
             "key": "field_69854757c0f86",
             "label": "Vocação Fundo",
             "name": "vocacao_fundo",
@@ -309,52 +337,6 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "medium"
-        },
-        {
-            "key": "field_6995e05ecb9fb",
-            "label": "Big Numbers",
-            "name": "big_numbers",
-            "aria-label": "",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "table",
-            "pagination": 0,
-            "min": 0,
-            "max": 0,
-            "collapsed": "",
-            "button_label": "Adicionar linha",
-            "rows_per_page": 20,
-            "sub_fields": [
-                {
-                    "key": "field_6995e066cb9fc",
-                    "label": "Text Big Numbers",
-                    "name": "text_big_numbers",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "parent_repeater": "field_6995e05ecb9fb"
-                }
-            ]
         },
         {
             "key": "field_697e916aa021c",
@@ -740,7 +722,6 @@
                     "collapsed": "",
                     "button_label": "Adicionar linha",
                     "rows_per_page": 20,
-                    "parent_repeater": "field_697e9234fac26",
                     "sub_fields": [
                         {
                             "key": "field_69938f0910513",
@@ -807,7 +788,6 @@
                             "collapsed": "",
                             "button_label": "Adicionar linha",
                             "rows_per_page": 20,
-                            "parent_repeater": "field_69938f0110512",
                             "sub_fields": [
                                 {
                                     "key": "field_69938f4110516",
@@ -831,7 +811,8 @@
                                     "append": "",
                                     "parent_repeater": "field_69938f2210515"
                                 }
-                            ]
+                            ],
+                            "parent_repeater": "field_69938f0110512"
                         },
                         {
                             "key": "field_69939072307f3",
@@ -851,7 +832,8 @@
                             "allow_in_bindings": 0,
                             "parent_repeater": "field_69938f0110512"
                         }
-                    ]
+                    ],
+                    "parent_repeater": "field_697e9234fac26"
                 }
             ]
         },
@@ -1080,5 +1062,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1771430005
+    "modified": 1771535594
 }

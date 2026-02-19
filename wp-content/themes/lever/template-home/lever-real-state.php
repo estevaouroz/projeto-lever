@@ -101,10 +101,44 @@ get_header();
                 <div class="dev-box-image">
                     <div class="dev-imagem">
                         <?php
-                        $main_image = get_field('vocacao_imagem');
-                        if ($main_image): ?>
-                            <img src="<?php echo esc_url($main_image['url']); ?>"
-                                alt="<?php echo esc_attr($main_image['alt']); ?>">
+                        $gallery_images = get_field('vocacao_imagens');
+                        $images = [];
+
+                        if (is_array($gallery_images) && !empty($gallery_images)) {
+                            $images = $gallery_images;
+                        }
+
+                        if (!empty($images)):
+                            $is_slideshow = count($images) > 1;
+                            if ($is_slideshow): ?>
+                                <div class="dev-slideshow" data-interval="5000">
+                                <?php endif; ?>
+
+                                <?php foreach ($images as $index => $image_item):
+                                    $image_url = '';
+                                    $image_alt = '';
+
+                                    if (is_numeric($image_item)) {
+                                        $image_url = wp_get_attachment_image_url((int) $image_item, 'full');
+                                        $image_alt = get_post_meta((int) $image_item, '_wp_attachment_image_alt', true);
+                                    } elseif (is_array($image_item)) {
+                                        $image_url = isset($image_item['url']) ? $image_item['url'] : '';
+                                        $image_alt = isset($image_item['alt']) ? $image_item['alt'] : '';
+                                    }
+
+                                    if (!$image_url) {
+                                        continue;
+                                    }
+
+                                    $image_class = $is_slideshow ? 'dev-slide' . ($index === 0 ? ' is-active' : '') : 'dev-single';
+                                    ?>
+                                    <img class="<?php echo esc_attr($image_class); ?>" src="<?php echo esc_url($image_url); ?>"
+                                        alt="<?php echo esc_attr($image_alt); ?>">
+                                <?php endforeach; ?>
+
+                                <?php if ($is_slideshow): ?>
+                                </div>
+                            <?php endif; ?>
                         <?php endif; ?>
 
                         <div class="elipse">
@@ -344,5 +378,64 @@ get_header();
         </div>
     </div>
 </section>
+
+<style>
+    .page-template-lever-real-state .desenvolvemos .dev-box-image .dev-imagem .dev-slideshow {
+        position: relative;
+        width: 433px;
+        height: 520px;
+    }
+
+    .page-template-lever-real-state .desenvolvemos .dev-box-image .dev-imagem .dev-slideshow .dev-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+    }
+
+    .page-template-lever-real-state .desenvolvemos .dev-box-image .dev-imagem .dev-slideshow .dev-slide.is-active {
+        opacity: 1;
+    }
+
+    @media (min-width: 1440px) {
+        .page-template-lever-real-state .desenvolvemos .dev-box-image .dev-imagem .dev-slideshow {
+            width: 100%;
+            height: 80dvh;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .page-template-lever-real-state .desenvolvemos .dev-box-image .dev-imagem .dev-slideshow {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 433 / 520;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var sliders = document.querySelectorAll('.dev-imagem .dev-slideshow');
+
+        sliders.forEach(function(slider) {
+            var slides = slider.querySelectorAll('.dev-slide');
+
+            if (slides.length <= 1) {
+                return;
+            }
+
+            var currentIndex = 0;
+            var intervalTime = parseInt(slider.getAttribute('data-interval'), 10) || 5000;
+
+            setInterval(function() {
+                slides[currentIndex].classList.remove('is-active');
+                currentIndex = (currentIndex + 1) % slides.length;
+                slides[currentIndex].classList.add('is-active');
+            }, intervalTime);
+        });
+    });
+</script>
 
 <?php get_footer(); ?>
